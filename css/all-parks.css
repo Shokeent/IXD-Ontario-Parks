@@ -235,6 +235,44 @@
     color: #2c5530;
 }
 
+/* Park Actions */
+.park-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.park-actions .btn-secondary,
+.park-actions .btn-primary {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.park-actions .btn-secondary {
+    background: #f8f9fa;
+    color: #2c5530;
+    border: 1px solid #e9ecef;
+}
+
+.park-actions .btn-secondary:hover {
+    background: #e9ecef;
+}
+
+.park-actions .btn-primary {
+    background: #2c5530;
+    color: white;
+}
+
+.park-actions .btn-primary:hover {
+    background: #1e3a22;
+}
+
 /* Additional placeholder images for All Parks page */
 .placeholder-park-4,
 .placeholder-park-5,

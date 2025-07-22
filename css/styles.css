@@ -26,6 +26,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -56,10 +57,12 @@ body {
 }
 
 .nav-link {
-    color: #374151;
+    color: #6b7280;
     text-decoration: none;
     font-weight: 500;
+    font-size: 14px;
     transition: color 0.2s;
+    padding: 8px 0;
 }
 
 .nav-link:hover,
@@ -68,18 +71,19 @@ body {
 }
 
 .btn-reservation {
-    background: #5b21b6;
+    background: #1f2937;
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
+    border-radius: 6px;
+    padding: 10px 20px;
     font-weight: 600;
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .btn-reservation:hover {
-    background: #4c1d95;
+    background: #111827;
 }
 
 /* Breadcrumb Navigation */
@@ -123,6 +127,55 @@ body {
 .breadcrumb-list .current {
     color: #2c5530;
     font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 15px;
+    }
+    
+    .nav-menu {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        font-size: 13px;
+        padding: 6px 0;
+    }
+    
+    .btn-reservation {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .nav-logo h2 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 16px;
+        padding: 15px;
+    }
+    
+    .nav-menu {
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        font-size: 12px;
+    }
+    
+    .btn-reservation {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 }
 
 /* Hero Section */
