@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acknowledge - Ontario Parks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/acknowledge.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Ontario Parks</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="all-parks.html" class="nav-link">Discover Parks</a>
+                <a href="gear-list.html" class="nav-link">Gear Guide</a>
+                <a href="#trails" class="nav-link">Find Trails Hubs</a>
+                <a href="#store" class="nav-link">Store</a>
+                <a href="#fees" class="nav-link">Fees</a>
+                <a href="#signin" class="nav-link">Sign In</a>
+                <button class="btn-reservation" onclick="window.location.href='booking.html'">Make Reservation</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Acknowledge</h1>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="search-filter-section">
+        <div class="container">
+            <div class="search-card">
+                <div class="search-row">
+                    <div class="search-field">
+                        <label>Campsite</label>
+                        <select class="search-select">
+                            <option>All Parks</option>
+                            <option>Algonquin - Achray</option>
+                            <option>Algonquin - Brent</option>
+                            <option>Backpacking</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Park</label>
+                        <select class="search-select">
+                            <option>Algonquin - Achray</option>
+                            <option>Algonquin - Brent</option>
+                            <option>Backpacking</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Arrival</label>
+                        <input type="date" class="search-input" value="2025-08-21">
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Departure</label>
+                        <input type="date" class="search-input" value="2025-08-24">
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Guest</label>
+                        <select class="search-select">
+                            <option>2 Night</option>
+                            <option>1 Night</option>
+                            <option>3 Nights</option>
+                            <option>4+ Nights</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Equipment</label>
+                        <select class="search-select">
+                            <option>Single Tent</option>
+                            <option>Family Tent</option>
+                            <option>RV</option>
+                            <option>Cabin</option>
+                        </select>
+                    </div>
+                    
+                    <button class="search-btn">
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="acknowledge-grid">
+                <!-- Left Column -->
+                <div class="left-column">
+                    <!-- Park Header -->
+                    <div class="park-header-section">
+                        <h2>Algonquin - Achray</h2>
+                        <p class="park-subtitle">Handpicked locations with excellent facilities and beginner-friendly features</p>
+                    </div>
+
+                    <!-- Campsites Available -->
+                    <div class="campsites-section">
+                        <div class="section-header">
+                            <h3>3 Campsites available</h3>
+                            <button class="map-toggle">
+                                <span class="map-icon">🗺️</span>
+                                Show in Map
+                            </button>
+                        </div>
+
+                        <!-- Site 1 -->
+                        <div class="campsite-card" data-campsite="1">
+                            <div class="campsite-image placeholder-campsite-1"></div>
+                            <div class="campsite-info">
+                                <h4>Site 1</h4>
+                                <div class="campsite-features">
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🏕️</span>
+                                        <span>Allowed equipment: Tent, RV</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🏠</span>
+                                        <span>Accessible campsites: WiFi</span>
+                                    </div>
+                                </div>
+                                <div class="campsite-price">$30 / 3+ night</div>
+                            </div>
+                        </div>
+
+                        <!-- Site 2 -->
+                        <div class="campsite-card" data-campsite="2">
+                            <div class="campsite-image placeholder-campsite-2"></div>
+                            <div class="campsite-info">
+                                <h4>Site 1</h4>
+                                <div class="campsite-features">
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🏕️</span>
+                                        <span>Allowed equipment: Tent, RV</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🏠</span>
+                                        <span>Accessible campsites: WiFi</span>
+                                    </div>
+                                </div>
+                                <div class="campsite-price">$30 / 3+ night</div>
+                            </div>
+                        </div>
+
+                        <!-- Site 3 -->
+                        <div class="campsite-card" data-campsite="3">
+                            <div class="campsite-image placeholder-campsite-3"></div>
+                            <div class="campsite-info">
+                                <h4>Site 1</h4>
+                                <div class="campsite-features">
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🏕️</span>
+                                        <span>Allowed equipment: Tent, RV</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🏠</span>
+                                        <span>Accessible campsites: WiFi</span>
+                                    </div>
+                                </div>
+                                <div class="campsite-price">$30 / 3+ night</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Facilities & Family Features -->
+                    <div class="facilities-section">
+                        <h3>Facilities & Family Features</h3>
+                        
+                        <div class="facilities-grid">
+                            <div class="facility-category">
+                                <h4>🏢 Available Facilities</h4>
+                                <div class="facility-items">
+                                    <span class="facility-item">Washrooms</span>
+                                    <span class="facility-item">Showers</span>
+                                    <span class="facility-item">Playground</span>
+                                    <span class="facility-item">Visitor Centre</span>
+                                    <span class="facility-item">Canoe Rentals</span>
+                                    <span class="facility-item">Hiking Trails</span>
+                                </div>
+                            </div>
+                            
+                            <div class="facility-category">
+                                <h4>👨‍👩‍👧‍👦 Perfect for Families</h4>
+                                <div class="facility-items">
+                                    <span class="facility-item">Kids Programs</span>
+                                    <span class="facility-item">Easy Trails</span>
+                                    <span class="facility-item">Swimming</span>
+                                    <span class="facility-item">Wildlife Viewing</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="popular-activities">
+                            <h4>Popular Activities</h4>
+                            <div class="activity-tags">
+                                <span class="activity-tag">Canoeing</span>
+                                <span class="activity-tag">Hiking</span>
+                                <span class="activity-tag">Swimming</span>
+                                <span class="activity-tag">Wildlife Viewing</span>
+                                <span class="activity-tag">Photography</span>
+                                <span class="activity-tag">Cycling</span>
+                                <span class="activity-tag">Fishing</span>
+                                <span class="activity-tag">Stargazing</span>
+                                <span class="activity-tag">Cross-country Skiing</span>
+                                <span class="activity-tag">Snowshoeing</span>
+                                <span class="activity-tag">Dog Sledding</span>
+                                <span class="activity-tag">Kayaking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="right-column">
+                    <!-- Selected Campsite Preview -->
+                    <div class="campsite-preview">
+                        <h3>Algonquin - Achray</h3>
+                        <div class="preview-image placeholder-preview"></div>
+                        <p class="preview-description">
+                            The campground is in a pine forest bordering sandy beaches, all campsites are a short walk from the beach. Come and enjoy the beautiful nature of Achray. Campground is radio-free and the western side of the campground is pet-free (sites 25 – 40). <a href="#" class="read-more">Read More</a>
+                        </p>
+                    </div>
+
+                    <!-- Campsite Options -->
+                    <div class="campsite-options">
+                        <h3>Campsite Options</h3>
+                        <div class="option-list">
+                            <div class="option-item">
+                                <span class="option-icon">🏕️</span>
+                                <span>Car Camping</span>
+                            </div>
+                            <div class="option-item">
+                                <span class="option-icon">🏕️</span>
+                                <span>Backcountry</span>
+                            </div>
+                            <div class="option-item">
+                                <span class="option-icon">👥</span>
+                                <span>Group Sites</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gears -->
+                    <div class="gears-section">
+                        <h3>Gears</h3>
+                        <div class="gear-list">
+                            <div class="gear-item">
+                                <span class="gear-icon">☑️</span>
+                                <span>Complete Gear Checklist</span>
+                            </div>
+                            <div class="gear-item">
+                                <span class="gear-icon">🎒</span>
+                                <span>Gear Rental</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guides -->
+                    <div class="guides-section">
+                        <h3>Guides</h3>
+                        <div class="guide-list">
+                            <div class="guide-item">
+                                <span class="guide-icon">📋</span>
+                                <span>Download Park Map</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-icon">📖</span>
+                                <span>Camping Guides</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- General Information -->
+                    <div class="general-info">
+                        <h3>General Information</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <strong>Address:</strong> Hwy 60, P.O. Box 219 Whitney, ON P0J 1S0
+                            </div>
+                            <div class="info-item">
+                                <strong>Phone:</strong> 705-633-5572
+                            </div>
+                            <div class="info-item">
+                                <strong>Size:</strong> 7725000.00 ha
+                            </div>
+                            <div class="info-item">
+                                <strong>Year Established:</strong> 1893
+                            </div>
+                            <div class="info-item">
+                                <strong>Park Classification:</strong> Natural Environment
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Park Alerts Modal -->
+    <div id="park-alerts-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Park Alerts</h3>
+                <button class="close-modal" id="close-alerts">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="alert-intro">Before you start and explore make sure to check Alerts in Ontario Parks to ensure you are up to date on important advisories for your park.</p>
+                
+                <div class="alert-item">
+                    <h4>Aquatic Invasive Species</h4>
+                    <p>Invasive species pose significant threats to Algonquin Park's ecosystems, particularly our freshwater species like Brook Trout. Aquatic invasive species have been detected in the park, resulting in permanent damage to food webs. Remember, as visitors to the park on visitor roads are close to recreational areas.</p>
+                </div>
+                
+                <div class="alert-item">
+                    <h4>Please do your part to protect Algonquin Park's unique aquatic life species:</h4>
+                    <ul>
+                        <li>clean, drain, and dry all camping, boating, and angling gear before arriving to Algonquin Park</li>
+                        <li>inspect and remove all plants, animals, or mud from boating and angling gear before travelling to another waterbody</li>
+                        <li>never move fish or other aquatic species between waterbodies</li>
+                        <li>the use of live baitfish is prohibited</li>
+                        <li>angling and and aquatic invasive species to park staff or Fisheries or call</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="acknowledge-btn" id="acknowledge-btn">Acknowledge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Connected with Nature</h2>
+                <p>Get monthly tips, seasonal park highlights, and exclusive first-timer guides delivered to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" class="email-input">
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+                <p class="newsletter-disclaimer">Available in English, French, Mandarin, and Punjabi. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Ontario Parks</h3>
+                        <p>Making Ontario's natural beauty accessible to everyone, especially first-time campers and newcomers alike.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For First-Timers</h4>
+                    <ul>
+                        <li><a href="#">Camping Basics</a></li>
+                        <li><a href="#">Gear Guide</a></li>
+                        <li><a href="#">Safety Tips</a></li>
+                        <li><a href="#">Family Activities</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Languages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Parks Info</h4>
+                    <ul>
+                        <li><a href="#">All Parks</a></li>
+                        <li><a href="#">Reservations</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ontario Parks. Making nature accessible for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/acknowledge.js"></script>
+</body>
+</html>

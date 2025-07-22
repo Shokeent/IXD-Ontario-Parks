@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Gear List - Ontario Parks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/gear-list.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h2>Ontario Parks</h2>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="all-parks.html" class="nav-link">Discover Parks</a>
+                <a href="gear-list.html" class="nav-link active">Gear Guide</a>
+                <a href="#trails" class="nav-link">Find Trails Hubs</a>
+                <a href="#store" class="nav-link">Store</a>
+                <a href="#fees" class="nav-link">Fees</a>
+                <a href="#signin" class="nav-link">Sign In</a>
+                <button class="btn-reservation" onclick="window.location.href='booking.html'">Make Reservation</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gear-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Complete Gear List</h1>
+            <p class="hero-description">A comprehensive camping gear checklist to ensure you're prepared for your outdoor adventure</p>
+            <div class="hero-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gear Categories -->
+    <section class="gear-categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">All Items</button>
+                <button class="filter-btn" data-category="shelter">Shelter & Sleep</button>
+                <button class="filter-btn" data-category="hiking">Hiking</button>
+                <button class="filter-btn" data-category="fishing">Fishing</button>
+            </div>
+
+            <!-- Shelter & Sleep Category -->
+            <div class="gear-category" id="shelter-sleep">
+                <div class="category-header">
+                    <h2>Shelter & Sleep</h2>
+                    <button class="see-all-btn">See all</button>
+                </div>
+                
+                <div class="gear-grid">
+                    <div class="gear-item">
+                        <div class="gear-image placeholder-gear">
+                            <div class="gear-placeholder-icon">📷</div>
+                        </div>
+                        <div class="gear-info">
+                            <h3>Tent</h3>
+                            <p class="gear-description">Weather-appropriate tent for camping and outdoor shelter</p>
+                        </div>
+                    </div>
+
+                    <div class="gear-item">
+                        <div class="gear-image placeholder-gear">
+                            <div class="gear-placeholder-icon">📷</div>
+                        </div>
+                        <div class="gear-info">
+                            <h3>Sleeping bag</h3>
+                            <p class="gear-description">Temperature-rated sleeping bag for comfortable rest</p>
+                        </div>
+                    </div>
+
+                    <div class="gear-item">
+                        <div class="gear-image placeholder-gear">
+                            <div class="gear-placeholder-icon">📷</div>
+                        </div>
+                        <div class="gear-info">
+                            <h3>Sleeping pad</h3>
+                            <p class="gear-description">Insulated sleeping pad for ground comfort and warmth</p>
+                        </div>
+                    </div>
+
+                    <div class="gear-item">
+                        <div class="gear-image placeholder-gear">
+                            <div class="gear-placeholder-icon">📷</div>
+                        </div>
+                        <div class="gear-info">
+                            <h3>Pillow</h3>
+                            <p class="gear-description">Compact inflatable pillow for comfortable sleeping</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Connected with Nature</h2>
+                <p>Get monthly tips, seasonal park highlights, and exclusive first-timer guides delivered to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" class="email-input">
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+                <p class="newsletter-disclaimer">Available in English, French, Mandarin, and Punjabi. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Ontario Parks</h3>
+                        <p>Making Ontario's natural beauty accessible to everyone, especially first-time campers and newcomers alike.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For First-Timers</h4>
+                    <ul>
+                        <li><a href="#">Camping Basics</a></li>
+                        <li><a href="#">Gear Guide</a></li>
+                        <li><a href="#">Safety Tips</a></li>
+                        <li><a href="#">Family Activities</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Languages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Parks Info</h4>
+                    <ul>
+                        <li><a href="#">All Parks</a></li>
+                        <li><a href="#">Reservations</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ontario Parks. Making nature accessible for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/gear-list.js"></script>
+</body>
+</html>

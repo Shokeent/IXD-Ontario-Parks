@@ -1,0 +1,640 @@
+/* Acknowledge Page Styles */
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, #2c5530, #3a6b3f);
+    padding: 60px 0 80px;
+    color: white;
+    text-align: left;
+}
+
+.page-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Search and Filter Section - Inherited from booking.css */
+.search-filter-section {
+    padding: 0;
+    margin-top: -40px;
+    position: relative;
+    z-index: 10;
+}
+
+.search-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.search-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr auto;
+    gap: 16px;
+    align-items: end;
+}
+
+.search-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.search-field label {
+    font-weight: 500;
+    color: #374151;
+    font-size: 14px;
+}
+
+.search-select,
+.search-input {
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    min-height: 44px;
+    box-sizing: border-box;
+}
+
+.search-select:focus,
+.search-input:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+.search-btn {
+    background: #059669;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    color: white;
+    cursor: pointer;
+    min-height: 44px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.search-btn:hover {
+    background: #047857;
+}
+
+.search-icon {
+    font-size: 16px;
+}
+
+/* Main Content */
+.main-content {
+    padding: 40px 0;
+    background: #f9fafb;
+    position: relative;
+}
+
+.acknowledge-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Left Column */
+.left-column {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.park-header-section {
+    margin-bottom: 32px;
+}
+
+.park-header-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.park-subtitle {
+    color: #6b7280;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Campsites Section */
+.campsites-section {
+    margin-bottom: 40px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-header h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.map-toggle {
+    background: transparent;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #374151;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.map-toggle:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.map-icon {
+    font-size: 16px;
+}
+
+/* Campsite Cards */
+.campsite-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.campsite-card:hover {
+    border-color: #059669;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1);
+}
+
+.campsite-card.selected {
+    border-color: #059669;
+    background: #f0fdf4;
+}
+
+.campsite-image {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    background: #e5e7eb;
+}
+
+.placeholder-campsite-1 {
+    background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.placeholder-campsite-2 {
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+}
+
+.placeholder-campsite-3 {
+    background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+}
+
+.campsite-info h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+}
+
+.campsite-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.feature-icon {
+    font-size: 16px;
+}
+
+.campsite-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #059669;
+}
+
+/* Facilities Section */
+.facilities-section h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 24px 0;
+}
+
+.facilities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.facility-category h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+}
+
+.facility-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.facility-item {
+    background: #f3f4f6;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #374151;
+}
+
+.popular-activities h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 16px 0;
+}
+
+.activity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.activity-tag {
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Right Column */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.campsite-preview,
+.campsite-options,
+.gears-section,
+.guides-section,
+.general-info {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.campsite-preview h3,
+.campsite-options h3,
+.gears-section h3,
+.guides-section h3,
+.general-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 16px 0;
+}
+
+.preview-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #059669, #10b981);
+    margin-bottom: 16px;
+}
+
+.preview-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6b7280;
+    margin: 0;
+}
+
+.read-more {
+    color: #059669;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Option and Item Lists */
+.option-list,
+.gear-list,
+.guide-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-item,
+.gear-item,
+.guide-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #374151;
+}
+
+.option-icon,
+.gear-icon,
+.guide-icon {
+    font-size: 16px;
+}
+
+/* General Information */
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-item {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+}
+
+.info-item strong {
+    color: #1f2937;
+}
+
+/* Park Alerts Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 0;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 24px;
+}
+
+.modal-header h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.close-modal:hover {
+    background: #f3f4f6;
+}
+
+.modal-body {
+    padding: 0 24px 24px;
+}
+
+.alert-intro {
+    font-size: 16px;
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    background: #fef3c7;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #f59e0b;
+}
+
+.alert-item {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.alert-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.alert-item h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+}
+
+.alert-item p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+}
+
+.alert-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.alert-item li {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+    padding: 4px 0 4px 20px;
+    position: relative;
+}
+
+.alert-item li:before {
+    content: "•";
+    color: #059669;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.modal-footer {
+    padding: 24px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.acknowledge-btn {
+    background: #5b21b6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.acknowledge-btn:hover {
+    background: #4c1d95;
+}
+
+/* Modal Animation */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-overlay.fade-out {
+    animation: fadeOut 0.3s ease;
+}
+
+@keyframes fadeOut {
+    from { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    to { 
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+/* Acknowledge page with modal overlay effect */
+.page-blurred {
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .acknowledge-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .right-column {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .search-btn {
+        width: 100%;
+    }
+    
+    .page-title {
+        font-size: 36px;
+    }
+    
+    .campsite-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .facilities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .modal-header {
+        padding: 20px 20px 0;
+    }
+    
+    .modal-body {
+        padding: 0 20px 20px;
+    }
+    
+    .modal-footer {
+        padding: 20px;
+    }
+}

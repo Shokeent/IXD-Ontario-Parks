@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<            <div class="nav-menu">
+                <a href="all-parks.html" class="nav-link active">Discover Parks</a>
+                <a href="gear-list.html" class="nav-link">Gear Guide</a>
+                <a href="#trails" class="nav-link">Find Trails Hubs</a>
+                <a href="#store" class="nav-link">Store</a>
+                <a href="#fees" class="nav-link">Fees</a>ang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Parks - Ontario Parks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/all-parks.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h2>Ontario Parks</h2>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Discover Parks</a>
+                <a href="#gear" class="nav-link">Gear Guide</a>
+                <a href="#trails" class="nav-link">Find Trails Hubs</a>
+                <a href="#store" class="nav-link">Store</a>
+                <a href="#fees" class="nav-link">Fees</a>
+                <a href="#signin" class="nav-link">Sign In</a>
+                <button class="btn-reservation">Make Reservation</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">All Parks</h1>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="search-filter-section">
+        <div class="container">
+            <div class="search-card">
+                <div class="search-row">
+                    <div class="search-field">
+                        <label>Complete</label>
+                        <select class="search-select">
+                            <option>All Parks</option>
+                            <option>Available Parks</option>
+                            <option>Fully Booked</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Park</label>
+                        <select class="search-select">
+                            <option>All Parks</option>
+                            <option>Algonquin Provincial Park</option>
+                            <option>Killarney Provincial Park</option>
+                            <option>Muskoka Park</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Arrival</label>
+                        <input type="date" class="search-input" value="2025-08-21">
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Departure</label>
+                        <input type="date" class="search-input" value="2025-08-24">
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Guest</label>
+                        <select class="search-select">
+                            <option>2 Night</option>
+                            <option>1 Night</option>
+                            <option>3 Nights</option>
+                            <option>4+ Nights</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-field">
+                        <label>Equipment</label>
+                        <select class="search-select">
+                            <option>Single Tent</option>
+                            <option>Family Tent</option>
+                            <option>RV</option>
+                            <option>Cabin</option>
+                        </select>
+                    </div>
+                    
+                    <button class="search-btn">
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Tags -->
+    <section class="filter-tags-section">
+        <div class="container">
+            <div class="filter-tags">
+                <button class="filter-tag active">
+                    <span class="filter-icon">📍</span>
+                    Filter
+                </button>
+                <button class="filter-tag">Kids Program</button>
+                <button class="filter-tag">Easy Trail</button>
+                <button class="filter-tag">Biking</button>
+                <button class="map-toggle">
+                    <span class="map-icon">🗺️</span>
+                    Show in Map
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parks Grid Section -->
+    <section class="parks-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ontario Parks</h2>
+                <p class="section-subtitle">Handpicked locations with excellent facilities and beginner-friendly features</p>
+            </div>
+            
+            <div class="parks-grid-all">
+                <!-- Row 1 -->
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-1">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-2">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-3">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-4">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-5">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-6">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-7">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-8">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-9">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-10">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-11">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="park-card-all">
+                    <div class="park-image placeholder-park-12">
+                        <!-- Placeholder for park image -->
+                    </div>
+                    <div class="park-info-all">
+                        <h3>Algonquin Provincial Park</h3>
+                        <div class="park-location">📍 Huntsville, ON</div>
+                        <p class="park-description-all">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                        
+                        <div class="park-tags">
+                            <span class="park-tag program">Kids Programs</span>
+                            <span class="park-tag trail">Easy Trails</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Connected with Nature</h2>
+                <p>Get monthly tips, seasonal park highlights, and exclusive first-timer guides delivered to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" class="email-input">
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+                <p class="newsletter-disclaimer">Available in English, French, Mandarin, and Punjabi. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Ontario Parks</h3>
+                        <p>Making Ontario's natural beauty accessible to everyone, especially first-time campers and newcomers alike.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For First-Timers</h4>
+                    <ul>
+                        <li><a href="#">Camping Basics</a></li>
+                        <li><a href="#">Gear Guide</a></li>
+                        <li><a href="#">Safety Tips</a></li>
+                        <li><a href="#">Family Activities</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Languages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Parks Info</h4>
+                    <ul>
+                        <li><a href="#">All Parks</a></li>
+                        <li><a href="#">Reservations</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ontario Parks. Making nature accessible for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/all-parks.js"></script>
+</body>
+</html>
