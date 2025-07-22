@@ -45,6 +45,11 @@ function initHeroSlider() {
     const dots = document.querySelectorAll('.hero-dots .dot');
     const heroContent = document.querySelector('.hero-content');
     
+    // Only initialize if hero content exists (for homepage)
+    if (!heroContent || !dots.length) {
+        return;
+    }
+    
     const heroSlides = [
         {
             title: "Your First Ontario<br>Adventure Starts Here",
