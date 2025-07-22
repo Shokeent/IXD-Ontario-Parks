@@ -20,7 +20,7 @@
             <div class="nav-menu">
                 <a href="all-parks.html" class="nav-link active">Discover Parks</a>
                 <a href="gear-list.html" class="nav-link">Gear Guide</a>
-                <a href="gear-list.html" class="nav-link">First Timer Help</a>
+                <a href="map.html" class="nav-link">Interactive Map</a>
                 <a href="#store" class="nav-link">Store</a>
                 <a href="#fees" class="nav-link">Fees</a>
                 <a href="#signin" class="nav-link">Sign In</a>
@@ -109,7 +109,7 @@
                 <button class="filter-tag">Kids Program</button>
                 <button class="filter-tag">Easy Trail</button>
                 <button class="filter-tag">Biking</button>
-                <button class="map-toggle">
+                <button class="map-toggle" onclick="window.location.href='map.html'">
                     <span class="map-icon">🗺️</span>
                     Show in Map
                 </button>
@@ -447,6 +447,9 @@
         </div>
     </footer>
 
+    <script src="js/image-config.js"></script>
+    <script src="js/image-manager.js"></script>
+    <script src="js/parks-api.js"></script>
     <script src="js/script.js"></script>
     <script src="js/all-parks.js"></script>
 </body>

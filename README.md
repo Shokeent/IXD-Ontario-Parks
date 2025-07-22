@@ -1,10 +1,31 @@
 # Ontario Parks Website 🌲
 
-A comprehensive camping and park reservation website designed specifically for first-time campers and newcomers to Ontario. Built with pure HTML, CSS, and JavaScript for maximum compatibility and performance.
+A comprehensive camping and park reservation website designed specifically for first-time campers and newcomers to Ontario. Built with **pure HTML, CSS, and JavaScript** for maximum compatibility, performance, and simplicity.
+
+## 🚀 **Quick Start**
+
+To run the website locally:
+
+```bash
+# Navigate to the project directory
+cd IXD-Ontario-Parks
+
+# Start a simple HTTP server
+python3 -m http.server 3000
+
+# Open your browser to http://localhost:3000
+```
 
 ## 🎯 **Project Overview**
 
 This website provides a complete digital experience for discovering, planning, and booking camping experiences in Ontario Parks. The design focuses on accessibility, ease-of-use, and comprehensive guidance for first-time outdoor enthusiasts.
+
+## 🏗️ **Architecture**
+
+- **Frontend-Only**: Pure HTML/CSS/JavaScript with no backend dependencies
+- **Static Files**: All content served as static files for maximum compatibility
+- **Responsive Design**: Mobile-first approach that works on all devices
+- **No Build Process**: Direct development and deployment without compilation
 
 ## 📋 **Pages & Features**
 
@@ -92,10 +113,45 @@ This website provides a complete digital experience for discovering, planning, a
 - **State Management**: Cross-page data flow
 
 ### **Performance Features**
-- **Optimized Images**: Placeholder system for fast loading
+- **Real Park Images**: High-quality photos from Unsplash and official sources
+- **Optimized Images**: Responsive images with multiple sizes and WebP support
+- **Lazy Loading**: Images load as needed for better performance
+- **Image Caching**: Smart caching system with fallback support
 - **Efficient CSS**: Modular stylesheets for specific pages
 - **Progressive Enhancement**: Works without JavaScript
 - **Cached Data**: Local storage for improved UX
+
+## 🖼️ **Image System**
+
+### **High-Quality Park Images**
+- **Real Photography**: Curated high-resolution images from Unsplash and official park sources
+- **Multiple Formats**: Primary images, hero backgrounds, and gallery collections
+- **Responsive Sizing**: Automatically optimized for different screen sizes and devices
+- **Smart Fallbacks**: Graceful degradation when images fail to load
+
+### **Image Optimization**
+- **WebP Detection**: Automatic WebP format serving for supported browsers
+- **Lazy Loading**: Images load only when needed to improve performance
+- **Size Optimization**: Dynamic resizing based on viewport and usage context
+- **Caching Strategy**: Intelligent preloading and caching of critical images
+
+### **Image Categories**
+```javascript
+// Featured Parks (10+ parks with multiple images each)
+PARK_IMAGES = {
+    'Algonquin Provincial Park': { main, hero, gallery[] },
+    'Killarney Provincial Park': { main, hero, gallery[] },
+    'Sandbanks Provincial Park': { main, hero, gallery[] }
+    // ... and more
+}
+
+// Hero backgrounds for different sections
+HERO_IMAGES = { homepage, allParks, booking, gear }
+
+// Activity and gear category images
+ACTIVITY_IMAGES = { hiking, canoeing, fishing, swimming }
+GEAR_IMAGES = { shelter, hiking, fishing, winter, biking }
+```
 
 ## 📁 **File Structure**
 
@@ -122,6 +178,9 @@ ontario-parks/
 │   ├── review-reservation.css          # Review flow styles
 │   └── gear-list.css                   # Gear guide styles
 ├── js/
+│   ├── parks-api.js                    # Ontario Parks API integration
+│   ├── image-config.js                 # Park image configuration
+│   ├── image-manager.js                # Image optimization utilities
 │   ├── script.js                       # Homepage functionality
 │   ├── all-parks.js                    # Search and filtering
 │   ├── park-details.js                 # Park interactions
@@ -130,6 +189,11 @@ ontario-parks/
 │   ├── acknowledge.js                  # Alert system
 │   ├── review-reservation.js           # Review workflow
 │   └── gear-list.js                    # Gear checklist
+├── images/
+│   ├── parks/                          # Individual park photos
+│   ├── heroes/                         # Hero section backgrounds
+│   ├── gear/                           # Camping gear images
+│   └── README.md                       # Image documentation
 ├── SITE_MAP.md                         # Complete navigation map
 └── README.md                           # This file
 ```
@@ -264,7 +328,8 @@ ontario-parks/
 ## 📈 **Future Enhancements**
 
 ### **Phase 2 Features**
-- [ ] **Real API Integration**: Connect to actual Ontario Parks data
+- [x] **Real API Integration**: Connect to actual Ontario Parks data ✅
+- [x] **High-Quality Images**: Real park photos with optimization ✅
 - [ ] **Payment Processing**: Secure payment gateway
 - [ ] **User Accounts**: Login system and saved preferences
 - [ ] **Real-time Availability**: Live campsite availability
@@ -297,9 +362,9 @@ This project is created for educational and demonstration purposes. All content 
 ## 📞 **Contact**
 
 For questions, suggestions, or contributions:
-- **Project Lead**: [Your Name]
-- **Email**: [your-email@domain.com]
-- **Repository**: [GitHub repository URL]
+- **Project Lead**: [Tarun Shokeen]
+- **Email**: [shokeentarun20@gmail.com]
+- **Repository**: [https://github.com/Shokeent/IXD-Ontario-Parks.git]
 
 ---
 

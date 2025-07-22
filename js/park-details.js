@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initBookingButtons();
     initCampingOptions();
     initDateFilter();
+    
+    // Load park details from API
+    loadParkDetails();
 });
 
 // Initialize hero carousel
@@ -293,6 +296,216 @@ function startBookingProcess(campgroundName) {
         
         // In real app: window.location.href = `booking.html?campground=${encodedName}`;
     }, 1500);
+}
+
+// Load park details from API
+async function loadParkDetails() {
+    try {
+        // Get park ID from localStorage (set from previous page)
+        const parkId = localStorage.getItem('selectedParkId');
+        
+        if (!parkId) {
+            console.warn('No park ID found, using default park data');
+            return;
+        }
+        
+        // Wait for API to be available
+        if (!window.ontarioParksAPI) {
+            console.warn('Parks API not available');
+            return;
+        }
+        
+        // Get park data from API
+        const park = await window.ontarioParksAPI.getParkById(parkId);
+        
+        if (!park) {
+            console.warn('Park not found:', parkId);
+            return;
+        }
+        
+        // Update page content with park data
+        updateParkDetailsContent(park);
+        
+        // Load weather data for the park
+        loadParkWeather(parkId);
+        
+    } catch (error) {
+        console.error('Error loading park details:', error);
+    }
+}
+
+// Update page content with park data
+function updateParkDetailsContent(park) {
+    // Update park name
+    const parkNameElements = document.querySelectorAll('.park-title, h1');
+    parkNameElements.forEach(element => {
+        if (element) element.textContent = park.name;
+    });
+    
+    // Update breadcrumb
+    const breadcrumbElement = document.querySelector('.breadcrumb .current');
+    if (breadcrumbElement) breadcrumbElement.textContent = park.name;
+    
+    // Update page title
+    document.title = `${park.name} - Ontario Parks`;
+    
+    // Update park location
+    const locationElements = document.querySelectorAll('.park-location');
+    locationElements.forEach(element => {
+        if (element) element.textContent = park.region;
+    });
+    
+    // Update park description/overview
+    const overviewElements = document.querySelectorAll('.park-overview p');
+    overviewElements.forEach(element => {
+        if (element) {
+            const readMoreLink = element.querySelector('.read-more');
+            const readMoreHtml = readMoreLink ? ' <a href="#" class="read-more">Read More</a>' : '';
+            element.innerHTML = park.description + readMoreHtml;
+        }
+    });
+    
+    // Update carousel images with gallery
+    const carouselSlides = document.querySelectorAll('.carousel-slide .hero-image');
+    if (carouselSlides.length > 0 && window.ontarioParksAPI) {
+        const galleryImages = window.ontarioParksAPI.getParkGallery(park.name);
+        
+        carouselSlides.forEach((heroDiv, index) => {
+            if (heroDiv && galleryImages[index]) {
+                heroDiv.style.backgroundImage = `url('${galleryImages[index]}')`;
+                heroDiv.style.backgroundSize = 'cover';
+                heroDiv.style.backgroundPosition = 'center';
+                heroDiv.className = `hero-image`; // Remove placeholder classes
+            } else if (heroDiv && galleryImages.length > 0) {
+                // Use the main image if we don't have enough gallery images
+                heroDiv.style.backgroundImage = `url('${galleryImages[0]}')`;
+                heroDiv.style.backgroundSize = 'cover';
+                heroDiv.style.backgroundPosition = 'center';
+                heroDiv.className = `hero-image`;
+            }
+        });
+    }
+    
+    // Update activities
+    const activitiesContainer = document.querySelector('.activity-tags');
+    if (activitiesContainer && park.activities) {
+        activitiesContainer.innerHTML = park.activities.map(activity => `
+            <span class="activity-tag">${activity}</span>
+        `).join('');
+    }
+    
+    // Update amenities
+    const amenitiesContainer = document.querySelector('.amenities-list, .park-amenities');
+    if (amenitiesContainer && park.amenities) {
+        amenitiesContainer.innerHTML = park.amenities.map(amenity => `
+            <span class="amenity-tag">${amenity}</span>
+        `).join('');
+    }
+    
+    // Update pricing information
+    const pricingElements = document.querySelectorAll('.pricing-info, .campsite-prices');
+    pricingElements.forEach(element => {
+        if (element && park.pricing) {
+            element.innerHTML = `
+                <div class="price-item">
+                    <span class="price-label">Tent Sites:</span>
+                    <span class="price-value">$${park.pricing.tent}/night</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-label">RV Sites:</span>
+                    <span class="price-value">$${park.pricing.rv}/night</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-label">Cabins:</span>
+                    <span class="price-value">$${park.pricing.cabin}/night</span>
+                </div>
+            `;
+        }
+    });
+    
+    // Update park features/details
+    const featuresContainer = document.querySelector('.park-features, .park-details');
+    if (featuresContainer) {
+        featuresContainer.innerHTML = `
+            <div class="feature-item">
+                <span class="feature-icon">🏕️</span>
+                <span class="feature-text">${park.campgrounds} Campgrounds</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">👥</span>
+                <span class="feature-text">Up to ${park.maxOccupancy} people</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">${park.pets ? '🐕' : '🚫'}</span>
+                <span class="feature-text">${park.pets ? 'Pet Friendly' : 'No Pets'}</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">${park.accessibility ? '♿' : '🚶'}</span>
+                <span class="feature-text">${park.accessibility ? 'Accessible' : 'Standard Access'}</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🗓️</span>
+                <span class="feature-text">${park.season.open} - ${park.season.close}</span>
+            </div>
+        `;
+    }
+    
+    // Update contact information
+    const contactContainer = document.querySelector('.contact-info, .park-contact');
+    if (contactContainer && park.contact) {
+        contactContainer.innerHTML = `
+            <div class="contact-item">
+                <span class="contact-label">Phone:</span>
+                <a href="tel:${park.contact.phone}" class="contact-value">${park.contact.phone}</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Email:</span>
+                <a href="mailto:${park.contact.email}" class="contact-value">${park.contact.email}</a>
+            </div>
+        `;
+    }
+    
+    // Update difficulty badge
+    const difficultyBadges = document.querySelectorAll('.difficulty-badge');
+    difficultyBadges.forEach(badge => {
+        if (badge) {
+            badge.textContent = park.difficulty;
+            badge.className = `difficulty-badge ${park.difficulty.toLowerCase()}`;
+        }
+    });
+}
+
+// Load weather data for the park
+async function loadParkWeather(parkId) {
+    try {
+        const weather = await window.ontarioParksAPI.getWeatherForPark(parkId);
+        
+        // Update weather display
+        const weatherContainer = document.querySelector('.weather-info, .current-weather');
+        if (weatherContainer) {
+            weatherContainer.innerHTML = `
+                <div class="weather-item">
+                    <span class="weather-icon">🌡️</span>
+                    <span class="weather-value">${weather.temperature}°C</span>
+                </div>
+                <div class="weather-item">
+                    <span class="weather-icon">☁️</span>
+                    <span class="weather-value">${weather.description}</span>
+                </div>
+                <div class="weather-item">
+                    <span class="weather-icon">💧</span>
+                    <span class="weather-value">${weather.humidity}%</span>
+                </div>
+                <div class="weather-item">
+                    <span class="weather-icon">💨</span>
+                    <span class="weather-value">${weather.windSpeed} km/h</span>
+                </div>
+            `;
+        }
+        
+    } catch (error) {
+        console.warn('Weather data not available:', error);
+    }
 }
 
 // Show camping details

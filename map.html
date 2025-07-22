@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Parks Map - Ontario Parks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Ontario Parks</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="all-parks.html" class="nav-link">Discover Parks</a>
+                <a href="gear-list.html" class="nav-link">Gear Guide</a>
+                <a href="map.html" class="nav-link active">Interactive Map</a>
+                <a href="#store" class="nav-link">Store</a>
+                <a href="#fees" class="nav-link">Fees</a>
+                <a href="#signin" class="nav-link">Sign In</a>
+                <button class="btn-reservation">Make Reservation</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Map Header -->
+    <section class="map-header">
+        <div class="container">
+            <h1 class="map-title">Explore Ontario Parks</h1>
+            <p class="map-subtitle">Discover parks near you with our interactive map</p>
+        </div>
+    </section>
+
+    <!-- Map Controls -->
+    <section class="map-controls">
+        <div class="container">
+            <div class="controls-row">
+                <div class="search-box">
+                    <input type="text" id="locationSearch" placeholder="Search by city or postal code..." class="search-input">
+                    <button id="searchBtn" class="search-btn">
+                        <span>🔍</span>
+                    </button>
+                </div>
+                
+                <div class="filter-controls">
+                    <select id="regionFilter" class="filter-select">
+                        <option value="">All Regions</option>
+                        <option value="central">Central Ontario</option>
+                        <option value="eastern">Eastern Ontario</option>
+                        <option value="northern">Northern Ontario</option>
+                        <option value="southwestern">Southwestern Ontario</option>
+                    </select>
+                    
+                    <select id="activityFilter" class="filter-select">
+                        <option value="">All Activities</option>
+                        <option value="hiking">Hiking</option>
+                        <option value="camping">Camping</option>
+                        <option value="swimming">Swimming</option>
+                        <option value="canoeing">Canoeing</option>
+                        <option value="fishing">Fishing</option>
+                    </select>
+                    
+                    <button id="clearFilters" class="clear-btn">Clear Filters</button>
+                </div>
+                
+                <div class="map-toggle-buttons">
+                    <button id="satelliteView" class="toggle-btn">Satellite</button>
+                    <button id="terrainView" class="toggle-btn active">Terrain</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Container -->
+    <section class="map-section">
+        <div class="map-container">
+            <div id="parkMap" class="interactive-map"></div>
+            
+            <!-- Map Legend -->
+            <div class="map-legend">
+                <h4>Legend</h4>
+                <div class="legend-item">
+                    <div class="legend-marker provincial"></div>
+                    <span>Provincial Parks</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-marker national"></div>
+                    <span>National Parks</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-marker conservation"></div>
+                    <span>Conservation Areas</span>
+                </div>
+            </div>
+            
+            <!-- Park Info Panel -->
+            <div id="parkInfoPanel" class="park-info-panel hidden">
+                <button id="closeParkInfo" class="close-btn">&times;</button>
+                <div class="park-info-content">
+                    <div class="park-image-container">
+                        <img id="parkImage" src="" alt="" class="park-image">
+                    </div>
+                    <div class="park-details">
+                        <h3 id="parkName"></h3>
+                        <p id="parkRegion" class="park-region"></p>
+                        <p id="parkDescription" class="park-description"></p>
+                        
+                        <div class="park-features">
+                            <div class="feature-grid">
+                                <div class="feature">
+                                    <span class="feature-icon">🏕️</span>
+                                    <span id="parkCampgrounds"></span>
+                                </div>
+                                <div class="feature">
+                                    <span class="feature-icon">👥</span>
+                                    <span id="parkOccupancy"></span>
+                                </div>
+                                <div class="feature">
+                                    <span class="feature-icon">💰</span>
+                                    <span id="parkPrice"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="park-actions">
+                            <button id="viewDetailsBtn" class="btn-primary">View Details</button>
+                            <button id="bookNowBtn" class="btn-secondary">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Statistics -->
+    <section class="map-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalParks">127</div>
+                    <div class="stat-label">Total Parks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="provincialParks">115</div>
+                    <div class="stat-label">Provincial Parks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="nationalParks">6</div>
+                    <div class="stat-label">National Parks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="conservationAreas">6</div>
+                    <div class="stat-label">Conservation Areas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Ontario Parks</h4>
+                    <p>Making nature accessible for everyone. Discover the beauty of Ontario's wilderness through our parks and conservation areas.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="all-parks.html">All Parks</a></li>
+                        <li><a href="map.html">Interactive Map</a></li>
+                        <li><a href="gear-list.html">Gear Guide</a></li>
+                        <li><a href="#reservations">Reservations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Languages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Parks Info</h4>
+                    <ul>
+                        <li><a href="#">Park Passes</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Conservation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ontario Parks. Making nature accessible for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <!-- Map JavaScript -->
+    <script src="js/image-config.js"></script>
+    <script src="js/image-manager.js"></script>
+    <script src="js/parks-api.js"></script>
+    <script src="js/map.js"></script>
+</body>
+</html>

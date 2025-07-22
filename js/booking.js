@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeBookingPage();
+    loadParkBookingData();
 });
 
 function initializeBookingPage() {
@@ -446,3 +447,104 @@ document.addEventListener('click', function(e) {
         }, 500);
     }
 });
+
+// Load park data for booking page
+async function loadParkBookingData() {
+    try {
+        // Get park ID from localStorage
+        const parkId = localStorage.getItem('selectedParkId');
+        
+        if (!parkId) {
+            console.warn('No park ID found for booking');
+            return;
+        }
+        
+        // Wait for API to be available
+        if (!window.ontarioParksAPI) {
+            console.warn('Parks API not available');
+            return;
+        }
+        
+        // Get park data from API
+        const park = await window.ontarioParksAPI.getParkById(parkId);
+        
+        if (!park) {
+            console.warn('Park not found for booking:', parkId);
+            return;
+        }
+        
+        // Update booking page with park data
+        updateBookingPageContent(park);
+        
+    } catch (error) {
+        console.error('Error loading park booking data:', error);
+    }
+}
+
+// Update booking page content with park data
+function updateBookingPageContent(park) {
+    // Update park name in page title and headers
+    const parkNameElements = document.querySelectorAll('.park-name, .booking-title h1, .page-title');
+    parkNameElements.forEach(element => {
+        if (element) {
+            element.textContent = `Book ${park.name}`;
+        }
+    });
+    
+    // Update park information in booking summary
+    const parkInfoContainer = document.querySelector('.park-info, .booking-park-details');
+    if (parkInfoContainer) {
+        parkInfoContainer.innerHTML = `
+            <div class="park-summary">
+                <h3>${park.name}</h3>
+                <p class="park-location">${park.region}</p>
+                <p class="park-description">${park.description}</p>
+            </div>
+            <div class="park-booking-features">
+                <span class="feature">🏕️ ${park.campgrounds} Campgrounds</span>
+                <span class="feature">👥 Up to ${park.maxOccupancy}</span>
+                ${park.pets ? '<span class="feature">🐕 Pet Friendly</span>' : ''}
+                ${park.accessibility ? '<span class="feature">♿ Accessible</span>' : ''}
+            </div>
+        `;
+    }
+    
+    // Update pricing in search results
+    const priceElements = document.querySelectorAll('.price, .campsite-price');
+    priceElements.forEach(element => {
+        if (element && park.pricing) {
+            // Determine site type and update accordingly
+            const parentCard = element.closest('.campsite-card');
+            if (parentCard) {
+                const siteType = parentCard.querySelector('.site-type')?.textContent?.toLowerCase() || 'tent';
+                
+                if (siteType.includes('rv') || siteType.includes('electrical')) {
+                    element.textContent = `$${park.pricing.rv}/night`;
+                } else if (siteType.includes('cabin')) {
+                    element.textContent = `$${park.pricing.cabin}/night`;
+                } else {
+                    element.textContent = `$${park.pricing.tent}/night`;
+                }
+            }
+        }
+    });
+    
+    // Update booking breadcrumb
+    const breadcrumb = document.querySelector('.breadcrumb, .booking-steps');
+    if (breadcrumb) {
+        const parkLink = breadcrumb.querySelector('a[href*="park-details"]');
+        if (parkLink) {
+            parkLink.textContent = park.name;
+        }
+    }
+    
+    // Store park data for booking process
+    localStorage.setItem('bookingParkData', JSON.stringify({
+        id: park.id,
+        name: park.name,
+        region: park.region,
+        pricing: park.pricing,
+        maxOccupancy: park.maxOccupancy,
+        contact: park.contact
+    }));
+}

@@ -3,38 +3,40 @@
 /* Page Header */
 .page-header {
     background: linear-gradient(135deg, #2c5530, #3a6b3f);
-    padding: 60px 0 80px;
+    padding: 40px 0 60px;
     color: white;
     text-align: left;
 }
 
 .page-title {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 36px;
+    font-weight: 600;
     margin: 0;
 }
 
-/* Search and Filter Section - Inherited from booking.css */
+/* Search and Filter Section */
 .search-filter-section {
     padding: 0;
-    margin-top: -40px;
+    margin-top: -30px;
     position: relative;
     z-index: 10;
+    margin-bottom: 40px;
 }
 
 .search-card {
     background: white;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     max-width: 1200px;
     margin: 0 auto;
+    border: 1px solid #f3f4f6;
 }
 
 .search-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr auto;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto;
+    gap: 24px;
     align-items: end;
 }
 
@@ -48,17 +50,20 @@
     font-weight: 500;
     color: #374151;
     font-size: 14px;
+    margin-bottom: 4px;
 }
 
 .search-select,
 .search-input {
-    padding: 12px 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
     font-size: 14px;
     background: white;
-    min-height: 44px;
+    min-height: 48px;
     box-sizing: border-box;
+    transition: all 0.2s ease;
+    font-family: inherit;
 }
 
 .search-select:focus,
@@ -68,15 +73,20 @@
     box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
 }
 
+.search-select:hover,
+.search-input:hover {
+    border-color: #9ca3af;
+}
+
 .search-btn {
     background: #059669;
     border: none;
-    border-radius: 8px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 14px;
     color: white;
     cursor: pointer;
-    min-height: 44px;
-    width: 44px;
+    min-height: 48px;
+    width: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -175,19 +185,76 @@
 /* Site Cards */
 .site-card {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 20px;
-    padding: 20px;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    margin-bottom: 16px;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    padding: 24px;
+    border: 2px solid #f3f4f6;
+    border-radius: 16px;
+    margin-bottom: 20px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    background: white;
 }
 
 .site-card:hover {
     border-color: #059669;
-    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1);
+    box-shadow: 0 8px 24px rgba(5, 150, 105, 0.12);
+    transform: translateY(-2px);
+}
+
+.site-card.selected {
+    border-color: #059669;
+    background: #f0fdf4;
+    box-shadow: 0 8px 24px rgba(5, 150, 105, 0.15);
+}
+
+.site-image {
+    width: 180px;
+    height: 120px;
+    background: #f3f4f6;
+    border-radius: 12px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.site-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.site-info h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+}
+
+.site-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.feature-icon {
+    font-size: 16px;
+}
+
+.site-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #059669;
+    margin-top: auto;
 }
 
 .site-card.selected {
@@ -319,9 +386,11 @@
 .guides-section,
 .general-info {
     background: white;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f3f4f6;
+    margin-bottom: 24px;
 }
 
 .booking-details h3,
@@ -330,55 +399,82 @@
 .gears-section h3,
 .guides-section h3,
 .general-info h3 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     color: #1f2937;
-    margin: 0 0 16px 0;
+    margin: 0 0 20px 0;
 }
 
 /* Booking Details */
 .booking-image {
     width: 100%;
     height: 200px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #059669, #10b981);
+    border-radius: 12px;
     margin-bottom: 24px;
+    overflow: hidden;
 }
 
 .pricing-section {
-    border-top: 1px solid #e5e7eb;
-    padding-top: 20px;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 24px;
 }
 
 .price-display {
     display: flex;
     align-items: baseline;
     gap: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .price {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
-    color: #1f2937;
+    color: #059669;
 }
 
 .price-period {
     font-size: 16px;
     color: #6b7280;
+    font-weight: 500;
 }
 
 .occupancy-info {
     font-size: 14px;
     color: #374151;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border-radius: 8px;
 }
 
 .booking-dates {
     background: #f9fafb;
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 20px;
     margin-bottom: 24px;
+}
+
+.cost-breakdown {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 16px;
+    margin-top: 16px;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #374151;
+}
+
+.cost-item.total {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 12px;
+    margin-top: 8px;
+    font-size: 16px;
+    color: #1f2937;
 }
 
 .date-row {
@@ -413,27 +509,31 @@
 
 .reserve-btn {
     width: 100%;
-    background: #1f2937;
+    background: #059669;
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 18px 24px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
-    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
 }
 
 .reserve-btn:hover {
-    background: #111827;
+    background: #047857;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
 }
 
 .reserve-note {
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     color: #6b7280;
     margin: 0;
+    font-weight: 400;
 }
 
 /* Equipment Section */

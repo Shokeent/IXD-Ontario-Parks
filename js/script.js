@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initParkCards();
     initScrollAnimations();
     initMobileMenu();
+    
+    // Load featured parks from API
+    loadFeaturedParks();
 });
 
 // Navigation functionality
@@ -141,14 +144,26 @@ function initParkCards() {
         
         // View Details functionality
         viewDetailsBtn?.addEventListener('click', function() {
-            const parkName = card.querySelector('h3').textContent;
-            showParkModal(parkName);
+            const parkId = card.dataset.parkId;
+            if (parkId) {
+                localStorage.setItem('selectedParkId', parkId);
+                window.location.href = 'park-details.html';
+            } else {
+                const parkName = card.querySelector('h3').textContent;
+                showParkModal(parkName);
+            }
         });
         
         // Book Now functionality
         bookNowBtn?.addEventListener('click', function() {
-            const parkName = card.querySelector('h3').textContent;
-            startBookingProcess(parkName);
+            const parkId = card.dataset.parkId;
+            if (parkId) {
+                localStorage.setItem('selectedParkId', parkId);
+                window.location.href = 'booking.html';
+            } else {
+                const parkName = card.querySelector('h3').textContent;
+                startBookingProcess(parkName);
+            }
         });
 
         // Card hover effects
@@ -374,3 +389,123 @@ const bookingSystem = new BookingSystem();
 
 // Make booking system globally available
 window.bookingSystem = bookingSystem;
+
+// Load featured parks from API
+async function loadFeaturedParks() {
+    // Only load on homepage (check if featured parks container exists)
+    const featuredParksContainer = document.querySelector('.perfect-parks .parks-grid') || 
+                                 document.querySelector('.featured-parks .parks-grid') ||
+                                 document.querySelector('.featured-parks-container') ||
+                                 document.querySelector('.parks-showcase');
+    
+    if (!featuredParksContainer) {
+        return; // Not on homepage
+    }
+    
+    try {
+        // Show loading state
+        featuredParksContainer.innerHTML = `
+            <div class="loading-featured-parks">
+                <div class="loading-spinner"></div>
+                <p>Loading featured parks...</p>
+            </div>
+        `;
+        
+        // Wait for API to be available
+        if (!window.ontarioParksAPI) {
+            console.warn('Parks API not available, using fallback');
+            loadFallbackFeaturedParks(featuredParksContainer);
+            return;
+        }
+        
+        // Get featured parks from API
+        const featuredParks = await window.ontarioParksAPI.getFeaturedParks(6);
+        
+        // Render featured parks
+        renderFeaturedParks(featuredParks, featuredParksContainer);
+        
+    } catch (error) {
+        console.error('Error loading featured parks:', error);
+        loadFallbackFeaturedParks(featuredParksContainer);
+    }
+}
+
+// Render featured parks
+function renderFeaturedParks(parks, container) {
+    container.innerHTML = parks.map(park => `
+        <div class="park-card" data-park-id="${park.id}">
+            <div class="park-image">
+                <img src="${park.image}" alt="${park.name}" loading="lazy">
+                <span class="difficulty-badge ${park.difficulty.toLowerCase()}">${park.difficulty}</span>
+                ${park.pets ? '<span class="pets-badge">🐕 Pet Friendly</span>' : ''}
+            </div>
+            <div class="park-content">
+                <h3>${park.name}</h3>
+                <p class="park-region">${park.region}</p>
+                <p class="park-description">${park.description.substring(0, 120)}...</p>
+                <div class="park-highlights">
+                    <span class="highlight">🏕️ ${park.campgrounds} Campgrounds</span>
+                    <span class="highlight">👥 Up to ${park.maxOccupancy}</span>
+                    ${park.accessibility ? '<span class="highlight">♿ Accessible</span>' : ''}
+                </div>
+                <div class="park-actions">
+                    <button class="btn btn-secondary">View Details</button>
+                    <button class="btn btn-primary">Book Now</button>
+                </div>
+                <div class="park-pricing">
+                    <span class="price">From $${park.pricing.tent}/night</span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    // Re-initialize park card interactions
+    initParkCards();
+}
+
+// Fallback featured parks if API fails
+function loadFallbackFeaturedParks(container) {
+    const fallbackParks = [
+        {
+            id: 'algonquin-fallback',
+            name: 'Algonquin Provincial Park',
+            region: 'Central Ontario',
+            description: 'Experience pristine wilderness, crystal-clear lakes, and diverse wildlife in Ontario\'s most famous park.',
+            image: 'https://via.placeholder.com/400x250/059669/ffffff?text=Algonquin+Park',
+            difficulty: 'Beginner',
+            campgrounds: 8,
+            maxOccupancy: 6,
+            pets: true,
+            accessibility: true,
+            pricing: { tent: 42 }
+        },
+        {
+            id: 'sandbanks-fallback',
+            name: 'Sandbanks Provincial Park',
+            region: 'Eastern Ontario',
+            description: 'Enjoy world-class sandy beaches and unique dune formations perfect for family camping adventures.',
+            image: 'https://via.placeholder.com/400x250/ea580c/ffffff?text=Sandbanks+Park',
+            difficulty: 'Beginner',
+            campgrounds: 4,
+            maxOccupancy: 6,
+            pets: true,
+            accessibility: true,
+            pricing: { tent: 45 }
+        },
+        {
+            id: 'killarney-fallback',
+            name: 'Killarney Provincial Park',
+            region: 'Northern Ontario',
+            description: 'Discover stunning white quartzite ridges and crystal-clear lakes in this iconic wilderness destination.',
+            image: 'https://via.placeholder.com/400x250/4f46e5/ffffff?text=Killarney+Park',
+            difficulty: 'Beginner',
+            campgrounds: 6,
+            maxOccupancy: 8,
+            pets: true,
+            accessibility: false,
+            pricing: { tent: 38 }
+        }
+    ];
+    
+    renderFeaturedParks(fallbackParks, container);
+}
