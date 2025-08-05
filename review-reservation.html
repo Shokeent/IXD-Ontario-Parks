@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Reservation Details - Ontario Parks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/review-reservation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for new design */
+        .page-header {
+            background: #f8f9fa;
+            padding: 40px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+        }
+        
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 16px;
+            margin: 0;
+        }
+        
+        .modify-booking-btn {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .modify-booking-btn:hover {
+            background: #e5e7eb;
+        }
+        
+        .main-content {
+            padding: 40px 0;
+            background: #f8f9fa;
+        }
+        
+        .review-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .reservation-card {
+            background: white;
+            border: 2px solid #3b82f6;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        
+        .card-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 12px 0;
+        }
+        
+        .dates-times {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .dates {
+            color: #374151;
+            font-weight: 500;
+        }
+        
+        .times {
+            color: #6b7280;
+        }
+        
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            padding-top: 24px;
+            border-top: 1px dashed #d1d5db;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .detail-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .detail-icon.site {
+            background: #dcfce7;
+        }
+        
+        .detail-icon.night {
+            background: #e0e7ff;
+        }
+        
+        .detail-icon.equipment {
+            background: #fef3c7;
+        }
+        
+        .detail-icon.guest {
+            background: #fce7f3;
+        }
+        
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .detail-label {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        .detail-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .alert-section {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .alert-icon {
+            font-size: 20px;
+            margin-top: 2px;
+        }
+        
+        .alert-content {
+            color: #92400e;
+            line-height: 1.5;
+        }
+        
+        .read-more {
+            color: #1d4ed8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        .messages-section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .messages-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 16px 0;
+        }
+        
+        .messages-section p {
+            color: #374151;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .confirmation-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .checkbox-container label {
+            font-weight: 600;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .confirm-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #059669;
+        }
+        
+        .checkbox-text {
+            color: #6b7280;
+            font-size: 14px;
+            margin-left: 26px;
+        }
+        
+        .confirm-btn {
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .confirm-btn:hover {
+            background: #047857;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .booking-details {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            
+            .confirmation-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .confirm-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Ontario Parks</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="all-parks.html" class="nav-link">Discover Parks</a>
+                <a href="gear-list.html" class="nav-link">Gear Guide</a>
+                <a href="#trails" class="nav-link">Find Trails Hubs</a>
+                <a href="#store" class="nav-link">Store</a>
+                <a href="#fees" class="nav-link">Fees</a>
+                <a href="#signin" class="nav-link">Sign In</a>
+                <button class="btn-reservation">Make Reservation</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="page-title">Review Reservation Details</h1>
+                    <p class="page-subtitle">Handpicked locations with excellent facilities and beginner-friendly features</p>
+                </div>
+                <button class="modify-booking-btn">
+                    <span class="modify-icon">✏️</span>
+                    Modify Booking
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="review-container">
+                <!-- Main Reservation Card -->
+                <div class="reservation-card">
+                    <div class="card-header">
+                        <h2>Algonquin - Kiosk Campground</h2>
+                        <div class="dates-times">
+                            <span class="dates">Mon, Jul 21 - Tue, Jul 22, 2025</span>
+                            <span class="times">Check In: 14:00  Check Out: 14:00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-details">
+                        <div class="detail-item">
+                            <div class="detail-icon site">📍</div>
+                            <div class="detail-info">
+                                <span class="detail-label">Site</span>
+                                <span class="detail-value">1</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon night">🌙</div>
+                            <div class="detail-info">
+                                <span class="detail-label">Night</span>
+                                <span class="detail-value">1</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon equipment">⛺</div>
+                            <div class="detail-info">
+                                <span class="detail-label">Equipment</span>
+                                <span class="detail-value">Single Tent</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon guest">👥</div>
+                            <div class="detail-info">
+                                <span class="detail-label">Guest</span>
+                                <span class="detail-value">2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aquatic Invasive Species Alert -->
+                <div class="alert-section">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <strong>Aquatic Invasive Species Alert:</strong> Clean all equipment before entering the park. Remove plants and mud from boats and gear. 
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+                
+                <!-- Reservation Messages -->
+                <div class="messages-section">
+                    <h3>Reservation Messages</h3>
+                    <p>I understand that Ontario Parks reservations cannot be sold to another party for more than the original cost of the reservation, and if there are attempts to sell a reservation for profit as determined by Ontario Parks, the reservation may be cancelled and all applicable penalty fees will apply. 
+                        <a href="#" class="read-more">Read More</a>
+                    </p>
+                </div>
+                
+                <!-- Confirmation Section -->
+                <div class="confirmation-section">
+                    <div class="checkbox-container">
+                        <label for="confirm-details">
+                            <input type="checkbox" id="confirm-details" class="confirm-checkbox">
+                            Please read and acknowledge
+                        </label>
+                        <div class="checkbox-text">All reservation details are correct.</div>
+                    </div>
+                    
+                    <button class="confirm-btn" onclick="window.location.href='shopping-cart.html'">
+                        Confirm reservation details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Ontario Parks</h3>
+                        <p>Making Ontario's natural beauty accessible to everyone, especially first-time campers and newcomers alike.</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For First-Timers</h4>
+                    <ul>
+                        <li><a href="#">Camping Basics</a></li>
+                        <li><a href="#">Gear Rental</a></li>
+                        <li><a href="#">Safety Tips</a></li>
+                        <li><a href="#">Family Activities</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Languages</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Parks Info</h4>
+                    <ul>
+                        <li><a href="#">All Parks</a></li>
+                        <li><a href="#">Reservations</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ontario Parks. Making nature accessible for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/review-reservation.js"></script>
+</body>
+</html>

@@ -60,21 +60,90 @@ function setupCampsiteSelection() {
 }
 
 function updateCampsitePreview(campsiteNumber) {
-    const preview = document.querySelector('.campsite-preview');
-    const previewImage = preview.querySelector('.preview-image');
-    const previewDescription = preview.querySelector('.preview-description');
-    
-    // Update preview image based on selected campsite
-    previewImage.className = `preview-image placeholder-campsite-${campsiteNumber}`;
-    
-    // Update description based on campsite
-    const descriptions = {
-        1: "This premium campsite offers stunning lake views with easy access to hiking trails. Perfect for families with children, featuring nearby washrooms and playground facilities. The site can accommodate both tents and RVs.",
-        2: "A secluded forest campsite ideal for those seeking a peaceful retreat. Surrounded by tall pines with excellent privacy. Close to the visitor center and canoe rental facilities. WiFi available.",
-        3: "Waterfront campsite with direct beach access. Wake up to beautiful sunrise views over the lake. Popular spot for swimming and water activities. Accessible facilities nearby."
+    // Campsite data
+    const campsiteData = {
+        1: {
+            title: "Campsite 1",
+            type: "Waterfront Site",
+            price: 45,
+            baseRate: 40,
+            premium: 5,
+            image: "placeholder-campsite-1",
+            features: [
+                { icon: "🏕️", text: "Tent & RV friendly (up to 30ft)" },
+                { icon: "💧", text: "Lake access • Fire pit • Picnic table" },
+                { icon: "📶", text: "WiFi available • Accessible facilities" }
+            ],
+            description: "This premium waterfront campsite offers stunning lake views with easy access to hiking trails. Perfect for families with children, featuring nearby washrooms and playground facilities. The site can accommodate both tents and RVs up to 30 feet."
+        },
+        2: {
+            title: "Campsite 2",
+            type: "Forest Site",
+            price: 35,
+            baseRate: 30,
+            premium: 5,
+            image: "placeholder-campsite-2",
+            features: [
+                { icon: "🏕️", text: "Tent & RV friendly (up to 25ft)" },
+                { icon: "🌲", text: "Forest setting • Fire pit • Picnic table" },
+                { icon: "📶", text: "WiFi available • Pet friendly" }
+            ],
+            description: "A secluded forest campsite ideal for those seeking a peaceful retreat. Surrounded by tall pines with excellent privacy. Close to the visitor center and canoe rental facilities. Perfect for nature lovers."
+        },
+        3: {
+            title: "Campsite 3",
+            type: "Beach Access",
+            price: 40,
+            baseRate: 35,
+            premium: 5,
+            image: "placeholder-campsite-3",
+            features: [
+                { icon: "🏕️", text: "Tent friendly (RV up to 20ft)" },
+                { icon: "🏖️", text: "Beach access • Fire pit • Picnic table" },
+                { icon: "🚿", text: "Shower facilities • Accessible washrooms" }
+            ],
+            description: "Waterfront campsite with direct beach access. Wake up to beautiful sunrise views over the lake. Popular spot for swimming and water activities. Great for families who love water sports."
+        }
     };
+
+    const campsite = campsiteData[campsiteNumber];
+    if (!campsite) return;
+
+    // Update title and type
+    document.getElementById('selected-campsite-title').textContent = campsite.title;
+    document.getElementById('selected-campsite-type').textContent = campsite.type;
+
+    // Update pricing
+    document.getElementById('selected-price').textContent = `$${campsite.price}`;
+    document.getElementById('base-rate').textContent = `$${campsite.baseRate}`;
+    document.getElementById('site-premium').textContent = `$${campsite.premium}`;
+
+    // Update image
+    const imageElement = document.getElementById('selected-campsite-image');
+    imageElement.className = `preview-image ${campsite.image}`;
+
+    // Update features
+    const featuresContainer = document.getElementById('selected-features');
+    featuresContainer.innerHTML = campsite.features.map(feature => `
+        <div class="feature-item">
+            <span class="feature-icon">${feature.icon}</span>
+            <span>${feature.text}</span>
+        </div>
+    `).join('');
+
+    // Update description
+    document.getElementById('selected-description').textContent = campsite.description;
+
+    // Add visual feedback for selection
+    const detailsContainer = document.querySelector('.campsite-details');
+    detailsContainer.style.borderColor = '#059669';
+    detailsContainer.style.boxShadow = '0 8px 24px rgba(5, 150, 105, 0.15)';
     
-    previewDescription.innerHTML = descriptions[campsiteNumber] + ' <a href="#" class="read-more">Read More</a>';
+    // Reset border after animation
+    setTimeout(() => {
+        detailsContainer.style.borderColor = '#e5e7eb';
+        detailsContainer.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.05)';
+    }, 1000);
 }
 
 // Map Toggle
@@ -480,6 +549,248 @@ async function loadParkBookingData() {
         console.error('Error loading park booking data:', error);
     }
 }
+
+// Booking Actions
+function setupBookingActions() {
+    const bookNowBtn = document.querySelector('.book-now-btn');
+    const viewCalendarBtn = document.querySelector('.view-calendar-btn');
+    
+    if (bookNowBtn) {
+        bookNowBtn.addEventListener('click', function() {
+            const selectedCampsite = document.querySelector('.campsite-card.selected');
+            const campsiteNumber = selectedCampsite ? selectedCampsite.dataset.campsite : '1';
+            
+            // Add loading state
+            this.innerHTML = '<span style="opacity: 0.7;">Processing...</span>';
+            this.disabled = true;
+            
+            // Simulate booking process
+            setTimeout(() => {
+                // Navigate to booking confirmation or next step
+                window.location.href = `booking-campsite.html?site=${campsiteNumber}`;
+            }, 1500);
+        });
+    }
+    
+    if (viewCalendarBtn) {
+        viewCalendarBtn.addEventListener('click', function() {
+            // Toggle calendar view
+            showAvailabilityCalendar();
+        });
+    }
+}
+
+function showAvailabilityCalendar() {
+    // Create calendar modal
+    const existingCalendar = document.querySelector('.calendar-overlay');
+    if (existingCalendar) {
+        existingCalendar.remove();
+        return;
+    }
+    
+    const calendarOverlay = document.createElement('div');
+    calendarOverlay.className = 'calendar-overlay';
+    calendarOverlay.innerHTML = `
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <h3>Available Dates</h3>
+                <button class="close-calendar">&times;</button>
+            </div>
+            <div class="calendar-content">
+                <div class="calendar-month">
+                    <h4>August 2025</h4>
+                    <div class="calendar-grid">
+                        ${generateCalendarDays()}
+                    </div>
+                </div>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <span class="legend-color available"></span>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color booked"></span>
+                        <span>Booked</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color selected"></span>
+                        <span>Selected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(calendarOverlay);
+    
+    // Add calendar styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .calendar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .calendar-container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .close-calendar {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-day.available {
+            background: #f0fdf4;
+            color: #059669;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .calendar-day.available:hover {
+            background: #dcfce7;
+            transform: scale(1.1);
+        }
+        
+        .calendar-day.booked {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            cursor: not-allowed;
+        }
+        
+        .calendar-day.selected {
+            background: #059669;
+            color: white;
+            border: 1px solid #047857;
+        }
+        
+        .calendar-legend {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .legend-color.available {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+        
+        .legend-color.booked {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+        
+        .legend-color.selected {
+            background: #059669;
+            border-color: #047857;
+        }
+    `;
+    
+    if (!document.querySelector('#calendar-styles')) {
+        style.id = 'calendar-styles';
+        document.head.appendChild(style);
+    }
+    
+    // Add event listeners
+    calendarOverlay.querySelector('.close-calendar').addEventListener('click', () => {
+        calendarOverlay.remove();
+    });
+    
+    calendarOverlay.addEventListener('click', (e) => {
+        if (e.target === calendarOverlay) {
+            calendarOverlay.remove();
+        }
+    });
+}
+
+function generateCalendarDays() {
+    const days = [];
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    
+    // Generate days for August 2025
+    for (let day = 1; day <= 31; day++) {
+        const isBooked = Math.random() < 0.3; // 30% chance of being booked
+        const isPast = day < currentDay && currentDate.getMonth() === 7; // August is month 7
+        const isSelected = day >= 21 && day <= 24; // Selected dates from form
+        
+        let className = 'calendar-day';
+        if (isPast || isBooked) {
+            className += ' booked';
+        } else if (isSelected) {
+            className += ' selected';
+        } else {
+            className += ' available';
+        }
+        
+        days.push(`<div class="${className}" data-day="${day}">${day}</div>`);
+    }
+    
+    return days.join('');
+}
+
+// Initialize booking actions when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    setupBookingActions();
+});
 
 // Update booking page content with park data
 function updateBookingPageContent(park) {

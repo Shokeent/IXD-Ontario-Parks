@@ -20,13 +20,12 @@ body {
 
 /* Navigation Styles */
 .navbar {
-    background: white;
-    padding: 16px 0;
+    background: #f8f9fa;
+    padding: 12px 0;
     border-bottom: 1px solid #e5e7eb;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -36,6 +35,53 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* Ontario Parks Logo */
+.ontario-parks-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-square {
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+}
+
+.logo-square.blue {
+    background: #0066cc;
+}
+
+.logo-square.green {
+    background: #00a651;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+    line-height: 1;
+}
+
+.logo-text .ontario {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.logo-text .parks {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    letter-spacing: 0.5px;
 }
 
 .nav-logo h2 {
@@ -57,7 +103,7 @@ body {
 }
 
 .nav-link {
-    color: #6b7280;
+    color: #4a5568;
     text-decoration: none;
     font-weight: 500;
     font-size: 14px;
@@ -67,11 +113,28 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-    color: #2c5530;
+    color: #2d3748;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-icon {
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.nav-icon:hover {
+    color: #2d3748;
 }
 
 .btn-reservation {
-    background: #1f2937;
+    background: #2d3748;
     color: white;
     border: none;
     border-radius: 6px;
@@ -83,7 +146,7 @@ body {
 }
 
 .btn-reservation:hover {
-    background: #111827;
+    background: #1a202c;
 }
 
 /* Breadcrumb Navigation */
@@ -189,47 +252,89 @@ body {
     text-align: center;
     padding: 5rem 2rem 3rem;
     position: relative;
+    transition: background-image 1s ease-in-out;
+}
+
+/* Hero Background Images */
+.hero-with-bg {
+    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.hero-with-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    transition: background 0.5s ease;
 }
 
 .hero-content {
     max-width: 700px;
     z-index: 2;
+    position: relative;
 }
 
 .hero-title {
     font-size: 3.2rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #ffffff;
     margin-bottom: 1.5rem;
     line-height: 1.1;
     letter-spacing: -0.02em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease;
 }
 
 .hero-description {
     font-size: 1.1rem;
-    color: #555;
+    color: #f0f0f0;
     margin-bottom: 2.5rem;
     line-height: 1.6;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
 }
 
 .btn-primary {
-    background: #2c5530;
+    background: #00a651;
     color: white;
     border: none;
     padding: 1rem 2rem;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 166, 81, 0.3);
+    border: 2px solid transparent;
 }
 
 .btn-primary:hover {
-    background: #1e3a22;
-    transform: translateY(-2px);
+    background: #008a44;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 166, 81, 0.4);
+}
+
+/* Enhanced button visibility on hero background */
+.hero .btn-primary {
+    background: #00a651;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero .btn-primary:hover {
+    background: #008a44;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-secondary {
@@ -252,19 +357,24 @@ body {
     margin-top: 2rem;
     display: flex;
     gap: 0.5rem;
+    z-index: 2;
+    position: relative;
 }
 
 .dot {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: #ccc;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.8);
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .dot.active {
-    background: #2c5530;
+    background: #ffffff;
+    border: 2px solid #00a651;
+    transform: scale(1.2);
 }
 
 /* Perfect Parks Section */
@@ -290,9 +400,12 @@ body {
 
 .parks-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
     margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .park-card {
@@ -302,6 +415,9 @@ body {
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .park-card:hover {
@@ -310,22 +426,69 @@ body {
 }
 
 .park-image {
-    height: 200px;
+    height: 220px;
     background: #e0e0e0;
     position: relative;
     overflow: hidden;
-    border-radius: 8px 8px 0 0;
+    border-radius: 12px 12px 0 0;
 }
 
-/* Placeholder park images */
+/* Corner badges on park image */
+.park-image::before {
+    content: 'BEGINNER';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(40, 167, 69, 0.9);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.park-image::after {
+    content: '🐾 Pet Friendly';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(44, 85, 48, 0.9);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+/* Park images with real photos */
 .placeholder-park-1,
 .placeholder-park-2,
 .placeholder-park-3 {
-    background: linear-gradient(135deg, #4a90a4 0%, #2c5530 50%, #1e3a22 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+}
+
+.placeholder-park-1 {
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-park-2 {
+    background-image: url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-park-3 {
+    background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
 }
 
 .placeholder-park-1::before,
@@ -337,43 +500,43 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 20%, transparent 21%),
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 15%, transparent 16%),
-        radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 10%, transparent 11%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
 }
 
 .placeholder-park-1::after {
-    content: 'Algonquin Park';
+    content: 'Algonquin Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.9rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-2::after {
-    content: 'Killarney Park';
+    content: 'Sandbanks Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.9rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-3::after {
-    content: 'Muskoka Park';
+    content: 'Killarney Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.9rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .park-image img {
@@ -389,17 +552,61 @@ body {
 
 .park-info {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
 }
 
 .park-info h3 {
     font-size: 1.25rem;
     font-weight: 600;
     color: #2c5530;
-    margin-bottom: 0.5rem;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .park-meta {
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.distance {
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.park-stats {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: rgba(44, 85, 48, 0.1);
+    color: #2c5530;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(44, 85, 48, 0.2);
+}
+
+.stat.accessible {
+    background: rgba(59, 130, 246, 0.1);
+    color: #1d4ed8;
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.park-description {
+    color: #4b5563;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
 }
 
 .distance {
@@ -414,9 +621,14 @@ body {
 }
 
 .park-features {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 1rem;
+    visibility: visible;
 }
 
 .feature-group {
@@ -426,14 +638,47 @@ body {
 }
 
 .feature-label {
-    font-size: 0.8rem;
-    color: #888;
-    text-transform: uppercase;
+    font-size: 0.75rem;
     font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.difficulty {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.8);
+    width: fit-content;
 }
 
 .difficulty.easy {
-    color: #28a745;
+    color: #059669;
+    background: rgba(5, 150, 105, 0.1);
+    border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.difficulty.moderate {
+    color: #d97706;
+    background: rgba(217, 119, 6, 0.1);
+    border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.difficulty.challenging {
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.difficulty.moderate {
+    color: #ffc107;
+    font-weight: 500;
+}
+
+.difficulty.challenging {
+    color: #dc3545;
     font-weight: 500;
 }
 
@@ -442,14 +687,16 @@ body {
 }
 
 .amenities {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .amenities h4 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #2c5530;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .amenity-tags {
@@ -459,17 +706,26 @@ body {
 }
 
 .amenity {
-    background: #e8f5e8;
+    background: linear-gradient(135deg, #e8f5e8 0%, #d4f1d4 100%);
     color: #2c5530;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
     font-weight: 500;
+    border: 1px solid rgba(44, 85, 48, 0.1);
+    transition: all 0.2s ease;
+}
+
+.amenity:hover {
+    background: linear-gradient(135deg, #d4f1d4 0%, #c0e7c0 100%);
+    transform: translateY(-1px);
 }
 
 .park-actions {
     display: flex;
     gap: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
 }
 
 .park-actions .btn-secondary,
@@ -480,66 +736,634 @@ body {
     font-size: 0.9rem;
 }
 
+.park-pricing {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c5530;
+}
+
+/* Modern Parks Grid Design */
+.parks-grid-horizontal {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.park-card-modern {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.park-card-modern:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.park-image-modern {
+    height: 240px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.park-image-algonquin {
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-killarney {
+    background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-bon-echo {
+    background-image: url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-content-modern {
+    padding: 1.5rem;
+}
+
+.park-title-modern {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.park-location-modern {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.park-description-modern {
+    color: #374151;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+.park-tags-modern {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tag-modern {
+    background: #f0f9ff;
+    color: #0369a1;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #e0f2fe;
+}
+
+.btn-view-details-modern {
+    background: #22c55e;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.btn-view-details-modern:hover {
+    background: #16a34a;
+}
+
+.parks-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d1d5db;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.carousel-dot.active {
+    background: #6b7280;
+}
+
+/* Responsive design for modern parks grid */
+@media (max-width: 1024px) {
+    .parks-grid-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .parks-grid-horizontal {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .park-image-modern {
+        height: 200px;
+    }
+    
+    .park-content-modern {
+        padding: 1.25rem;
+    }
+}
+
+/* Keep the simple layout styles for other sections */
+
+/* Simple Parks List Design */
+.parks-list {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0;
+}
+
+.park-item {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.park-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.park-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c5530;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.park-location {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.park-desc {
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.park-tags {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.view-details-link {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.view-details-link:hover {
+    text-decoration: underline;
+}
+
+/* Simple Features Grid Design */
+.features-grid-simple {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feature-card-simple {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.feature-card-simple:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    border-color: #e0e0e0;
+}
+
+.feature-icon-simple {
+    width: 48px;
+    height: 48px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.feature-card-simple h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.feature-card-simple p {
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.feature-benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.feature-benefits li {
+    color: #374151;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Responsive design for simple layout */
+@media (max-width: 768px) {
+    .parks-list {
+        padding: 0 1rem;
+    }
+    
+    .park-item {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+    
+    .features-grid-simple {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .feature-card-simple {
+        padding: 1.5rem;
+    }
+}
+
+/* New Featured Parks Carousel Design */
+.parks-carousel {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0;
+    margin: 2rem 0;
+}
+
+.park-card-featured {
+    flex: 0 0 300px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.park-card-featured:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.park-image-featured {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.placeholder-algonquin {
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-killarney {
+    background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-bon-echo {
+    background-image: url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-content {
+    padding: 1.5rem;
+}
+
+.park-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2c5530;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+}
+
+.park-location {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.park-description {
+    color: #374151;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.park-features-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-tag {
+    background: #f0f9ff;
+    color: #0369a1;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #e0f2fe;
+}
+
+.btn-view-details {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.btn-view-details:hover {
+    background: #218838;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.carousel-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d1d5db;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.carousel-dots .dot.active {
+    background: #28a745;
+}
+
+/* New Features Grid Design */
+.features-grid-new {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feature-card-new {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    text-align: left;
+    position: relative;
+}
+
+.feature-card-new:hover {
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+    border-color: #e0e0e0;
+}
+
+.feature-icon-large {
+    width: 64px;
+    height: 64px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.feature-card-new h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.feature-card-new p {
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.feature-benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.feature-benefits li {
+    color: #374151;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Responsive design for new sections */
+@media (max-width: 768px) {
+    .parks-carousel {
+        gap: 1rem;
+        padding: 0.5rem 0;
+    }
+    
+    .park-card-featured {
+        flex: 0 0 280px;
+    }
+    
+    .features-grid-new {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card-new {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .park-card-featured {
+        flex: 0 0 260px;
+    }
+    
+    .park-content {
+        padding: 1rem;
+    }
+}
+
 /* Features Section */
 .features-section {
     padding: 5rem 0;
-    background: #f8f9fa;
+    background: #ffffff;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .feature-card {
     background: white;
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    width: 48px;
+    height: 48px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .feature-card h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #2c5530;
+    color: #1f2937;
     margin-bottom: 1rem;
+    line-height: 1.3;
 }
 
 .feature-card p {
-    color: #666;
+    color: #6b7280;
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 .feature-list {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .feature-list li {
-    color: #666;
-    margin-bottom: 0.5rem;
+    color: #374151;
+    margin-bottom: 0.75rem;
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
 }
 
 .feature-list li::before {
-    content: "✓";
-    color: #28a745;
+    content: "•";
+    color: #6b7280;
     font-weight: bold;
-    position: absolute;
-    left: 0;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+/* Responsive design for features */
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
 }
 
 /* Newsletter Section */
@@ -586,6 +1410,98 @@ body {
 .newsletter-disclaimer {
     font-size: 0.85rem;
     opacity: 0.7;
+    margin-top: 1rem;
+}
+
+/* Modern Newsletter Section */
+.newsletter-modern {
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 6rem 0;
+    color: white;
+}
+
+.newsletter-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.newsletter-content-modern {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    color: #333;
+}
+
+.newsletter-content-modern h2 {
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+}
+
+.newsletter-content-modern p {
+    margin-bottom: 2rem;
+    color: #6b7280;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.newsletter-form-modern {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.email-input-modern {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.email-input-modern:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.btn-subscribe-modern {
+    background: #22c55e;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-subscribe-modern:hover {
+    background: #16a34a;
+}
+
+.newsletter-disclaimer-modern {
+    font-size: 0.9rem;
+    color: #6b7280;
     margin-top: 1rem;
 }
 
@@ -640,7 +1556,156 @@ body {
     opacity: 0.7;
 }
 
-/* Responsive Design */
+/* Modern Footer */
+.footer-modern {
+    background: #f8f9fa;
+    color: #374151;
+    padding: 4rem 0 2rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.footer-content-modern {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section-modern h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+}
+
+.footer-section-modern ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-section-modern ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-section-modern ul li a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.footer-section-modern ul li a:hover {
+    color: #22c55e;
+}
+
+.footer-logo-section {
+    max-width: 300px;
+}
+
+.footer-ontario-parks-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.footer-logo-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-logo-square {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.footer-logo-square.blue {
+    background: #0066cc;
+}
+
+.footer-logo-square.green {
+    background: #00a651;
+}
+
+.footer-logo-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+    line-height: 1;
+}
+
+.footer-logo-text .footer-ontario,
+.footer-logo-text .footer-parks {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1f2937;
+    letter-spacing: 0.5px;
+}
+
+.footer-description {
+    color: #6b7280;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.footer-bottom-modern {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.footer-bottom-modern p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+    .footer-content-modern {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: left;
+    }
+    
+    .footer-logo-section {
+        max-width: none;
+    }
+    
+    .newsletter-form-modern {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .newsletter-content-modern {
+        padding: 2rem 1.5rem;
+    }
+    
+    .newsletter-content-modern h2 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Tablet Responsive Design */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .parks-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    .park-card {
+        max-width: none;
+    }
+}
+
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {
         gap: 1rem;
@@ -650,12 +1715,34 @@ body {
         display: none;
     }
     
+    .hero {
+        min-height: 70vh;
+        padding: 3rem 1rem 2rem;
+    }
+    
     .hero-title {
         font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-dots {
+        margin-top: 1.5rem;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
     }
     
     .parks-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
     }
     
     .features-grid {
@@ -664,6 +1751,22 @@ body {
     
     .footer-content {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Small Tablet / Large Mobile */
+@media (max-width: 640px) {
+    .parks-grid {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .park-card {
+        margin: 0;
+    }
+    
+    .container {
+        padding: 0 1rem;
     }
     
     .newsletter-form {
@@ -675,6 +1778,23 @@ body {
     }
 }
 
+/* Small Tablet / Large Mobile */
+@media (max-width: 640px) {
+    .parks-grid {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .park-card {
+        margin: 0;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+/* Small Mobile */
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
@@ -934,7 +2054,7 @@ body {
 }
 
 /* Feature Lists */
-.park-features {
+.api-park-features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.5rem;
@@ -988,7 +2108,7 @@ body {
 
 /* Responsive Design for API Elements */
 @media (max-width: 768px) {
-    .park-features {
+    .api-park-features {
         grid-template-columns: 1fr;
     }
     
@@ -1027,30 +2147,6 @@ body {
     object-fit: cover;
     object-position: center;
     border-radius: 12px;
-}
-
-/* Hero Background Images */
-.hero-with-bg {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-}
-
-.hero-with-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(44, 85, 48, 0.4);
-    z-index: 1;
-}
-
-.hero-with-bg .hero-content {
-    position: relative;
-    z-index: 2;
 }
 
 /* Image Loading States */
@@ -1151,4 +2247,406 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* ALL PARKS PAGE STYLES */
+
+/* Hero Section with Search */
+.hero-all-parks {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 120px 0 80px;
+    position: relative;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.15), rgba(46, 125, 50, 0.15));
+    z-index: 1;
+}
+
+.hero-all-parks .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Search Card */
+.search-card-hero {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.search-row-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.search-field-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.search-field-hero label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 4px;
+}
+
+.search-select-hero,
+.search-input-hero {
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.search-select-hero:focus,
+.search-input-hero:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+/* Date Input Styling */
+.date-input-wrapper {
+    position: relative;
+}
+
+.date-display {
+    padding-right: 40px !important;
+    cursor: pointer;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+}
+
+/* Guest Input Styling */
+.guest-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.guest-icon {
+    position: absolute;
+    left: 12px;
+    z-index: 2;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+.guest-select {
+    padding-left: 40px !important;
+}
+
+.search-btn-hero {
+    background: #059669;
+    color: white;
+    border: none;
+    padding: 14px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+}
+
+.search-btn-hero:hover {
+    background: #047857;
+    transform: translateY(-2px);
+}
+
+.search-icon {
+    font-size: 18px;
+}
+
+/* Filter Section */
+.filter-section {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 24px 0;
+}
+
+.filter-tags-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-tags-left {
+    display: flex;
+    gap: 12px;
+}
+
+.filter-tag-btn {
+    background: white;
+    border: 2px solid #e5e7eb;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-tag-btn:hover {
+    border-color: #059669;
+    color: #059669;
+}
+
+.filter-tag-btn.active {
+    background: #059669;
+    color: white;
+    border-color: #059669;
+}
+
+.filter-icon {
+    font-size: 16px;
+}
+
+.map-view-btn {
+    background: #f3f4f6;
+    border: 2px solid #e5e7eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.map-view-btn:hover {
+    background: #e5e7eb;
+}
+
+.map-icon {
+    font-size: 16px;
+}
+
+/* All Parks Main Section */
+.all-parks-main {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.parks-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.parks-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+
+.parks-subtitle {
+    font-size: 1.2rem;
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* All Parks Grid */
+.parks-grid-all-modern {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.park-card-all-modern {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.park-card-all-modern:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.park-image-all-modern {
+    height: 240px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.park-image-algonquin {
+    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-killarney {
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-bon-echo {
+    background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-sandbanks {
+    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-long-point {
+    background-image: url('https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-silent-lake {
+    background-image: url('https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-kawartha {
+    background-image: url('https://images.unsplash.com/photo-1464822759844-d150baec0493?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-presquile {
+    background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-image-petroglyphs {
+    background-image: url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+}
+
+.park-content-all-modern {
+    padding: 24px;
+}
+
+.park-title-all-modern {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.park-location-all-modern {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.park-description-all-modern {
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.park-tags-all-modern {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tag-all-modern {
+    background: #f0fdf4;
+    color: #059669;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #d1fae5;
+}
+
+.btn-view-details-all-modern {
+    background: #059669;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-view-details-all-modern:hover {
+    background: #047857;
+    transform: translateY(-2px);
+}
+
+/* Responsive Design for All Parks */
+@media (max-width: 768px) {
+    .search-row-hero {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .search-btn-hero {
+        width: 100%;
+    }
+    
+    .filter-tags-row {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+    
+    .filter-tags-left {
+        flex-wrap: wrap;
+    }
+    
+    .parks-grid-all-modern {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .parks-title {
+        font-size: 2rem;
+    }
+    
+    .hero-all-parks {
+        padding: 80px 0 60px;
+    }
+    
+    .search-card-hero {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .parks-grid-all-modern {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
 }

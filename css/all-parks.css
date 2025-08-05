@@ -273,7 +273,7 @@
     background: #1e3a22;
 }
 
-/* Additional placeholder images for All Parks page */
+/* Real Ontario park images for All Parks page */
 .placeholder-park-4,
 .placeholder-park-5,
 .placeholder-park-6,
@@ -283,11 +283,49 @@
 .placeholder-park-10,
 .placeholder-park-11,
 .placeholder-park-12 {
-    background: linear-gradient(135deg, #4a90a4 0%, #2c5530 50%, #1e3a22 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+}
+
+.placeholder-park-4 {
+    background-image: url('https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80');
+}
+
+.placeholder-park-5 {
+    background-image: url('https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-park-6 {
+    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+}
+
+.placeholder-park-7 {
+    background-image: url('https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-park-8 {
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-park-9 {
+    background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80');
+}
+
+.placeholder-park-10 {
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-park-11 {
+    background-image: url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.placeholder-park-12 {
+    background-image: url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
 }
 
 .placeholder-park-4::before,
@@ -305,109 +343,115 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 20%, transparent 21%),
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 15%, transparent 16%),
-        radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 10%, transparent 11%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
 }
 
 .placeholder-park-4::after {
-    content: 'Blue Mountain';
+    content: 'Blue Mountain Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-5::after {
-    content: 'Tobermory';
+    content: 'Bruce Peninsula National Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-6::after {
-    content: 'Silent Lake';
+    content: 'Silent Lake Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-7::after {
-    content: 'Sandbanks';
+    content: 'Long Point Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-8::after {
-    content: 'French River';
+    content: 'French River Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-9::after {
-    content: 'MacGregor Point';
+    content: 'MacGregor Point Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-10::after {
-    content: 'Petroglyphs';
+    content: 'Petroglyphs Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-11::after {
-    content: 'Presqu\'ile';
+    content: 'Presqu\'ile Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 .placeholder-park-12::after {
-    content: 'Bon Echo';
+    content: 'Bon Echo Provincial Park';
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    z-index: 2;
 }
 
 /* Responsive Design for All Parks */

@@ -56,23 +56,28 @@ function initHeroSlider() {
     const heroSlides = [
         {
             title: "Your First Ontario<br>Adventure Starts Here",
-            description: "We guide newcomers and first-time campers through every step<br>from gear prep to unforgettable memories. No experience needed, just curiosity!"
+            description: "We guide newcomers and first-time campers through every step<br>from gear prep to unforgettable memories. No experience needed, just curiosity!",
+            background: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
         },
         {
             title: "Discover Ontario's<br>Natural Wonders",
-            description: "From pristine lakes to ancient forests, explore over 330 parks<br>with expert guidance and beginner-friendly facilities."
+            description: "From pristine lakes to ancient forests, explore over 330 parks<br>with expert guidance and beginner-friendly facilities.",
+            background: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
         },
         {
             title: "Family Adventures<br>Made Simple",
-            description: "Safe, educational, and fun outdoor experiences designed<br>specifically for families and children of all ages."
+            description: "Safe, educational, and fun outdoor experiences designed<br>specifically for families and children of all ages.",
+            background: "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80"
         },
         {
             title: "Connect with Nature<br>and Community",
-            description: "Join thousands of newcomers discovering Ontario's outdoors<br>with multilingual support and cultural welcome programs."
+            description: "Join thousands of newcomers discovering Ontario's outdoors<br>with multilingual support and cultural welcome programs.",
+            background: "https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
         },
         {
             title: "Year-Round Outdoor<br>Experiences",
-            description: "From summer camping to winter activities, discover<br>Ontario's parks in every season with expert guidance."
+            description: "From summer camping to winter activities, discover<br>Ontario's parks in every season with expert guidance.",
+            background: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
         }
     ];
 
@@ -82,14 +87,22 @@ function initHeroSlider() {
         const slide = heroSlides[index];
         const title = heroContent.querySelector('.hero-title');
         const description = heroContent.querySelector('.hero-description');
+        const heroSection = document.getElementById('hero-section');
         
         // Add fade out effect
         title.style.opacity = '0';
         description.style.opacity = '0';
         
+        // Update background image
+        if (slide && slide.background && heroSection) {
+            heroSection.style.backgroundImage = `url('${slide.background}')`;
+        }
+        
         setTimeout(() => {
-            title.innerHTML = slide.title;
-            description.innerHTML = slide.description;
+            if (slide) {
+                title.innerHTML = slide.title;
+                description.innerHTML = slide.description;
+            }
             title.style.opacity = '1';
             description.style.opacity = '1';
         }, 300);
@@ -107,6 +120,12 @@ function initHeroSlider() {
             updateSlide(currentSlide);
         });
     });
+
+    // Initialize first slide background
+    const heroSection = document.getElementById('hero-section');
+    if (heroSection && heroSlides[0].background) {
+        heroSection.style.backgroundImage = `url('${heroSlides[0].background}')`;
+    }
 
     // Auto-advance slides
     setInterval(() => {

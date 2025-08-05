@@ -14,6 +14,46 @@
     margin: 0;
 }
 
+.campsite-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    background: #e5e7eb;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.placeholder-campsite-1 {
+    background-image: url('https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');
+}
+
+.placeholder-campsite-2 {
+    background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');
+}
+
+.placeholder-campsite-3 {
+    background-image: url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');
+}
+
+.campsite-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.booking-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0;
+}
+
 /* Search and Filter Section */
 .search-filter-section {
     padding: 0;
@@ -200,18 +240,23 @@
     height: 120px;
     border-radius: 8px;
     background: #e5e7eb;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
 }
 
 .placeholder-campsite-1 {
-    background: linear-gradient(135deg, #059669, #10b981);
+    background-image: url('https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');
 }
 
 .placeholder-campsite-2 {
-    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');
 }
 
 .placeholder-campsite-3 {
-    background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+    background-image: url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');
 }
 
 .campsite-info h4 {
@@ -311,7 +356,7 @@
     gap: 24px;
 }
 
-.campsite-preview,
+.campsite-details,
 .campsite-options,
 .gears-section,
 .guides-section,
@@ -322,7 +367,192 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
-.campsite-preview h3,
+/* Campsite Details Styling */
+.campsite-details {
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.campsite-header {
+    margin-bottom: 20px;
+}
+
+.campsite-header h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.campsite-type {
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.preview-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    background: #e5e7eb;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.preview-image:hover {
+    transform: scale(1.02);
+}
+
+/* Pricing Details */
+.pricing-details {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.price-display {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.price-amount {
+    font-size: 32px;
+    font-weight: 700;
+    color: #059669;
+}
+
+.price-period {
+    font-size: 16px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.price-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.price-item span:first-child {
+    color: #6b7280;
+}
+
+.price-item span:last-child {
+    font-weight: 600;
+    color: #374151;
+}
+
+/* Campsite Features Detail */
+.campsite-features-detail {
+    margin-bottom: 20px;
+}
+
+.campsite-features-detail h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 16px 0;
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.features-list .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #f3f4f6;
+}
+
+.features-list .feature-icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+}
+
+/* Campsite Description */
+.campsite-description {
+    margin-bottom: 24px;
+}
+
+.campsite-description p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin: 0;
+}
+
+/* Booking Actions */
+.booking-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.book-now-btn {
+    background: #059669;
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.book-now-btn:hover {
+    background: #047857;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+}
+
+.view-calendar-btn {
+    background: transparent;
+    color: #059669;
+    border: 2px solid #059669;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-calendar-btn:hover {
+    background: #059669;
+    color: white;
+}
+
 .campsite-options h3,
 .gears-section h3,
 .guides-section h3,
@@ -331,21 +561,6 @@
     font-weight: 600;
     color: #1f2937;
     margin: 0 0 16px 0;
-}
-
-.preview-image {
-    width: 100%;
-    height: 200px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #059669, #10b981);
-    margin-bottom: 16px;
-}
-
-.preview-description {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #6b7280;
-    margin: 0;
 }
 
 .read-more {
@@ -413,6 +628,17 @@
     }
 }
 
+@media (max-width: 1200px) {
+    .booking-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .right-column {
+        order: -1; /* Show campsite details first on mobile */
+    }
+}
+
 @media (max-width: 768px) {
     .search-row {
         grid-template-columns: 1fr;
@@ -429,6 +655,12 @@
     
     .campsite-card {
         grid-template-columns: 1fr;
+        padding: 16px;
+    }
+    
+    .campsite-card .campsite-image {
+        height: 180px;
+        margin-bottom: 16px;
     }
     
     .facilities-grid {
@@ -439,5 +671,76 @@
         flex-direction: column;
         gap: 16px;
         align-items: flex-start;
+    }
+    
+    /* Mobile optimizations for campsite details */
+    .campsite-details {
+        padding: 20px;
+        margin-bottom: 24px;
+    }
+    
+    .campsite-header h3 {
+        font-size: 20px;
+    }
+    
+    .price-amount {
+        font-size: 28px;
+    }
+    
+    .pricing-details {
+        padding: 16px;
+    }
+    
+    .booking-actions {
+        position: sticky;
+        bottom: 0;
+        background: white;
+        padding: 16px;
+        margin: -20px -20px 0 -20px;
+        border-top: 1px solid #e5e7eb;
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .features-list .feature-item {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .features-list .feature-icon {
+        font-size: 16px;
+        width: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .left-column,
+    .campsite-details {
+        padding: 16px;
+    }
+    
+    .campsite-header h3 {
+        font-size: 18px;
+    }
+    
+    .price-amount {
+        font-size: 24px;
+    }
+    
+    .price-breakdown {
+        gap: 6px;
+    }
+    
+    .price-item {
+        font-size: 13px;
+    }
+    
+    .book-now-btn {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .view-calendar-btn {
+        padding: 10px 20px;
+        font-size: 13px;
     }
 }

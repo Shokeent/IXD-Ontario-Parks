@@ -12,22 +12,34 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2>Ontario Parks</h2>
+                <div class="ontario-parks-logo">
+                    <div class="logo-icon">
+                        <div class="logo-square blue"></div>
+                        <div class="logo-square green"></div>
+                        <div class="logo-text">
+                            <span class="ontario">ONTARIO</span>
+                            <span class="parks">PARKS</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="nav-menu">
                 <a href="all-parks.html" class="nav-link">Discover Parks</a>
                 <a href="gear-list.html" class="nav-link">Gear Guide</a>
-                <a href="map.html" class="nav-link">Interactive Map</a>
+                <a href="#first-timer" class="nav-link">First Timer Help</a>
                 <a href="#store" class="nav-link">Store</a>
                 <a href="#fees" class="nav-link">Fees</a>
-                <a href="#signin" class="nav-link">Sign In</a>
+                <div class="nav-icons">
+                    <a href="#signin" class="nav-icon">👤</a>
+                    <a href="#cart" class="nav-icon">🛒</a>
+                </div>
                 <button class="btn-reservation" onclick="window.location.href='booking.html'">Make Reservation</button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero hero-with-bg" id="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">
                 Your First Ontario<br>
@@ -54,126 +66,65 @@
             <h2 class="section-title">Perfect Parks for First-Time Campers</h2>
             <p class="section-subtitle">Handpicked locations with excellent facilities and beginner-friendly features</p>
             
-            <div class="parks-grid">
-                <!-- Park 1 -->
-                <div class="park-card">
-                    <div class="park-image placeholder-park-1">
-                        <!-- Placeholder for park image -->
-                    </div>
-                    <div class="park-info">
-                        <h3>Algonquin Provincial Park</h3>
-                        <div class="park-meta">
-                            <span class="distance">📍 Huntsville ON</span>
-                        </div>
-                        <p class="park-description">Perfect for families campers with guided programs and family-friendly trails.</p>
+            <div class="parks-grid-horizontal">
+                <div class="park-card-modern">
+                    <div class="park-image-modern park-image-algonquin"></div>
+                    <div class="park-content-modern">
+                        <h3 class="park-title-modern">Algonquin Provincial Park</h3>
+                        <div class="park-location-modern">📍 Huntsville, ON</div>
+                        <p class="park-description-modern">Perfect for first-time campers with guided programs and family-friendly trails</p>
                         
-                        <div class="park-features">
-                            <div class="feature-group">
-                                <span class="feature-label">Difficulty</span>
-                                <span class="difficulty easy">Easy trails</span>
-                            </div>
-                            <div class="feature-group">
-                                <span class="feature-label">Scenery</span>
-                                <div class="rating">⭐⭐⭐⭐⭐</div>
-                            </div>
+                        <div class="park-tags-modern">
+                            <span class="tag-modern">Kids Programs</span>
+                            <span class="tag-modern">Swimming</span>
+                            <span class="tag-modern">Easy Trails</span>
                         </div>
-
-                        <div class="amenities">
-                            <h4>Available Amenities</h4>
-                            <div class="amenity-tags">
-                                <span class="amenity">Washrooms</span>
-                                <span class="amenity">Showers</span>
-                                <span class="amenity">Playground</span>
-                                <span class="amenity">+4 more</span>
-                            </div>
-                        </div>
-
-                        <div class="park-actions">
-                            <button class="btn-secondary" onclick="window.location.href='park-details.html'">View Details</button>
-                            <button class="btn-primary" onclick="window.location.href='booking.html'">Book Now</button>
-                        </div>
+                        
+                        <button class="btn-view-details-modern" onclick="window.location.href='park-details.html'">View Details</button>
                     </div>
                 </div>
 
-                <!-- Park 2 -->
-                <div class="park-card">
-                    <div class="park-image placeholder-park-2">
-                        <!-- Placeholder for park image -->
-                    </div>
-                    <div class="park-info">
-                        <h3>Algonquin Provincial Park</h3>
-                        <div class="park-meta">
-                            <span class="distance">📍 Huntsville ON</span>
-                        </div>
-                        <p class="park-description">Perfect for first-time campers with guided programs and family-friendly trails.</p>
+                <div class="park-card-modern">
+                    <div class="park-image-modern park-image-killarney"></div>
+                    <div class="park-content-modern">
+                        <h3 class="park-title-modern">Killarney Provincial Park</h3>
+                        <div class="park-location-modern">📍 Huntsville, ON</div>
+                        <p class="park-description-modern">Perfect for first-time campers with guided programs and family-friendly trails</p>
                         
-                        <div class="park-features">
-                            <div class="feature-group">
-                                <span class="feature-label">Difficulty</span>
-                                <span class="difficulty easy">Easy trails</span>
-                            </div>
-                            <div class="feature-group">
-                                <span class="feature-label">Scenery</span>
-                                <div class="rating">⭐⭐⭐⭐⭐</div>
-                            </div>
+                        <div class="park-tags-modern">
+                            <span class="tag-modern">Kids Programs</span>
+                            <span class="tag-modern">Swimming</span>
+                            <span class="tag-modern">Easy Trails</span>
                         </div>
-
-                        <div class="amenities">
-                            <h4>Available Amenities</h4>
-                            <div class="amenity-tags">
-                                <span class="amenity">Washrooms</span>
-                                <span class="amenity">Showers</span>
-                                <span class="amenity">Playground</span>
-                                <span class="amenity">+4 more</span>
-                            </div>
-                        </div>
-
-                        <div class="park-actions">
-                            <button class="btn-secondary" onclick="window.location.href='park-details.html'">View Details</button>
-                            <button class="btn-primary" onclick="window.location.href='booking.html'">Book Now</button>
-                        </div>
+                        
+                        <button class="btn-view-details-modern" onclick="window.location.href='park-details.html'">View Details</button>
                     </div>
                 </div>
 
-                <!-- Park 3 -->
-                <div class="park-card">
-                    <div class="park-image placeholder-park-3">
-                        <!-- Placeholder for park image -->
-                    </div>
-                    <div class="park-info">
-                        <h3>Algonquin Provincial Park</h3>
-                        <div class="park-meta">
-                            <span class="distance">📍 Huntsville ON</span>
-                        </div>
-                        <p class="park-description">Perfect for beginner campers with guided programs and family-friendly trails.</p>
+                <div class="park-card-modern">
+                    <div class="park-image-modern park-image-bon-echo"></div>
+                    <div class="park-content-modern">
+                        <h3 class="park-title-modern">Bon Echo Provincial Park</h3>
+                        <div class="park-location-modern">📍 Huntsville, ON</div>
+                        <p class="park-description-modern">Perfect for first-time campers with guided programs and family-friendly trails</p>
                         
-                        <div class="park-features">
-                            <div class="feature-group">
-                                <span class="feature-label">Difficulty</span>
-                                <span class="difficulty easy">Easy trails</span>
-                            </div>
-                            <div class="feature-group">
-                                <span class="feature-label">Scenery</span>
-                                <div class="rating">⭐⭐⭐⭐⭐</div>
-                            </div>
+                        <div class="park-tags-modern">
+                            <span class="tag-modern">Kids Programs</span>
+                            <span class="tag-modern">Swimming</span>
+                            <span class="tag-modern">Easy Trails</span>
                         </div>
-
-                        <div class="amenities">
-                            <h4>Available Amenities</h4>
-                            <div class="amenity-tags">
-                                <span class="amenity">Washrooms</span>
-                                <span class="amenity">Showers</span>
-                                <span class="amenity">Playground</span>
-                                <span class="amenity">+4 more</span>
-                            </div>
-                        </div>
-
-                        <div class="park-actions">
-                            <button class="btn-secondary" onclick="window.location.href='park-details.html'">View Details</button>
-                            <button class="btn-primary" onclick="window.location.href='booking.html'">Book Now</button>
-                        </div>
+                        
+                        <button class="btn-view-details-modern" onclick="window.location.href='park-details.html'">View Details</button>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Carousel Dots -->
+            <div class="parks-carousel-dots">
+                <span class="carousel-dot active"></span>
+                <span class="carousel-dot"></span>
+                <span class="carousel-dot"></span>
+                <span class="carousel-dot"></span>
             </div>
         </div>
     </section>
@@ -184,56 +135,52 @@
             <h2 class="section-title">Built for First-Time Campers</h2>
             <p class="section-subtitle">Every feature is designed with newcomers in mind, removing barriers and building confidence for your outdoor adventure</p>
             
-            <div class="features-grid">
-                <!-- Feature 1 -->
-                <div class="feature-card">
-                    <div class="feature-icon">🗺️</div>
+            <div class="features-grid-simple">
+                <div class="feature-card-simple">
+                    <div class="feature-icon-simple">🗺️</div>
                     <h3>Offline-Ready Maps</h3>
-                    <p>GPS-enabled trail and park guides that work even without cell service. Never get lost even in remote spots.</p>
-                    <ul class="feature-list">
-                        <li>Easy to use map</li>
-                        <li>Works in forest</li>
-                        <li>Trail difficulty ratings</li>
-                        <li>Emergency contacts</li>
+                    <p>Download detailed park maps and trail guides that work even without cell service. Never get lost, even in remote areas.</p>
+                    <ul class="feature-benefits">
+                        <li>• Easy to use map</li>
+                        <li>• Points of interest</li>
+                        <li>• Trail difficulty ratings</li>
+                        <li>• Emergency contacts</li>
                     </ul>
                 </div>
 
-                <!-- Feature 2 -->
-                <div class="feature-card">
-                    <div class="feature-icon">📖</div>
+                <div class="feature-card-simple">
+                    <div class="feature-icon-simple">📖</div>
                     <h3>Cultural Welcome Guide</h3>
                     <p>Learn camping etiquette, local customs, and connect with other newcomer families for a welcoming experience.</p>
-                    <ul class="feature-list">
-                        <li>Multilingual guides</li>
-                        <li>Community connections</li>
-                        <li>Cultural tips</li>
-                        <li>Local cuisine</li>
+                    <ul class="feature-benefits">
+                        <li>• Multilingual guides</li>
+                        <li>• Community connections</li>
+                        <li>• Cultural tips</li>
+                        <li>• Local customs</li>
                     </ul>
                 </div>
 
-                <!-- Feature 3 -->
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                <div class="feature-card-simple">
+                    <div class="feature-icon-simple">👨‍👩‍👧‍👦</div>
                     <h3>Family Activity Planner</h3>
-                    <p>Age-appropriate activities, nature scavenger hunts, fun educational programs ideal for kids and families.</p>
-                    <ul class="feature-list">
-                        <li>Kid-friendly trails</li>
-                        <li>Wildlife spotting</li>
-                        <li>Educational programs</li>
-                        <li>Interactive games</li>
+                    <p>Age-appropriate activities, nature scavenger hunts, and educational programs designed for kids and families.</p>
+                    <ul class="feature-benefits">
+                        <li>• Kid-friendly trails</li>
+                        <li>• Wildlife spotting</li>
+                        <li>• Educational programs</li>
+                        <li>• Interactive games</li>
                     </ul>
                 </div>
 
-                <!-- Feature 4 -->
-                <div class="feature-card">
-                    <div class="feature-icon">📅</div>
+                <div class="feature-card-simple">
+                    <div class="feature-icon-simple">📅</div>
                     <h3>Simplified Booking</h3>
                     <p>One-click reservations with smart recommendations based on your family size, experience level, and preferences.</p>
-                    <ul class="feature-list">
-                        <li>Smart recommendations</li>
-                        <li>Flexible cancellation</li>
-                        <li>Family size matching</li>
-                        <li>Instant confirmations</li>
+                    <ul class="feature-benefits">
+                        <li>• Smart recommendations</li>
+                        <li>• Flexible cancellation</li>
+                        <li>• Family-size matching</li>
+                        <li>• Instant confirmation</li>
                     </ul>
                 </div>
             </div>
@@ -241,42 +188,53 @@
     </section>
 
     <!-- Newsletter Section -->
-    <section class="newsletter">
+    <section class="newsletter-modern">
+        <div class="newsletter-bg-overlay"></div>
         <div class="container">
-            <div class="newsletter-content">
+            <div class="newsletter-content-modern">
                 <h2>Stay Connected with Nature</h2>
                 <p>Get monthly tips, seasonal park highlights, and exclusive first-timer guides delivered to your inbox.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" class="email-input">
-                    <button type="submit" class="btn-primary">Subscribe</button>
+                <form class="newsletter-form-modern">
+                    <input type="email" placeholder="Enter your email address" class="email-input-modern">
+                    <button type="submit" class="btn-subscribe-modern">Subscribe</button>
                 </form>
-                <p class="newsletter-disclaimer">Available in English, French, Mandarin, and Punjabi. Unsubscribe anytime.</p>
+                <p class="newsletter-disclaimer-modern">Available in English, French, Mandarin, and Spanish. Unsubscribe anytime.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer-modern">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <h3>Ontario Parks</h3>
-                        <p>Making Ontario's natural beauty accessible to everyone, especially first-time campers and newcomers alike.</p>
+            <div class="footer-content-modern">
+                <div class="footer-section-modern footer-logo-section">
+                    <div class="footer-logo-modern">
+                        <div class="footer-ontario-parks-logo">
+                            <div class="footer-logo-icon">
+                                <div class="footer-logo-square blue"></div>
+                                <div class="footer-logo-square green"></div>
+                                <div class="footer-logo-text">
+                                    <span class="footer-ontario">ONTARIO</span>
+                                    <span class="footer-parks">PARKS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="footer-description">Making Ontario's natural beauty accessible to everyone, especially first-time campers and newcomers.</p>
                     </div>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-section-modern">
                     <h4>For First-Timers</h4>
                     <ul>
                         <li><a href="gear-list.html">Camping Basics</a></li>
-                        <li><a href="gear-list.html">Gear Guide</a></li>
+                        <li><a href="gear-list.html">Gear Rental</a></li>
                         <li><a href="park-details.html">Safety Tips</a></li>
                         <li><a href="all-parks.html">Family Activities</a></li>
+                        <li><a href="#maps">Park Maps</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-section">
+                <div class="footer-section-modern">
                     <h4>Support</h4>
                     <ul>
                         <li><a href="#help">Help Center</a></li>
@@ -286,7 +244,7 @@
                     </ul>
                 </div>
 
-                <div class="footer-section">
+                <div class="footer-section-modern">
                     <h4>Parks Info</h4>
                     <ul>
                         <li><a href="all-parks.html">All Parks</a></li>
@@ -297,8 +255,8 @@
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2025 Ontario Parks. Making nature accessible for everyone.</p>
+            <div class="footer-bottom-modern">
+                <p>&copy; 2024 Ontario Parks. Making nature accessible for everyone.</p>
             </div>
         </div>
     </footer>

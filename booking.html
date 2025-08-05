@@ -239,13 +239,64 @@
 
                 <!-- Right Column -->
                 <div class="right-column">
-                    <!-- Selected Campsite Preview -->
-                    <div class="campsite-preview">
-                        <h3>Algonquin - Achray</h3>
-                        <div class="preview-image placeholder-preview"></div>
-                        <p class="preview-description">
-                            The campground is in a pine forest bordering sandy beaches, all campsites are a short walk from the beach. Come and enjoy the beautiful nature of Achray. Campground is radio-free and the western side of the campground is pet-free (sites 25 – 40). <a href="#" class="read-more">Read More</a>
-                        </p>
+                    <!-- Selected Campsite Details -->
+                    <div class="campsite-details">
+                        <div class="campsite-header">
+                            <h3 id="selected-campsite-title">Campsite 1</h3>
+                            <div class="campsite-type" id="selected-campsite-type">Waterfront Site</div>
+                        </div>
+                        
+                        <div class="preview-image placeholder-campsite-1" id="selected-campsite-image"></div>
+                        
+                        <!-- Pricing Information -->
+                        <div class="pricing-details">
+                            <div class="price-display">
+                                <span class="price-amount" id="selected-price">$45</span>
+                                <span class="price-period">/ night</span>
+                            </div>
+                            <div class="price-breakdown">
+                                <div class="price-item">
+                                    <span>Base Rate:</span>
+                                    <span id="base-rate">$40</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>Site Premium:</span>
+                                    <span id="site-premium">$5</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Campsite Features -->
+                        <div class="campsite-features-detail">
+                            <h4>Site Features</h4>
+                            <div class="features-list" id="selected-features">
+                                <div class="feature-item">
+                                    <span class="feature-icon">🏕️</span>
+                                    <span>Tent & RV friendly (up to 30ft)</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">💧</span>
+                                    <span>Lake access • Fire pit • Picnic table</span>
+                                </div>
+                                <div class="feature-item">
+                                    <span class="feature-icon">📶</span>
+                                    <span>WiFi available • Accessible facilities</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="campsite-description">
+                            <p id="selected-description">
+                                This premium waterfront campsite offers stunning lake views with easy access to hiking trails. Perfect for families with children, featuring nearby washrooms and playground facilities. The site can accommodate both tents and RVs up to 30 feet.
+                            </p>
+                        </div>
+                        
+                        <!-- Booking Actions -->
+                        <div class="booking-actions">
+                            <button class="btn-primary book-now-btn" onclick="window.location.href='review-reservation.html'">Book This Site</button>
+                            <button class="btn-secondary view-calendar-btn">View Calendar</button>
+                        </div>
                     </div>
 
                     <!-- Campsite Options -->

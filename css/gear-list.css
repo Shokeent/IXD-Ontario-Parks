@@ -155,6 +155,20 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.gear-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.gear-item:hover .gear-image img {
+    transform: scale(1.05);
 }
 
 .gear-placeholder-icon {
