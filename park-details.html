@@ -337,7 +337,8 @@
     <script src="js/park-details.js"></script>
     <script src="js/park-amenities.js"></script>
     <script>
-        parkAmenitiesFinder.renderAmenitiesPanel('algonquin-park', 'amenities-panel');
+        const parkId = localStorage.getItem('selectedParkId') || 'algonquin-park';
+        parkAmenitiesFinder.renderAmenitiesPanel(parkId, 'amenities-panel');
     </script>
 </body>
 </html>

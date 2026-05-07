@@ -371,7 +371,7 @@ function updateParkDetailsContent(park) {
     document.title = `${park.name} - Ontario Parks`;
     
     // Update park location
-    const locationElements = document.querySelectorAll('.park-location');
+    const locationElements = document.querySelectorAll('.park-location, .park-location-hero');
     locationElements.forEach(element => {
         if (element) element.textContent = park.region;
     });
