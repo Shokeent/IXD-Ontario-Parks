@@ -494,6 +494,34 @@ function updateParkDetailsContent(park) {
             badge.className = `difficulty-badge ${park.difficulty.toLowerCase()}`;
         }
     });
+
+    // Update park stats hero line
+    const statsEl = document.querySelector('.park-stats');
+    if (statsEl) {
+        statsEl.textContent = `${park.campgrounds} campgrounds • ${park.activities.length} activities`;
+    }
+
+    // Rebuild campground section from park data
+    const campgroundSection = document.querySelector('.campground-section');
+    if (campgroundSection && park.campgroundNames && park.campgroundNames.length > 0) {
+        campgroundSection.innerHTML = '<h2>Campground</h2>' + park.campgroundNames.map(name => `
+            <div class="campground-item">
+                <div class="campground-header">
+                    <h3>${name}</h3>
+                    <button class="btn-book-now" onclick="window.location.href='booking.html'">BOOK NOW</button>
+                </div>
+                <div class="campground-features">
+                    <span class="feature-badge day-use">☀️ Day Use</span>
+                    <span class="feature-badge overnight">🌙 Overnight Use</span>
+                    <span class="feature-badge backcountry">⛺ Backcountry Camping</span>
+                </div>
+                <div class="campground-amenities">
+                    <span class="amenity">🏠 Roofed Accommodations</span>
+                    <span class="amenity">❄️ Available in Winter</span>
+                </div>
+            </div>
+        `).join('');
+    }
 }
 
 // Load weather data for the park

@@ -828,6 +828,18 @@ function updateBookingPageContent(park) {
             element.textContent = `Book ${park.name}`;
         }
     });
+
+    // Update document title and breadcrumb park link
+    document.title = `Booking - ${park.name} - Ontario Parks`;
+    const parkDetailLink = document.querySelector('a[href="park-details.html"]');
+    if (parkDetailLink) parkDetailLink.textContent = park.name;
+
+    // Update campground select options
+    const campgroundSelects = document.querySelectorAll('.search-select');
+    if (campgroundSelects.length > 0 && park.campgroundNames && park.campgroundNames.length > 0) {
+        const options = park.campgroundNames.map(n => `<option value="${n}">${n}</option>`).join('');
+        campgroundSelects.forEach(sel => { sel.innerHTML = options; });
+    }
     
     // Update park information in booking summary
     const parkInfoContainer = document.querySelector('.park-info, .booking-park-details');
