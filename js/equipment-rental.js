@@ -460,17 +460,35 @@ class EquipmentRentalManager {
     // Start rental flow
     startRentalFlow(itemId) {
         const item = this.equipment[itemId];
-        window.currentRentalItem = item;
+
+        const daysStr = window.prompt(
+            `How many days would you like to rent the ${item.name}?\n$${item.pricePerDay}/day`,
+            '3'
+        );
+        if (!daysStr) return;
+
+        const days = Math.max(1, parseInt(daysStr, 10) || 1);
+        const totalCost = this.calculateRentalCost(itemId, days);
+
+        localStorage.setItem('pending_rental', JSON.stringify({
+            type: 'rental',
+            itemId: item.id,
+            itemName: item.name,
+            pricePerDay: item.pricePerDay,
+            days,
+            totalCost
+        }));
 
         if (window.gaManager) {
             window.gaManager.trackEvent('equipment_rental_started', {
                 item_id: itemId,
-                item_name: item.name
+                item_name: item.name,
+                days,
+                cost: totalCost
             });
         }
 
-        // Navigate to rental page or open modal
-        alert(`Starting rental for ${item.name}. This would open a rental form in production.`);
+        window.location.href = 'shopping-cart.html';
     }
 }
 

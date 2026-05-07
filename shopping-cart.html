@@ -389,7 +389,43 @@
         </div>
     </footer>
 
+    <script src="js/analytics.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/notifications.js"></script>
     <script src="js/script.js"></script>
     <script src="js/review-reservation.js"></script>
+    <script>
+        (function() {
+            const pending = localStorage.getItem('pending_rental');
+            if (!pending) return;
+
+            const rental = JSON.parse(pending);
+            localStorage.removeItem('pending_rental');
+
+            const pricing = document.querySelector('.pricing-section');
+            if (!pricing) return;
+
+            const row = document.createElement('div');
+            row.className = 'pricing-row';
+            row.innerHTML = `
+                <span class="pricing-description">${rental.days} day${rental.days > 1 ? 's' : ''} x $${rental.pricePerDay} – ${rental.itemName} Rental</span>
+                <span class="pricing-amount">$${rental.totalCost.toFixed(2)}</span>
+            `;
+            const subtotal = pricing.querySelector('.subtotal-row');
+            pricing.insertBefore(row, subtotal);
+
+            const subtotalAmt = subtotal.querySelector('.pricing-amount');
+            const newSubtotal = parseFloat(subtotalAmt.textContent.replace('$', '')) + rental.totalCost;
+            subtotalAmt.textContent = '$' + newSubtotal.toFixed(2);
+
+            const totalEl = document.querySelector('.total-amount');
+            if (totalEl) {
+                const currentTotal = parseFloat(totalEl.textContent.replace(/[^0-9.]/g, ''));
+                totalEl.textContent = 'TOTAL (CAD) $' + (currentTotal + rental.totalCost).toFixed(2);
+            }
+        })();
+    </script>
 </body>
 </html>
