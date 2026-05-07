@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Ontario Parks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .admin-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            background: #f3f4f6;
+        }
+
+        .admin-sidebar {
+            background: #1f2937;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            width: 250px;
+            overflow-y: auto;
+        }
+
+        .admin-sidebar h2 {
+            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .admin-nav {
+            list-style: none;
+            padding: 0;
+        }
+
+        .admin-nav li {
+            margin-bottom: 10px;
+        }
+
+        .admin-nav button {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #d1d5db;
+            padding: 12px 15px;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .admin-nav button:hover {
+            background: #374151;
+            color: white;
+        }
+
+        .admin-nav button.active {
+            background: #059669;
+            color: white;
+        }
+
+        .admin-main {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #1f2937;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #059669;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f3f4f6;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-confirmed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .flag-control {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .flag-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .flag-info p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .flag-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #059669;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .rollout-control {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .rollout-control input {
+            width: 80px;
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+        }
+
+        .btn-admin {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-primary-admin {
+            background: #059669;
+            color: white;
+        }
+
+        .btn-primary-admin:hover {
+            background: #047857;
+        }
+
+        .btn-secondary-admin {
+            background: #e5e7eb;
+            color: #1f2937;
+        }
+
+        .btn-secondary-admin:hover {
+            background: #d1d5db;
+        }
+
+        .btn-danger-admin {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger-admin:hover {
+            background: #dc2626;
+        }
+
+        .experiment-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .experiment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .experiment-variants {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .variant-bar {
+            background: #e5e7eb;
+            height: 30px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .variant-fill {
+            height: 100%;
+            background: #059669;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar {
+                position: relative;
+                height: auto;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .admin-main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .flag-control {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .flag-controls {
+                width: 100%;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <h2>Admin Panel</h2>
+            <ul class="admin-nav">
+                <li><button class="nav-btn active" onclick="switchSection('dashboard')">Dashboard</button></li>
+                <li><button class="nav-btn" onclick="switchSection('bookings')">Bookings</button></li>
+                <li><button class="nav-btn" onclick="switchSection('flags')">Feature Flags</button></li>
+                <li><button class="nav-btn" onclick="switchSection('experiments')">Experiments</button></li>
+                <li><button class="nav-btn" onclick="switchSection('analytics')">Analytics</button></li>
+                <li style="margin-top: 30px;"><button class="logout-btn" onclick="logoutAdmin()">Logout</button></li>
+            </ul>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-header">
+                <h1>Ontario Parks Admin</h1>
+                <span id="admin-user">Admin User</span>
+            </div>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="admin-section active">
+                <h2 class="section-title">Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Bookings</div>
+                        <div class="stat-value" id="total-bookings">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Confirmed</div>
+                        <div class="stat-value" id="confirmed-bookings">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Pending</div>
+                        <div class="stat-value" id="pending-bookings">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Revenue (CAD)</div>
+                        <div class="stat-value" id="total-revenue">$0</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px; margin-bottom: 20px;">Recent Bookings</h3>
+                <div class="table-container">
+                    <table id="dashboard-bookings-table">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Guest Name</th>
+                                <th>Park</th>
+                                <th>Check-in</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboard-bookings-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Bookings Section -->
+            <section id="bookings" class="admin-section">
+                <h2 class="section-title">Manage Bookings</h2>
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="booking-search" placeholder="Search by booking ID, guest name, or park..." style="padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; width: 300px;">
+                </div>
+
+                <div class="table-container">
+                    <table id="bookings-table">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Guest Name</th>
+                                <th>Email</th>
+                                <th>Park</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th>Total (CAD)</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Feature Flags Section -->
+            <section id="flags" class="admin-section">
+                <h2 class="section-title">Feature Flags</h2>
+                <div id="flags-container">
+                </div>
+            </section>
+
+            <!-- Experiments Section -->
+            <section id="experiments" class="admin-section">
+                <h2 class="section-title">A/B Experiments</h2>
+                <div id="experiments-container">
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="admin-section">
+                <h2 class="section-title">Analytics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Page Views</div>
+                        <div class="stat-value" id="analytics-pageviews">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Unique Users</div>
+                        <div class="stat-value" id="analytics-users">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Bookings Started</div>
+                        <div class="stat-value" id="analytics-bookings-started">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Conversion Rate</div>
+                        <div class="stat-value" id="analytics-conversion">0%</div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 40px; margin-bottom: 20px;">Top Parks</h3>
+                <div class="table-container">
+                    <table id="analytics-parks-table">
+                        <thead>
+                            <tr>
+                                <th>Park Name</th>
+                                <th>Views</th>
+                                <th>Bookings</th>
+                                <th>Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody id="analytics-parks-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/feature-flags.js"></script>
+    <script src="js/analytics.js"></script>
+    <script>
+        // Admin authentication check
+        function checkAdminAuth() {
+            const adminToken = localStorage.getItem('admin_token');
+            if (!adminToken) {
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('admin_token');
+            window.location.href = 'admin-login.html';
+        }
+
+        function switchSection(section) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            event.target.classList.add('active');
+
+            if (section === 'dashboard') {
+                loadDashboard();
+            } else if (section === 'bookings') {
+                loadBookings();
+            } else if (section === 'flags') {
+                loadFeatureFlags();
+            } else if (section === 'experiments') {
+                loadExperiments();
+            } else if (section === 'analytics') {
+                loadAnalytics();
+            }
+        }
+
+        function loadDashboard() {
+            const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+            const stats = {
+                total: bookings.length,
+                confirmed: bookings.filter(b => b.status === 'confirmed').length,
+                pending: bookings.filter(b => b.status === 'pending').length,
+                revenue: bookings.filter(b => b.status === 'confirmed').reduce((sum, b) => sum + (b.totalCost || 0), 0)
+            };
+
+            document.getElementById('total-bookings').textContent = stats.total;
+            document.getElementById('confirmed-bookings').textContent = stats.confirmed;
+            document.getElementById('pending-bookings').textContent = stats.pending;
+            document.getElementById('total-revenue').textContent = '$' + stats.revenue.toFixed(2);
+
+            const tbody = document.getElementById('dashboard-bookings-body');
+            tbody.innerHTML = bookings.slice(0, 10).map(b => `
+                <tr>
+                    <td>${b.confirmationId || 'N/A'}</td>
+                    <td>${b.guestName || 'N/A'}</td>
+                    <td>${b.parkName || 'N/A'}</td>
+                    <td>${b.checkIn || 'N/A'}</td>
+                    <td>$${(b.totalCost || 0).toFixed(2)}</td>
+                    <td><span class="badge badge-${b.status || 'pending'}">${(b.status || 'pending').toUpperCase()}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function loadBookings() {
+            const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+            const tbody = document.getElementById('bookings-body');
+            tbody.innerHTML = bookings.map(b => `
+                <tr>
+                    <td>${b.confirmationId || 'N/A'}</td>
+                    <td>${b.guestName || 'N/A'}</td>
+                    <td>${b.email || 'N/A'}</td>
+                    <td>${b.parkName || 'N/A'}</td>
+                    <td>${b.checkIn || 'N/A'}</td>
+                    <td>${b.checkOut || 'N/A'}</td>
+                    <td>$${(b.totalCost || 0).toFixed(2)}</td>
+                    <td><span class="badge badge-${b.status || 'pending'}">${(b.status || 'pending').toUpperCase()}</span></td>
+                    <td>
+                        <button class="btn-admin btn-secondary-admin" onclick="editBooking('${b.confirmationId}')">Edit</button>
+                        <button class="btn-admin btn-danger-admin" onclick="cancelBooking('${b.confirmationId}')">Cancel</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadFeatureFlags() {
+            const flags = featureFlags.getAllFlags();
+            const container = document.getElementById('flags-container');
+            container.innerHTML = Object.entries(flags).map(([name, flag]) => `
+                <div class="flag-control">
+                    <div class="flag-info">
+                        <h3>${name}</h3>
+                        <p>Rollout: <strong>${flag.rolloutPercentage}%</strong></p>
+                    </div>
+                    <div class="flag-controls">
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${flag.enabled ? 'checked' : ''} onchange="toggleFlag('${name}', this.checked)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <div class="rollout-control">
+                            <input type="number" min="0" max="100" value="${flag.rolloutPercentage}" onchange="updateRollout('${name}', this.value)">
+                            <span>%</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadExperiments() {
+            const experiments = featureFlags.getAllExperiments();
+            const container = document.getElementById('experiments-container');
+            container.innerHTML = Object.entries(experiments).map(([name, exp]) => `
+                <div class="experiment-card">
+                    <div class="experiment-header">
+                        <div>
+                            <h3>${exp.name}</h3>
+                            <p style="color: #6b7280; margin: 5px 0;">Status: <strong>${exp.active ? 'ACTIVE' : 'INACTIVE'}</strong></p>
+                        </div>
+                        <button class="btn-admin ${exp.active ? 'btn-danger-admin' : 'btn-primary-admin'}" onclick="toggleExperiment('${name}', ${!exp.active})">
+                            ${exp.active ? 'End Experiment' : 'Start Experiment'}
+                        </button>
+                    </div>
+                    <div class="experiment-variants">
+                        ${Object.entries(exp.variants).map(([varName, variant]) => `
+                            <div>
+                                <p style="font-weight: 600; margin-bottom: 8px;">${variant.label}</p>
+                                <div class="variant-bar">
+                                    <div class="variant-fill" style="width: ${variant.weight}%;">${variant.weight}%</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadAnalytics() {
+            const analytics = {
+                pageviews: Math.floor(Math.random() * 10000) + 500,
+                users: Math.floor(Math.random() * 2000) + 100,
+                bookingsStarted: Math.floor(Math.random() * 500) + 50,
+                bookingsCompleted: Math.floor(Math.random() * 200) + 20
+            };
+
+            const conversion = (analytics.bookingsCompleted / analytics.bookingsStarted * 100).toFixed(1);
+
+            document.getElementById('analytics-pageviews').textContent = analytics.pageviews;
+            document.getElementById('analytics-users').textContent = analytics.users;
+            document.getElementById('analytics-bookings-started').textContent = analytics.bookingsStarted;
+            document.getElementById('analytics-conversion').textContent = conversion + '%';
+
+            const parks = [
+                { name: 'Algonquin Provincial Park', views: 1250, bookings: 89, revenue: 8900 },
+                { name: 'Killarney Provincial Park', views: 950, bookings: 64, revenue: 6400 },
+                { name: 'Bon Echo Provincial Park', views: 820, bookings: 52, revenue: 5200 },
+                { name: 'Pinery Provincial Park', views: 750, bookings: 48, revenue: 4800 },
+                { name: 'Sandbanks Provincial Park', views: 680, bookings: 42, revenue: 4200 }
+            ];
+
+            const tbody = document.getElementById('analytics-parks-body');
+            tbody.innerHTML = parks.map(p => `
+                <tr>
+                    <td>${p.name}</td>
+                    <td>${p.views}</td>
+                    <td>${p.bookings}</td>
+                    <td>$${p.revenue}</td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleFlag(flagName, enabled) {
+            const flag = featureFlags.flags[flagName];
+            featureFlags.setFlag(flagName, enabled, flag.rolloutPercentage);
+            loadFeatureFlags();
+        }
+
+        function updateRollout(flagName, percentage) {
+            const flag = featureFlags.flags[flagName];
+            featureFlags.setFlag(flagName, flag.enabled, parseInt(percentage));
+            loadFeatureFlags();
+        }
+
+        function toggleExperiment(expName, active) {
+            if (active) {
+                featureFlags.startExperiment(expName);
+            } else {
+                featureFlags.endExperiment(expName);
+            }
+            loadExperiments();
+        }
+
+        function editBooking(bookingId) {
+            alert('Edit functionality for: ' + bookingId);
+        }
+
+        function cancelBooking(bookingId) {
+            if (confirm('Are you sure you want to cancel this booking?')) {
+                const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+                const booking = bookings.find(b => b.confirmationId === bookingId);
+                if (booking) {
+                    booking.status = 'cancelled';
+                    localStorage.setItem('bookings', JSON.stringify(bookings));
+                    loadBookings();
+                }
+            }
+        }
+
+        // Initialize
+        checkAdminAuth();
+        loadDashboard();
+    </script>
+</body>
+</html>
