@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initParkCards();
     initScrollAnimations();
     initMobileMenu();
-    
+
+    // Register service worker for PWA
+    registerServiceWorker();
+
     // Load featured parks from API
     loadFeaturedParks();
 });
@@ -548,8 +551,39 @@ document.addEventListener('DOMContentLoaded', function() {
     analyticsTracker.trackPageView(pageName);
 });
 
-// Make booking system globally available
-window.bookingSystem = bookingSystem;
+// Register service worker for PWA support
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('Service Worker registered successfully:', registration);
+
+                // Check for updates periodically
+                setInterval(() => {
+                    registration.update();
+                }, 60000); // Check every 60 seconds
+
+                // Listen for updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // New service worker is ready, show update notification
+                            showNotification('App update available! Refresh to get the latest version.', 'info');
+                        }
+                    });
+                });
+            })
+            .catch(error => {
+                console.warn('Service Worker registration failed:', error);
+            });
+
+        // Handle controller change (new service worker activated)
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            console.log('Service Worker controller changed');
+        });
+    }
+}
 
 // Navigate to park details with park ID
 function navigateToParkDetails(parkId) {
