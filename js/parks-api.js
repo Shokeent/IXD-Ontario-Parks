@@ -445,21 +445,23 @@ class OntarioParksAPI {
         try {
             const park = await this.getParkById(parkId);
             if (!park || !park.coordinates) {
-                throw new Error('Park coordinates not available');
+                console.warn('Park coordinates not available for weather');
+                return this.getMockWeatherData();
             }
 
-            // Using OpenWeatherMap API (requires API key)
+            // Using OpenWeatherMap API (requires API key configuration in environment)
             const weatherAPI = 'https://api.openweathermap.org/data/2.5/weather';
-            const apiKey = 'YOUR_OPENWEATHER_API_KEY'; // Replace with actual API key
-            
-            if (apiKey === 'YOUR_OPENWEATHER_API_KEY') {
-                // Return mock weather data if no API key
+            const apiKey = localStorage.getItem('openWeatherApiKey') ||
+                          process.env.REACT_APP_OPENWEATHER_API_KEY;
+
+            if (!apiKey || apiKey === 'YOUR_OPENWEATHER_API_KEY') {
+                console.warn('Weather API key not configured, using mock data');
                 return this.getMockWeatherData();
             }
 
             const url = `${weatherAPI}?lat=${park.coordinates.lat}&lon=${park.coordinates.lng}&appid=${apiKey}&units=metric`;
             const response = await this.makeAPICall(url);
-            
+
             return {
                 temperature: Math.round(response.main.temp),
                 description: response.weather[0].description,

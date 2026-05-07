@@ -183,31 +183,44 @@ function initSearchAndFilters() {
     if (searchInput) {
         searchInput.addEventListener('input', debounce(handleSearch, 300));
     }
-    
+
     // Filter functionality
     const filters = document.querySelectorAll('.filter-select, .filter-checkbox');
     filters.forEach(filter => {
         filter.addEventListener('change', handleFilterChange);
     });
-    
+
     // Clear filters button
     const clearFiltersBtn = document.querySelector('.clear-filters');
     if (clearFiltersBtn) {
         clearFiltersBtn.addEventListener('click', clearAllFilters);
     }
+
+    // Add input validation for search
+    if (searchInput) {
+        searchInput.addEventListener('invalid', function(e) {
+            e.preventDefault();
+            showNotification('Please enter a valid search term', 'error');
+        });
+    }
 }
 
 // Handle search input
 function handleSearch(event) {
-    const searchTerm = event.target.value.toLowerCase();
-    
-    filteredParks = allParks.filter(park => 
+    const searchTerm = event.target.value.toLowerCase().trim();
+
+    // Validate and sanitize search input
+    if (typeof validateSearchInput !== 'undefined') {
+        event.target.value = validateSearchInput(event.target.value);
+    }
+
+    filteredParks = allParks.filter(park =>
         park.name.toLowerCase().includes(searchTerm) ||
         park.description.toLowerCase().includes(searchTerm) ||
         park.region.toLowerCase().includes(searchTerm) ||
         park.activities.some(activity => activity.toLowerCase().includes(searchTerm))
     );
-    
+
     currentPage = 1;
     renderParks();
     updateParkCount();

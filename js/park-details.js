@@ -97,10 +97,20 @@ function initMapInteractions() {
             showNotification(`Viewing ${location} area details`, 'info');
         });
 
+        // Keyboard accessibility for markers
+        marker.setAttribute('tabindex', '0');
+        marker.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+
         // Enhanced hover effect
         marker.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.3)';
             this.style.zIndex = '10';
+            this.style.cursor = 'pointer';
         });
 
         marker.addEventListener('mouseleave', function() {
@@ -109,27 +119,38 @@ function initMapInteractions() {
         });
     });
 
-    // Zoom controls
-    zoomInBtn.addEventListener('click', function() {
-        if (zoomLevel < 3) {
-            zoomLevel += 0.2;
-            updateMapZoom();
-            showNotification('Zoomed in', 'info');
-        }
-    });
+    // Zoom controls with bounds checking
+    if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', function() {
+            if (zoomLevel < 3) {
+                zoomLevel += 0.2;
+                updateMapZoom();
+                showNotification('Zoomed in', 'info');
+            } else {
+                showNotification('Maximum zoom reached', 'info');
+            }
+        });
+    }
 
-    zoomOutBtn.addEventListener('click', function() {
-        if (zoomLevel > 0.5) {
-            zoomLevel -= 0.2;
-            updateMapZoom();
-            showNotification('Zoomed out', 'info');
-        }
-    });
+    if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', function() {
+            if (zoomLevel > 0.5) {
+                zoomLevel -= 0.2;
+                updateMapZoom();
+                showNotification('Zoomed out', 'info');
+            } else {
+                showNotification('Minimum zoom reached', 'info');
+            }
+        });
+    }
 
     function updateMapZoom() {
         const mapPlaceholder = document.querySelector('.map-placeholder');
-        mapPlaceholder.style.transform = `scale(${zoomLevel})`;
-        mapPlaceholder.style.transformOrigin = 'center';
+        if (mapPlaceholder) {
+            mapPlaceholder.style.transform = `scale(${zoomLevel})`;
+            mapPlaceholder.style.transformOrigin = 'center';
+            mapPlaceholder.style.transition = 'transform 0.3s ease';
+        }
     }
 }
 

@@ -351,6 +351,41 @@
     <script src="js/script.js"></script>
     <script>
         function completeCheckout() {
+            const inputs = document.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+
+            // Validate all required fields
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#dc2626';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#d1d5db';
+                }
+            });
+
+            // Validate email format
+            const emailInput = document.querySelector('input[type="email"]');
+            if (emailInput && !validateEmail(emailInput.value)) {
+                emailInput.style.borderColor = '#dc2626';
+                showNotification('Please enter a valid email address', 'error');
+                return;
+            }
+
+            // Validate card number (simple check - Luhn-like validation)
+            const cardInputs = document.querySelectorAll('input[placeholder*="4111"], input[placeholder*="1111"]');
+            const cardInput = Array.from(cardInputs).find(inp => inp.value);
+            if (cardInput && cardInput.value.replace(/\s/g, '').length < 13) {
+                cardInput.style.borderColor = '#dc2626';
+                showNotification('Please enter a valid card number', 'error');
+                return;
+            }
+
+            if (!isValid) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+
             const btn = event.target;
             btn.disabled = true;
             btn.textContent = 'Processing...';

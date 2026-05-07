@@ -229,41 +229,78 @@ function initScrollAnimations() {
 
 // Mobile menu functionality
 function initMobileMenu() {
-    // Create mobile menu toggle button
+    // Create mobile menu toggle button if it doesn't exist
     const navbar = document.querySelector('.nav-container');
     const navMenu = document.querySelector('.nav-menu');
-    
-    // Mobile menu button (you might want to add this to your HTML)
-    const mobileMenuBtn = document.createElement('button');
-    mobileMenuBtn.className = 'mobile-menu-btn';
-    mobileMenuBtn.innerHTML = '☰';
-    mobileMenuBtn.style.display = 'none';
-    
-    navbar.appendChild(mobileMenuBtn);
-    
+
+    if (!navbar || !navMenu) return;
+
+    let mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    if (!mobileMenuBtn) {
+        mobileMenuBtn = document.createElement('button');
+        mobileMenuBtn.className = 'mobile-menu-btn';
+        mobileMenuBtn.innerHTML = '☰';
+        mobileMenuBtn.setAttribute('aria-label', 'Toggle navigation menu');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        navbar.appendChild(mobileMenuBtn);
+    }
+
     mobileMenuBtn.addEventListener('click', function() {
-        navMenu.classList.toggle('mobile-active');
+        const isOpen = navMenu.classList.toggle('mobile-active');
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen);
     });
-    
+
+    // Close menu when a link is clicked
+    const navLinks = navMenu.querySelectorAll('a, button');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('mobile-active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        });
+    });
+
     // Show/hide mobile menu based on screen size
     function checkScreenSize() {
-        if (window.innerWidth <= 768) {
-            mobileMenuBtn.style.display = 'block';
-            navMenu.style.display = navMenu.classList.contains('mobile-active') ? 'flex' : 'none';
-        } else {
-            mobileMenuBtn.style.display = 'none';
-            navMenu.style.display = 'flex';
-        }
+        const isMobile = window.innerWidth <= 768;
+        mobileMenuBtn.style.display = isMobile ? 'block' : 'none';
+        navMenu.style.display = isMobile ? (navMenu.classList.contains('mobile-active') ? 'flex' : 'none') : 'flex';
     }
-    
-    window.addEventListener('resize', checkScreenSize);
+
+    window.addEventListener('resize', debounceResize(checkScreenSize, 250));
     checkScreenSize();
+}
+
+// Debounce function for resize events
+function debounceResize(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 // Utility functions
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
+}
+
+// Sanitize user input to prevent XSS attacks
+function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+}
+
+// Validate and sanitize search input
+function validateSearchInput(input) {
+    if (!input || typeof input !== 'string') return '';
+    // Remove potentially dangerous characters
+    return input.replace(/[<>\"']/g, '').trim();
 }
 
 function showNotification(message, type = 'info') {

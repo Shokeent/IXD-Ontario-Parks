@@ -464,29 +464,55 @@ function showSearchResults(searchData) {
 function setupDateInputs() {
     const dateInputs = document.querySelectorAll('input[type="date"]');
     const today = new Date().toISOString().split('T')[0];
-    
+
     dateInputs.forEach((input, index) => {
         // Set minimum date to today
         input.min = today;
-        
+
+        // Add validation event
+        input.addEventListener('change', function() {
+            validateDateRange(dateInputs);
+        });
+
         // Ensure departure is after arrival
         if (index === 1) { // Departure date
             const arrivalInput = dateInputs[0];
-            
+
             arrivalInput.addEventListener('change', function() {
                 const arrivalDate = new Date(this.value);
                 const nextDay = new Date(arrivalDate);
                 nextDay.setDate(nextDay.getDate() + 1);
-                
+
                 input.min = nextDay.toISOString().split('T')[0];
-                
+
                 // Update departure if it's before new minimum
                 if (input.value && new Date(input.value) <= arrivalDate) {
                     input.value = nextDay.toISOString().split('T')[0];
+                    showNotification('Departure date updated to be after arrival', 'info');
                 }
+
+                validateDateRange(dateInputs);
             });
         }
     });
+}
+
+// Validate date range
+function validateDateRange(dateInputs) {
+    const arrivalInput = dateInputs[0];
+    const departureInput = dateInputs[1];
+
+    if (!arrivalInput || !departureInput) return;
+
+    const arrivalDate = new Date(arrivalInput.value);
+    const departureDate = new Date(departureInput.value);
+
+    if (arrivalDate && departureDate && departureDate <= arrivalDate) {
+        departureInput.setCustomValidity('Departure must be after arrival');
+        showNotification('Please select a departure date after arrival', 'error');
+    } else {
+        departureInput.setCustomValidity('');
+    }
 }
 
 // Booking functionality (to be connected to campsite details page)
