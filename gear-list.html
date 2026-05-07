@@ -20,7 +20,6 @@
             <div class="nav-menu">
                 <a href="all-parks.html" class="nav-link">Discover Parks</a>
                 <a href="gear-list.html" class="nav-link active">Gear Guide</a>
-                <a href="gear-list.html" class="nav-link active">Gear Guide</a>
                 <a href="#store" class="nav-link">Store</a>
                 <a href="#fees" class="nav-link">Fees</a>
                 <a href="#signin" class="nav-link">Sign In</a>
@@ -106,6 +105,25 @@
         </div>
     </section>
 
+    <!-- Equipment Rental Section -->
+    <section class="equipment-rental-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Rent Equipment</h2>
+                <p>Don't have gear? Rent everything you need for your trip.</p>
+                <div class="rental-category-filters">
+                    <button class="filter-btn active" onclick="equipmentRentalManager.renderEquipmentCatalog('equipment-catalog', null); this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active')">All</button>
+                    <button class="filter-btn" onclick="equipmentRentalManager.renderEquipmentCatalog('equipment-catalog', 'shelter'); this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active')">Shelter</button>
+                    <button class="filter-btn" onclick="equipmentRentalManager.renderEquipmentCatalog('equipment-catalog', 'cooking'); this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active')">Cooking</button>
+                    <button class="filter-btn" onclick="equipmentRentalManager.renderEquipmentCatalog('equipment-catalog', 'bags'); this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active')">Bags</button>
+                    <button class="filter-btn" onclick="equipmentRentalManager.renderEquipmentCatalog('equipment-catalog', 'lighting'); this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active')">Lighting</button>
+                    <button class="filter-btn" onclick="equipmentRentalManager.renderEquipmentCatalog('equipment-catalog', 'safety'); this.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active')">Safety</button>
+                </div>
+            </div>
+            <div id="equipment-catalog"></div>
+        </div>
+    </section>
+
     <!-- Newsletter Section -->
     <section class="newsletter">
         <div class="container">
@@ -170,5 +188,9 @@
     </footer>
 
     <script src="js/gear-list.js"></script>
+    <script src="js/equipment-rental.js"></script>
+    <script>
+        equipmentRentalManager.renderEquipmentCatalog('equipment-catalog');
+    </script>
 </body>
 </html>
