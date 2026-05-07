@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Ontario Parks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .account-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .account-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .account-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        .account-sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .account-menu {
+            list-style: none;
+        }
+
+        .account-menu li {
+            margin-bottom: 10px;
+        }
+
+        .account-menu button {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 12px 15px;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 6px;
+            color: #6b7280;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .account-menu button:hover {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .account-menu button.active {
+            background: #059669;
+            color: white;
+        }
+
+        .account-logout {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .account-logout:hover {
+            background: #dc2626;
+        }
+
+        .account-main {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .account-section {
+            display: none;
+        }
+
+        .account-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #059669;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-save {
+            background: #059669;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-save:hover {
+            background: #047857;
+        }
+
+        .booking-card {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #059669;
+        }
+
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .booking-park-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .booking-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .booking-status.confirmed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .booking-status.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .booking-status.cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .booking-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .booking-detail {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .booking-detail strong {
+            color: #1f2937;
+        }
+
+        .booking-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #f3f4f6;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .notification {
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .notification.success {
+            background: #d1fae5;
+            color: #065f46;
+            display: block;
+        }
+
+        .notification.error {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <div class="ontario-parks-logo">
+                        <div class="logo-icon">
+                            <div class="logo-square blue"></div>
+                            <div class="logo-square green"></div>
+                            <div class="logo-text">
+                                <span class="ontario">ONTARIO</span>
+                                <span class="parks">PARKS</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="all-parks.html" class="nav-link">Discover Parks</a>
+                <a href="gear-list.html" class="nav-link">Gear Guide</a>
+                <a href="booking.html" class="nav-link">Make Reservation</a>
+                <div class="nav-icons">
+                    <a href="account.html" class="nav-icon">👤</a>
+                    <a href="#cart" class="nav-icon">🛒</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="account-container">
+        <div class="account-header">
+            <h1>My Account</h1>
+            <div id="user-greeting" style="color: #6b7280;"></div>
+        </div>
+
+        <div class="account-grid">
+            <aside class="account-sidebar">
+                <ul class="account-menu">
+                    <li><button class="menu-btn active" onclick="switchTab('profile')">Profile</button></li>
+                    <li><button class="menu-btn" onclick="switchTab('bookings')">My Bookings</button></li>
+                    <li><button class="menu-btn" onclick="switchTab('preferences')">Preferences</button></li>
+                    <li><button class="menu-btn" onclick="switchTab('security')">Security</button></li>
+                </ul>
+                <button class="account-logout" onclick="handleLogout()">Logout</button>
+            </aside>
+
+            <main class="account-main">
+                <!-- Profile Section -->
+                <section id="profile" class="account-section active">
+                    <h2 class="section-title">Profile Information</h2>
+                    <div class="notification" id="profile-message"></div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="profile-email" readonly disabled style="background: #f3f4f6; cursor: not-allowed;">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" id="profile-firstName" placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" id="profile-lastName" placeholder="Smith">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="profile-phone" placeholder="416-555-0123">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" id="profile-address" placeholder="123 Main Street">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="profile-city" placeholder="Toronto">
+                        </div>
+                        <div class="form-group">
+                            <label>Province</label>
+                            <input type="text" id="profile-province" placeholder="ON">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Postal Code</label>
+                        <input type="text" id="profile-postalCode" placeholder="M5H 2N2">
+                    </div>
+
+                    <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+                </section>
+
+                <!-- Bookings Section -->
+                <section id="bookings" class="account-section">
+                    <h2 class="section-title">My Bookings</h2>
+                    <div id="bookings-list"></div>
+                </section>
+
+                <!-- Preferences Section -->
+                <section id="preferences" class="account-section">
+                    <h2 class="section-title">Preferences</h2>
+                    <div class="notification" id="preferences-message"></div>
+
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 400;">
+                            <input type="checkbox" id="pref-newsletter" style="width: 18px; height: 18px;">
+                            <span>Subscribe to our newsletter for park updates and tips</span>
+                        </label>
+
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 400;">
+                            <input type="checkbox" id="pref-notifications" style="width: 18px; height: 18px;">
+                            <span>Receive email notifications about my bookings</span>
+                        </label>
+
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 400;">
+                            <input type="checkbox" id="pref-darkmode" style="width: 18px; height: 18px;">
+                            <span>Enable dark mode (coming soon)</span>
+                        </label>
+
+                        <button class="btn-save" onclick="savePreferences()" style="width: fit-content;">Save Preferences</button>
+                    </div>
+                </section>
+
+                <!-- Security Section -->
+                <section id="security" class="account-section">
+                    <h2 class="section-title">Security Settings</h2>
+                    <div class="notification" id="security-message"></div>
+
+                    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 15px 0; color: #1f2937;">Change Password</h3>
+
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" id="security-current" placeholder="Enter your current password">
+                    </div>
+
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="security-new" placeholder="Enter new password (min 8 characters)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="security-confirm" placeholder="Confirm new password">
+                    </div>
+
+                    <button class="btn-save" onclick="changePassword()">Update Password</button>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/analytics.js"></script>
+    <script>
+        // Check authentication
+        function checkAuthentication() {
+            if (!authManager.isAuthenticated) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const user = authManager.getCurrentUser();
+            document.getElementById('user-greeting').textContent = `Hello, ${user.firstName || user.email}!`;
+
+            loadProfileData();
+            loadBookings();
+            loadPreferences();
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.account-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tab === 'bookings') {
+                loadBookings();
+            }
+        }
+
+        function loadProfileData() {
+            const user = authManager.getCurrentUser();
+            document.getElementById('profile-email').value = user.email;
+            document.getElementById('profile-firstName').value = user.firstName || '';
+            document.getElementById('profile-lastName').value = user.lastName || '';
+            document.getElementById('profile-phone').value = user.phone || '';
+            document.getElementById('profile-address').value = user.address || '';
+            document.getElementById('profile-city').value = user.city || '';
+            document.getElementById('profile-province').value = user.province || '';
+            document.getElementById('profile-postalCode').value = user.postalCode || '';
+        }
+
+        function loadBookings() {
+            const bookings = authManager.getUserBookings();
+            const container = document.getElementById('bookings-list');
+
+            if (bookings.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📅</div>
+                        <h3>No Bookings Yet</h3>
+                        <p>You haven't made any reservations yet. <a href="booking.html" style="color: #059669; text-decoration: none;">Start booking now!</a></p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = bookings.map(booking => `
+                <div class="booking-card">
+                    <div class="booking-header">
+                        <div class="booking-park-name">${booking.parkName}</div>
+                        <span class="booking-status ${booking.status}">${booking.status.toUpperCase()}</span>
+                    </div>
+                    <div class="booking-details">
+                        <div class="booking-detail">
+                            <strong>Check-in:</strong><br>${booking.checkIn}
+                        </div>
+                        <div class="booking-detail">
+                            <strong>Check-out:</strong><br>${booking.checkOut}
+                        </div>
+                        <div class="booking-detail">
+                            <strong>Campsite:</strong><br>${booking.campsiteName || 'TBA'}
+                        </div>
+                        <div class="booking-detail">
+                            <strong>Total:</strong><br>$${(booking.totalCost || 0).toFixed(2)}
+                        </div>
+                    </div>
+                    <div class="booking-actions">
+                        <button class="btn-secondary" onclick="viewBookingDetails('${booking.confirmationId}')">View Details</button>
+                        ${booking.status === 'pending' ? `<button class="btn-secondary" onclick="cancelBooking('${booking.confirmationId}')">Cancel</button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadPreferences() {
+            const user = authManager.getCurrentUser();
+            document.getElementById('pref-newsletter').checked = user.preferences.newsletter;
+            document.getElementById('pref-notifications').checked = user.preferences.notifications;
+            document.getElementById('pref-darkmode').checked = user.preferences.darkMode;
+        }
+
+        async function saveProfile() {
+            const result = await authManager.updateProfile({
+                firstName: document.getElementById('profile-firstName').value,
+                lastName: document.getElementById('profile-lastName').value,
+                phone: document.getElementById('profile-phone').value,
+                address: document.getElementById('profile-address').value,
+                city: document.getElementById('profile-city').value,
+                province: document.getElementById('profile-province').value,
+                postalCode: document.getElementById('profile-postalCode').value
+            });
+
+            showMessage('profile-message', result);
+        }
+
+        async function savePreferences() {
+            const result = authManager.updatePreferences({
+                newsletter: document.getElementById('pref-newsletter').checked,
+                notifications: document.getElementById('pref-notifications').checked,
+                darkMode: document.getElementById('pref-darkmode').checked
+            });
+
+            showMessage('preferences-message', result);
+        }
+
+        async function changePassword() {
+            const current = document.getElementById('security-current').value;
+            const newPass = document.getElementById('security-new').value;
+            const confirm = document.getElementById('security-confirm').value;
+
+            if (!current || !newPass || !confirm) {
+                showMessage('security-message', { success: false, error: 'All fields are required' });
+                return;
+            }
+
+            if (newPass !== confirm) {
+                showMessage('security-message', { success: false, error: 'Passwords do not match' });
+                return;
+            }
+
+            const result = await authManager.changePassword(current, newPass);
+            if (result.success) {
+                document.getElementById('security-current').value = '';
+                document.getElementById('security-new').value = '';
+                document.getElementById('security-confirm').value = '';
+            }
+
+            showMessage('security-message', result);
+        }
+
+        function viewBookingDetails(confirmationId) {
+            alert('Viewing details for: ' + confirmationId);
+        }
+
+        function cancelBooking(confirmationId) {
+            if (confirm('Are you sure you want to cancel this booking?')) {
+                alert('Booking ' + confirmationId + ' has been cancelled');
+            }
+        }
+
+        function handleLogout() {
+            authManager.logoutUser();
+            window.location.href = 'login.html';
+        }
+
+        function showMessage(elementId, result) {
+            const element = document.getElementById(elementId);
+            element.textContent = result.error || result.message || 'Success!';
+            element.className = 'notification ' + (result.success ? 'success' : 'error');
+            setTimeout(() => {
+                element.className = 'notification';
+            }, 3000);
+        }
+
+        // Initialize
+        checkAuthentication();
+    </script>
+</body>
+</html>

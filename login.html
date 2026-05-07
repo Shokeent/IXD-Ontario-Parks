@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Ontario Parks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 10px;
+        }
+
+        .auth-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .auth-subtitle {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #374151;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #059669;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 12px;
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn-auth:hover {
+            background: #047857;
+        }
+
+        .btn-auth:active {
+            transform: scale(0.98);
+        }
+
+        .notification {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .notification.error {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
+        .notification.success {
+            background: #d1fae5;
+            color: #065f46;
+            display: block;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .auth-toggle button {
+            background: none;
+            border: none;
+            color: #059669;
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .auth-tab {
+            display: none;
+        }
+
+        .auth-tab.active {
+            display: block;
+        }
+
+        .demo-hint {
+            background: #f0fdf4;
+            border-left: 4px solid #059669;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #065f46;
+            margin-bottom: 20px;
+        }
+
+        .demo-hint strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <div class="auth-logo">OP</div>
+            <h1 class="auth-title" id="auth-title">Welcome Back</h1>
+            <p class="auth-subtitle" id="auth-subtitle">Sign in to your account</p>
+        </div>
+
+        <div class="notification" id="auth-message"></div>
+
+        <!-- Login Tab -->
+        <div id="login-tab" class="auth-tab active">
+            <div class="demo-hint">
+                <strong>Demo Account:</strong>
+                john@example.com / password123
+            </div>
+
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn-auth">Sign In</button>
+            </form>
+
+            <div class="auth-toggle">
+                Don't have an account?
+                <button onclick="switchTab('signup')">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Signup Tab -->
+        <div id="signup-tab" class="auth-tab">
+            <form id="signup-form" onsubmit="handleSignup(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="signup-firstName">First Name</label>
+                        <input type="text" id="signup-firstName" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-lastName">Last Name</label>
+                        <input type="text" id="signup-lastName" placeholder="Smith" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Min 8 characters" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="Confirm password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-phone">Phone Number (Optional)</label>
+                    <input type="tel" id="signup-phone" placeholder="416-555-0123">
+                </div>
+
+                <label style="display: flex; gap: 10px; cursor: pointer; font-weight: 400;">
+                    <input type="checkbox" id="signup-newsletter" style="width: 18px; height: 18px; margin-top: 2px;">
+                    <span>Subscribe to our newsletter for park updates</span>
+                </label>
+
+                <button type="submit" class="btn-auth">Create Account</button>
+            </form>
+
+            <div class="auth-toggle">
+                Already have an account?
+                <button onclick="switchTab('login')">Sign In</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Create demo accounts on first load
+        const users = authManager.getAllUsers();
+        if (users.length === 0) {
+            authManager.createDemoAccounts();
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tab + '-tab').classList.add('active');
+
+            if (tab === 'login') {
+                document.getElementById('auth-title').textContent = 'Welcome Back';
+                document.getElementById('auth-subtitle').textContent = 'Sign in to your account';
+            } else {
+                document.getElementById('auth-title').textContent = 'Create Account';
+                document.getElementById('auth-subtitle').textContent = 'Join Ontario Parks community';
+            }
+
+            clearMessages();
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            const result = await authManager.loginUser(email, password);
+
+            if (result.success) {
+                showMessage(result);
+                setTimeout(() => {
+                    window.location.href = 'account.html';
+                }, 1000);
+            } else {
+                showMessage(result);
+            }
+        }
+
+        async function handleSignup(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            const firstName = document.getElementById('signup-firstName').value;
+            const lastName = document.getElementById('signup-lastName').value;
+            const phone = document.getElementById('signup-phone').value;
+            const newsletter = document.getElementById('signup-newsletter').checked;
+
+            if (password !== confirm) {
+                showMessage({ success: false, error: 'Passwords do not match' });
+                return;
+            }
+
+            const result = await authManager.registerUser(email, password, {
+                firstName,
+                lastName,
+                phone,
+                newsletter
+            });
+
+            if (result.success) {
+                showMessage({ success: true, message: 'Account created! Signing in...' });
+
+                // Auto-login
+                setTimeout(async () => {
+                    await authManager.loginUser(email, password);
+                    window.location.href = 'account.html';
+                }, 1000);
+            } else {
+                showMessage(result);
+            }
+        }
+
+        function showMessage(result) {
+            const element = document.getElementById('auth-message');
+            element.textContent = result.error || result.message || 'Success!';
+            element.className = 'notification ' + (result.success ? 'success' : 'error');
+        }
+
+        function clearMessages() {
+            document.getElementById('auth-message').className = 'notification';
+        }
+
+        // Redirect if already authenticated
+        if (authManager.isAuthenticated) {
+            window.location.href = 'account.html';
+        }
+    </script>
+</body>
+</html>
