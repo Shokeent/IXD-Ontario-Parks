@@ -5,6 +5,7 @@ This guide covers CDN deployment and optimization for Ontario Parks website usin
 ## Overview
 
 The Ontario Parks website uses a CDN to:
+
 - Serve static assets (CSS, JS, images) from edge locations
 - Improve page load times globally
 - Reduce server bandwidth costs
@@ -22,17 +23,17 @@ aws s3 mb s3://ontario-parks-cdn --region us-east-1
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity EABC123"
-            },
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::ontario-parks-cdn/*"
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity EABC123"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::ontario-parks-cdn/*"
+    }
+  ]
 }
 ```
 
@@ -75,9 +76,9 @@ Compress: Yes
 Add versioning to static assets:
 
 ```html
-<link rel="stylesheet" href="css/styles.css?v=1.0.0">
+<link rel="stylesheet" href="css/styles.css?v=1.0.0" />
 <script src="js/script.js?v=1.0.0"></script>
-<img src="images/park.jpg?v=1.0.0" alt="Park">
+<img src="images/park.jpg?v=1.0.0" alt="Park" />
 ```
 
 ### Step 6: Deploy Assets
@@ -162,22 +163,25 @@ Update version in manifest when deploying:
 ### Image Optimization
 
 1. Use WebP format with JPEG fallback:
+
 ```html
 <picture>
-  <source srcset="image.webp" type="image/webp">
-  <img src="image.jpg" alt="Description">
+  <source srcset="image.webp" type="image/webp" />
+  <img src="image.jpg" alt="Description" />
 </picture>
 ```
 
 2. Responsive images:
+
 ```html
-<img srcset="image-small.jpg 480w,
-            image-medium.jpg 800w,
-            image-large.jpg 1200w"
-     sizes="(max-width: 600px) 480px,
+<img
+  srcset="image-small.jpg 480w, image-medium.jpg 800w, image-large.jpg 1200w"
+  sizes="(max-width: 600px) 480px,
             (max-width: 1024px) 800px,
             1200px"
-     src="image-medium.jpg" alt="Park">
+  src="image-medium.jpg"
+  alt="Park"
+/>
 ```
 
 ### CSS/JS Minification
@@ -197,6 +201,7 @@ terser input.js -o output.min.js -c -m
 ### CloudWatch Metrics
 
 Monitor key metrics:
+
 - BytesDownloaded
 - BytesUploaded
 - Requests
@@ -206,6 +211,7 @@ Monitor key metrics:
 ### Cloudflare Analytics
 
 View real-time metrics:
+
 - Requests/minute
 - Cache hit ratio
 - Bandwidth saved

@@ -72,6 +72,7 @@ Ontario Parks Web App
 **File:** `js/analytics.js`
 
 **Key Features:**
+
 - Page view tracking
 - Event tracking (search, view item, add to cart, purchase)
 - User engagement metrics
@@ -79,29 +80,34 @@ Ontario Parks Web App
 - User property management
 
 **Initialization:**
+
 ```javascript
 const gaManager = new GoogleAnalyticsManager();
 ```
 
 **Configuration:**
+
 - Set `ga_measurement_id` in localStorage or pass to constructor
 - Example: `localStorage.setItem('ga_measurement_id', 'G-XXXXXXXXXX')`
 
 **Usage Examples:**
+
 ```javascript
 // Track page view
-gaManager.trackPageView('All Parks');
+gaManager.trackPageView("All Parks");
 
 // Track search
-gaManager.trackSearch('camping', 150);
+gaManager.trackSearch("camping", 150);
 
 // Track purchase
-gaManager.trackPurchase('TRANS-123', 299.99, [{
-    item_id: 'algonquin-park',
-    item_name: 'Algonquin Provincial Park',
+gaManager.trackPurchase("TRANS-123", 299.99, [
+  {
+    item_id: "algonquin-park",
+    item_name: "Algonquin Provincial Park",
     price: 299.99,
-    quantity: 1
-}]);
+    quantity: 1,
+  },
+]);
 ```
 
 ### 2. Stripe Payment Processing
@@ -109,6 +115,7 @@ gaManager.trackPurchase('TRANS-123', 299.99, [{
 **File:** `js/stripe.js`
 
 **Key Features:**
+
 - Card element creation
 - Payment processing via confirmCardPayment
 - Payment intent creation
@@ -117,15 +124,18 @@ gaManager.trackPurchase('TRANS-123', 299.99, [{
 - Error handling
 
 **Initialization:**
+
 ```javascript
 const stripeManager = new StripePaymentManager();
 ```
 
 **Configuration:**
+
 - Set `stripe_key` in localStorage with your publishable key
 - Requires backend endpoint at `/api/create-payment-intent`
 
 **Usage:**
+
 ```javascript
 // Create payment element
 stripeManager.createPaymentElement('card-element');
@@ -138,6 +148,7 @@ await processCheckout(amount, {
 ```
 
 **Backend Requirement:**
+
 - Endpoint: `POST /api/create-payment-intent`
 - Body: `{ amount, currency, metadata }`
 - Returns: `{ clientSecret }`
@@ -147,31 +158,35 @@ await processCheckout(amount, {
 **File:** `js/email.js`
 
 **Supported Providers:**
+
 - SendGrid (Bearer token authentication)
 - Mailgun (Basic authentication)
 
 **Key Features:**
+
 - Booking confirmations
 - Reservation summaries
 - Newsletter confirmations
 - HTML and text email generation
 
 **Configuration:**
+
 - Set `email_api_key` in localStorage
 - Set `email_provider` to 'sendgrid' or 'mailgun'
 - Set `from_email` for sender address
 
 **Usage:**
+
 ```javascript
 const emailManager = new EmailServiceManager();
 
-await emailManager.sendBookingConfirmation('user@example.com', {
-    parkName: 'Algonquin',
-    campsiteName: 'Site 42',
-    checkIn: '2026-06-01',
-    checkOut: '2026-06-03',
-    totalCost: 299.99,
-    confirmationId: 'BOOK-123'
+await emailManager.sendBookingConfirmation("user@example.com", {
+  parkName: "Algonquin",
+  campsiteName: "Site 42",
+  checkIn: "2026-06-01",
+  checkOut: "2026-06-03",
+  totalCost: 299.99,
+  confirmationId: "BOOK-123",
 });
 ```
 
@@ -184,12 +199,14 @@ await emailManager.sendBookingConfirmation('user@example.com', {
 **File:** `js/feature-flags.js`
 
 **Key Concepts:**
+
 - Gradual rollout control via percentage
 - User variant-based assignment (consistent per user)
 - localStorage persistence
 - Admin management
 
 **Available Flags:**
+
 - `booking-redesign`: New booking interface (50% rollout)
 - `advanced-filters`: Advanced park filtering (30%)
 - `gear-rental`: Gear rental feature (20%)
@@ -202,48 +219,52 @@ await emailManager.sendBookingConfirmation('user@example.com', {
 - `dark-mode`: Dark mode theme (0%)
 
 **Usage:**
+
 ```javascript
 // Check if feature is enabled
-if (featureFlags.isEnabled('booking-redesign')) {
-    // Show new booking interface
+if (featureFlags.isEnabled("booking-redesign")) {
+  // Show new booking interface
 }
 
 // Get variant for experiment
-const variant = featureFlags.getExperimentVariant('checkout-flow-v2');
-if (variant?.name === 'variant_a') {
-    // Show simplified checkout
+const variant = featureFlags.getExperimentVariant("checkout-flow-v2");
+if (variant?.name === "variant_a") {
+  // Show simplified checkout
 }
 ```
 
 **Admin Control:**
+
 ```javascript
 // Enable feature for all users
-featureFlags.setFlag('dark-mode', true, 100);
+featureFlags.setFlag("dark-mode", true, 100);
 
 // Gradual rollout
-featureFlags.setFlag('payment-integration', true, 50);
+featureFlags.setFlag("payment-integration", true, 50);
 
 // Run experiment
-featureFlags.startExperiment('search-ranking', '2026-06-01', '2026-06-15');
+featureFlags.startExperiment("search-ranking", "2026-06-01", "2026-06-15");
 ```
 
 ### A/B Experiments
 
 **Predefined Experiments:**
+
 1. **checkout-flow-v2**: Original vs Simplified checkout
 2. **search-ranking**: Distance-based vs Popularity-based search
 3. **recommendation-engine**: Random vs ML-based recommendations
 
 **Managing Experiments:**
+
 ```javascript
 // Start experiment
-featureFlags.startExperiment('checkout-flow-v2');
+featureFlags.startExperiment("checkout-flow-v2");
 
 // End experiment
-featureFlags.endExperiment('checkout-flow-v2');
+featureFlags.endExperiment("checkout-flow-v2");
 
 // Check experiment variant
-const variant = featureFlags.getExperimentVariant('checkout-flow-v2');
+const variant = featureFlags.getExperimentVariant("checkout-flow-v2");
 ```
 
 ---
@@ -255,34 +276,40 @@ const variant = featureFlags.getExperimentVariant('checkout-flow-v2');
 **URL:** `admin-login.html`
 
 **Demo Credentials:**
+
 - Email: `admin@ontarioparks.com`
 - Password: `admin123`
 
 ### Features
 
 #### 1. Dashboard
+
 - Total bookings count
 - Confirmed vs pending bookings
 - Revenue calculation
 - Recent bookings table
 
 #### 2. Booking Management
+
 - Search bookings
 - View booking details
 - Edit booking
 - Cancel booking
 
 #### 3. Feature Flags
+
 - Toggle features on/off
 - Adjust rollout percentage
 - Real-time updates
 
 #### 4. Experiments
+
 - View active experiments
 - Variant distribution visualization
 - Start/end experiments
 
 #### 5. Analytics
+
 - Page views
 - Unique users
 - Bookings started
@@ -292,12 +319,14 @@ const variant = featureFlags.getExperimentVariant('checkout-flow-v2');
 ### Implementation
 
 **Authentication:**
+
 ```javascript
 // Admin token stored in localStorage
-localStorage.getItem('admin_token')
+localStorage.getItem("admin_token");
 ```
 
 **Data Storage:**
+
 - Bookings: `localStorage.getItem('bookings')`
 - Feature flags: `localStorage.getItem('feature_flags')`
 - Experiments: `localStorage.getItem('experiments')`
@@ -311,74 +340,81 @@ localStorage.getItem('admin_token')
 **File:** `js/api-client.js`
 
 **Features:**
+
 - Mock mode for development
 - Fallback to mock data on API errors
 - Consistent error handling
 - Support for real API endpoints
 
 **Initialization:**
+
 ```javascript
 const apiClient = new BackendAPIClient();
 ```
 
 **Configuration:**
+
 - `api_base_url`: Set base URL for API
 - `api_mock_mode`: Enable mock mode (true/false)
 
 ### API Endpoints
 
 #### Parks API
+
 ```javascript
 // Get all parks
-await apiClient.getParks({ difficulty: 'easy' });
+await apiClient.getParks({ difficulty: "easy" });
 
 // Get park details
-await apiClient.getParkDetails('algonquin-park');
+await apiClient.getParkDetails("algonquin-park");
 
 // Search parks
-await apiClient.searchParks('algonquin');
+await apiClient.searchParks("algonquin");
 
 // Check availability
-await apiClient.checkAvailability('algonquin-park', '2026-06-01', '2026-06-03');
+await apiClient.checkAvailability("algonquin-park", "2026-06-01", "2026-06-03");
 ```
 
 #### Booking Endpoints
+
 ```javascript
 // Create booking
 await apiClient.createBooking({
-    parkId: 'algonquin-park',
-    guestName: 'John Doe',
-    checkIn: '2026-06-01',
-    checkOut: '2026-06-03',
-    totalCost: 299.99
+  parkId: "algonquin-park",
+  guestName: "John Doe",
+  checkIn: "2026-06-01",
+  checkOut: "2026-06-03",
+  totalCost: 299.99,
 });
 
 // Get booking
-await apiClient.getBooking('BOOK-123');
+await apiClient.getBooking("BOOK-123");
 
 // Update booking
-await apiClient.updateBooking('BOOK-123', { status: 'confirmed' });
+await apiClient.updateBooking("BOOK-123", { status: "confirmed" });
 
 // Cancel booking
-await apiClient.cancelBooking('BOOK-123');
+await apiClient.cancelBooking("BOOK-123");
 ```
 
 #### Payment Endpoints
+
 ```javascript
 // Create payment intent
-const result = await apiClient.createPaymentIntent(299.99, 'cad');
+const result = await apiClient.createPaymentIntent(299.99, "cad");
 
 // Confirm payment
 await apiClient.confirmPayment(result.clientSecret, paymentData);
 ```
 
 #### Email Endpoints
+
 ```javascript
 // Send booking confirmation
 await apiClient.sendBookingConfirmation(bookingData);
 
 // Send reservation summary
-await apiClient.sendReservationSummary('user@example.com', data);
+await apiClient.sendReservationSummary("user@example.com", data);
 ```
 
 ### Mock Data
@@ -387,7 +423,7 @@ When `api_mock_mode` is enabled, the API client returns mock data:
 
 ```javascript
 // Enable mock mode
-localStorage.setItem('api_mock_mode', 'true');
+localStorage.setItem("api_mock_mode", "true");
 setMockMode(true); // Reloads page
 ```
 
@@ -446,11 +482,11 @@ registerServiceWorker();
 
 ```javascript
 // localStorage-based configuration (development)
-localStorage.setItem('stripe_key', 'pk_live_xxx');
-localStorage.setItem('ga_measurement_id', 'G-xxx');
-localStorage.setItem('email_api_key', 'sg_xxx');
-localStorage.setItem('email_provider', 'sendgrid');
-localStorage.setItem('api_base_url', 'https://api.ontarioparks.com');
+localStorage.setItem("stripe_key", "pk_live_xxx");
+localStorage.setItem("ga_measurement_id", "G-xxx");
+localStorage.setItem("email_api_key", "sg_xxx");
+localStorage.setItem("email_provider", "sendgrid");
+localStorage.setItem("api_base_url", "https://api.ontarioparks.com");
 ```
 
 ### CDN Deployment
@@ -482,42 +518,44 @@ GET  /api/parks/{parkId}/availability
 
 ```javascript
 // Enable mock API mode
-localStorage.setItem('api_mock_mode', 'true');
+localStorage.setItem("api_mock_mode", "true");
 
 // Set test credentials
-localStorage.setItem('stripe_key', 'pk_test_xxx');
-localStorage.setItem('ga_measurement_id', 'G-test-xxx');
-localStorage.setItem('admin_token', 'test-token');
+localStorage.setItem("stripe_key", "pk_test_xxx");
+localStorage.setItem("ga_measurement_id", "G-test-xxx");
+localStorage.setItem("admin_token", "test-token");
 ```
 
 ### Production
 
 ```javascript
 // Disable mock mode
-localStorage.setItem('api_mock_mode', 'false');
+localStorage.setItem("api_mock_mode", "false");
 
 // Set production credentials
-localStorage.setItem('stripe_key', 'pk_live_xxx');
-localStorage.setItem('ga_measurement_id', 'G-prod-xxx');
-localStorage.setItem('email_api_key', 'sg_live_xxx');
-localStorage.setItem('api_base_url', 'https://api.ontarioparks.com');
+localStorage.setItem("stripe_key", "pk_live_xxx");
+localStorage.setItem("ga_measurement_id", "G-prod-xxx");
+localStorage.setItem("email_api_key", "sg_live_xxx");
+localStorage.setItem("api_base_url", "https://api.ontarioparks.com");
 ```
 
 ### Feature Flag Management
 
 **Development:**
+
 ```javascript
 // Enable all features for testing
-Object.keys(featureFlags.flags).forEach(flag => {
-    featureFlags.setFlag(flag, true, 100);
+Object.keys(featureFlags.flags).forEach((flag) => {
+  featureFlags.setFlag(flag, true, 100);
 });
 ```
 
 **Production:**
+
 ```javascript
 // Gradual rollout
-featureFlags.setFlag('payment-integration', true, 25); // 25% rollout
-featureFlags.setFlag('email-confirmations', true, 50); // 50% rollout
+featureFlags.setFlag("payment-integration", true, 25); // 25% rollout
+featureFlags.setFlag("email-confirmations", true, 50); // 50% rollout
 ```
 
 ---
@@ -527,6 +565,7 @@ featureFlags.setFlag('email-confirmations', true, 50); // 50% rollout
 ### Manual Testing Checklist
 
 **Booking Flow:**
+
 - [ ] Search for parks
 - [ ] View park details
 - [ ] Create booking
@@ -534,21 +573,25 @@ featureFlags.setFlag('email-confirmations', true, 50); // 50% rollout
 - [ ] Check admin dashboard for new booking
 
 **Payment:**
+
 - [ ] Test with Stripe test card: 4242 4242 4242 4242
 - [ ] Verify payment success/failure handling
 - [ ] Check transaction in Stripe dashboard
 
 **Analytics:**
+
 - [ ] Verify GA4 events in real-time
 - [ ] Check event parameters
 - [ ] Verify purchase tracking
 
 **Feature Flags:**
+
 - [ ] Test gradual rollout
 - [ ] Verify variant assignment consistency
 - [ ] Test experiment variants
 
 **Admin Dashboard:**
+
 - [ ] Login with demo credentials
 - [ ] Manage bookings
 - [ ] Toggle features
@@ -561,11 +604,13 @@ featureFlags.setFlag('email-confirmations', true, 50); // 50% rollout
 ### Payment Integration Issues
 
 **Issue:** Stripe not initializing
+
 - Check `stripe_key` in localStorage
 - Verify Stripe.js is loaded from CDN
 - Check browser console for errors
 
 **Issue:** Payment intent creation fails
+
 - Verify backend endpoint is accessible
 - Check request body format
 - Verify API key authentication
@@ -573,6 +618,7 @@ featureFlags.setFlag('email-confirmations', true, 50); // 50% rollout
 ### Email Service Issues
 
 **Issue:** Emails not sent
+
 - Verify `email_api_key` is set
 - Check `email_provider` is correct (sendgrid/mailgun)
 - Verify from email address is configured
@@ -581,6 +627,7 @@ featureFlags.setFlag('email-confirmations', true, 50); // 50% rollout
 ### Analytics Issues
 
 **Issue:** Events not appearing in GA4
+
 - Verify `ga_measurement_id` is correct
 - Check GA4 property is receiving data
 - Allow 24-48 hours for data processing
@@ -589,6 +636,7 @@ featureFlags.setFlag('email-confirmations', true, 50); // 50% rollout
 ### Feature Flag Issues
 
 **Issue:** Flag not applying to user
+
 - Clear localStorage and reload
 - Verify flag is enabled and has > 0% rollout
 - Check browser console for flag status
