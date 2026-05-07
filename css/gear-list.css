@@ -431,3 +431,163 @@
         gap: 16px;
     }
 }
+
+/* Equipment Rental Section */
+.equipment-rental-section {
+    padding: 60px 0;
+    background: #f9fafb;
+}
+
+.equipment-rental-section .section-header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.equipment-rental-section .section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.equipment-rental-section .section-header p {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0 0 24px 0;
+}
+
+.rental-category-filters {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.equipment-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+}
+
+.equipment-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.equipment-image {
+    height: 160px;
+    background: #e5e7eb;
+    overflow: hidden;
+}
+
+.equipment-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.equipment-info {
+    padding: 16px 16px 0;
+    flex: 1;
+}
+
+.equipment-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 6px 0;
+}
+
+.equipment-description {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+}
+
+.equipment-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.spec {
+    font-size: 11px;
+    color: #374151;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: capitalize;
+}
+
+.equipment-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.equipment-rating .stars {
+    color: #f59e0b;
+}
+
+.equipment-footer {
+    padding: 12px 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 12px;
+}
+
+.equipment-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.equipment-price span {
+    font-size: 13px;
+    font-weight: 400;
+    color: #6b7280;
+}
+
+.equipment-availability {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.equipment-availability.available {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.equipment-availability.unavailable {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media (max-width: 768px) {
+    .equipment-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+    }
+
+    .rental-category-filters {
+        gap: 6px;
+    }
+}
