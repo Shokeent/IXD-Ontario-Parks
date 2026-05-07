@@ -3,26 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review Reservation Details - Customer Details - Ontario Parks</title>
+    <title>Reservation Checkout - Ontario Parks</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/review-reservation.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            background: #f8f9fa;
+            padding: 40px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .main-content {
+            padding: 40px 0;
+            background: #f8f9fa;
+        }
+
+        .checkout-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .checkout-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 24px 0;
+            border-bottom: 2px solid #059669;
+            padding-bottom: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .total-section {
+            background: #1f2937;
+            color: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: right;
+        }
+
+        .total-amount {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+        }
+
+        .total-note {
+            color: #d1d5db;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .checkout-btn {
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #047857;
+        }
+
+        .checkout-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2>Ontario Parks</h2>
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h2>Ontario Parks</h2>
+                </a>
             </div>
             <div class="nav-menu">
                 <a href="all-parks.html" class="nav-link">Discover Parks</a>
                 <a href="gear-list.html" class="nav-link">Gear Guide</a>
-                <a href="#trails" class="nav-link">Find Trails Hubs</a>
+                <a href="gear-list.html" class="nav-link">First Timer Help</a>
                 <a href="#store" class="nav-link">Store</a>
                 <a href="#fees" class="nav-link">Fees</a>
                 <a href="#signin" class="nav-link">Sign In</a>
-                <button class="btn-reservation">Make Reservation</button>
+                <button class="btn-reservation" onclick="window.location.href='booking.html'">Make Reservation</button>
             </div>
         </div>
     </nav>
@@ -30,98 +169,133 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1 class="page-title">Review Reservation Details</h1>
+            <div class="header-content">
+                <div>
+                    <h1 class="page-title">Complete Your Checkout</h1>
+                    <p class="page-subtitle">Secure payment and confirmation for your Ontario Parks reservation</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Main Content -->
     <div class="main-content">
         <div class="container">
-            <div class="review-container">
-                <!-- Customer Details Form -->
-                <div class="customer-details-section">
-                    <h2>Customer Details</h2>
-                    
-                    <form class="customer-form" id="customer-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" name="firstName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" required>
-                            </div>
-                        </div>
+            <div class="checkout-container">
+                <!-- Billing Information -->
+                <div class="checkout-card">
+                    <h2 class="section-title">Billing Information</h2>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="email">Email ID</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone No.</label>
-                                <input type="tel" id="phone" name="phone" required>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="John Doe" required>
+                    </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" name="password" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" id="confirmPassword" name="confirmPassword" required>
-                            </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="john@example.com" required>
                         </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="(555) 123-4567" required>
+                        </div>
+                    </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="streetAddress">Street Address</label>
-                                <input type="text" id="streetAddress" name="streetAddress" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="unitNo">Unit No.(Opt)</label>
-                                <input type="text" id="unitNo" name="unitNo">
-                            </div>
-                            <div class="form-group">
-                                <label for="postalCode">Postal Code</label>
-                                <input type="text" id="postalCode" name="postalCode" required>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" placeholder="123 Main Street" required>
+                    </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="city">City</label>
-                                <input type="text" id="city" name="city" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="province">Province</label>
-                                <select id="province" name="province" required>
-                                    <option value="">Select Province</option>
-                                    <option value="ON">Ontario</option>
-                                    <option value="BC">British Columbia</option>
-                                    <option value="AB">Alberta</option>
-                                    <option value="MB">Manitoba</option>
-                                    <option value="SK">Saskatchewan</option>
-                                    <option value="QC">Quebec</option>
-                                    <option value="NB">New Brunswick</option>
-                                    <option value="NS">Nova Scotia</option>
-                                    <option value="PE">Prince Edward Island</option>
-                                    <option value="NL">Newfoundland and Labrador</option>
-                                    <option value="YT">Yukon</option>
-                                    <option value="NT">Northwest Territories</option>
-                                    <option value="NU">Nunavut</option>
-                                </select>
-                            </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" placeholder="Toronto" required>
                         </div>
+                        <div class="form-group">
+                            <label>Province</label>
+                            <input type="text" placeholder="Ontario" required>
+                        </div>
+                    </div>
 
-                        <div class="form-actions">
-                            <button type="submit" class="continue-btn" onclick="window.location.href='acknowledge.html'">Complete Reservation</button>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <input type="text" placeholder="M1A 1A1" required>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" placeholder="Canada" required>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Payment Information -->
+                <div class="checkout-card">
+                    <h2 class="section-title">Payment Information</h2>
+
+                    <div class="form-group">
+                        <label>Card Holder Name</label>
+                        <input type="text" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" placeholder="4111 1111 1111 1111" maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="text" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="checkout-card">
+                    <h2 class="section-title">Order Summary</h2>
+
+                    <div style="margin-bottom: 24px;">
+                        <p style="color: #374151; margin: 0 0 8px 0;"><strong>Algonquin - Kiosk Campground</strong></p>
+                        <p style="color: #6b7280; margin: 0 0 16px 0;">Mon, Jul 21 - Tue, Jul 22, 2025 • 1 Night</p>
+
+                        <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Camp Fee (1 x $37.50)</span>
+                                <span>$37.50</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Reservation Fee (web)</span>
+                                <span>$9.73</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Subtotal</span>
+                                <span>$47.23</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid #d1d5db;">
+                                <span><strong>Tax (HST 13%)</strong></span>
+                                <span><strong>$6.14</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total Section -->
+                    <div class="total-section">
+                        <div class="total-amount">Total: $53.37 CAD</div>
+                        <div class="total-note">Payment processed securely</div>
+                    </div>
+                </div>
+
+                <!-- Checkout Button -->
+                <button class="checkout-btn" onclick="completeCheckout()">Complete Purchase</button>
+                <p style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 16px;">
+                    By clicking "Complete Purchase", you agree to our Terms & Conditions
+                </p>
             </div>
         </div>
     </div>
@@ -136,14 +310,14 @@
                         <p>Making Ontario's natural beauty accessible to everyone, especially first-time campers and newcomers alike.</p>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>For First-Timers</h4>
                     <ul>
-                        <li><a href="#">Camping Basics</a></li>
-                        <li><a href="#">Gear Rental</a></li>
-                        <li><a href="#">Safety Tips</a></li>
-                        <li><a href="#">Family Activities</a></li>
+                        <li><a href="gear-list.html">Camping Basics</a></li>
+                        <li><a href="gear-list.html">Gear Rental</a></li>
+                        <li><a href="park-details.html">Safety Tips</a></li>
+                        <li><a href="all-parks.html">Family Activities</a></li>
                     </ul>
                 </div>
 
@@ -160,14 +334,14 @@
                 <div class="footer-section">
                     <h4>Parks Info</h4>
                     <ul>
-                        <li><a href="#">All Parks</a></li>
-                        <li><a href="#">Reservations</a></li>
+                        <li><a href="all-parks.html">All Parks</a></li>
+                        <li><a href="booking.html">Reservations</a></li>
                         <li><a href="#">Events</a></li>
                         <li><a href="#">News</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>&copy; 2025 Ontario Parks. Making nature accessible for everyone.</p>
             </div>
@@ -175,6 +349,19 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script src="js/review-reservation.js"></script>
+    <script>
+        function completeCheckout() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+
+            setTimeout(() => {
+                showNotification('Payment successful! Your reservation is confirmed.', 'success');
+                setTimeout(() => {
+                    window.location.href = 'acknowledge.html';
+                }, 1500);
+            }, 2000);
+        }
+    </script>
 </body>
 </html>

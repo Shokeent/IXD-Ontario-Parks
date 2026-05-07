@@ -27,7 +27,7 @@
             <div class="nav-menu">
                 <a href="all-parks.html" class="nav-link active">Discover Parks</a>
                 <a href="gear-list.html" class="nav-link">Gear Guide</a>
-                <a href="#first-timer" class="nav-link">First Timer Help</a>
+                <a href="gear-list.html" class="nav-link">First Timer Help</a>
                 <a href="#store" class="nav-link">Store</a>
                 <a href="#fees" class="nav-link">Fees</a>
                 <div class="nav-icons">
@@ -58,15 +58,15 @@
                     <div class="search-field-hero">
                         <label>Arrival</label>
                         <div class="date-input-wrapper">
-                            <input type="text" class="search-input-hero date-display" value="Sun, Aug 21" readonly>
+                            <input type="text" class="search-input-hero date-display" id="arrival-date-display" readonly>
                             <span class="calendar-icon">📅</span>
                         </div>
                     </div>
-                    
+
                     <div class="search-field-hero">
                         <label>Departure</label>
                         <div class="date-input-wrapper">
-                            <input type="text" class="search-input-hero date-display" value="Tue, Aug 24" readonly>
+                            <input type="text" class="search-input-hero date-display" id="departure-date-display" readonly>
                             <span class="calendar-icon">📅</span>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                             <span class="tag-all-modern">Easy Trails</span>
                         </div>
                         
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('algonquin-park')">View Details</button>
                     </div>
                 </div>
 
@@ -159,14 +159,14 @@
                         <h3 class="park-title-all-modern">Killarney Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Huntsville, ON</div>
                         <p class="park-description-all-modern">Perfect for first-time campers with guided programs and family-friendly trails</p>
-                        
+
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Kids Programs</span>
                             <span class="tag-all-modern">Swimming</span>
                             <span class="tag-all-modern">Easy Trails</span>
                         </div>
-                        
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('killarney-park')">View Details</button>
                     </div>
                 </div>
 
@@ -177,14 +177,14 @@
                         <h3 class="park-title-all-modern">Bon Echo Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Huntsville, ON</div>
                         <p class="park-description-all-modern">Perfect for first-time campers with guided programs and family-friendly trails</p>
-                        
+
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Kids Programs</span>
                             <span class="tag-all-modern">Swimming</span>
                             <span class="tag-all-modern">Easy Trails</span>
                         </div>
-                        
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('bon-echo-park')">View Details</button>
                     </div>
                 </div>
 
@@ -195,14 +195,14 @@
                         <h3 class="park-title-all-modern">Sandbanks Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Prince Edward County, ON</div>
                         <p class="park-description-all-modern">Beautiful beaches and sandy dunes perfect for families and swimming enthusiasts</p>
-                        
+
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Beach</span>
                             <span class="tag-all-modern">Swimming</span>
                             <span class="tag-all-modern">Family Fun</span>
                         </div>
-                        
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('sandbanks-park')">View Details</button>
                     </div>
                 </div>
 
@@ -213,14 +213,14 @@
                         <h3 class="park-title-all-modern">Long Point Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Port Rowan, ON</div>
                         <p class="park-description-all-modern">Excellent birding location with pristine beaches and nature trails</p>
-                        
+
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Birding</span>
                             <span class="tag-all-modern">Beach</span>
                             <span class="tag-all-modern">Nature Trails</span>
                         </div>
-                        
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('long-point-park')">View Details</button>
                     </div>
                 </div>
 
@@ -231,14 +231,14 @@
                         <h3 class="park-title-all-modern">Silent Lake Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Bancroft, ON</div>
                         <p class="park-description-all-modern">Peaceful canoeing and fishing with quiet hiking trails through old-growth forest</p>
-                        
+
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Canoeing</span>
                             <span class="tag-all-modern">Fishing</span>
                             <span class="tag-all-modern">Quiet</span>
                         </div>
-                        
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('silent-lake-park')">View Details</button>
                     </div>
                 </div>
 
@@ -249,14 +249,14 @@
                         <h3 class="park-title-all-modern">Kawartha Highlands Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Peterborough, ON</div>
                         <p class="park-description-all-modern">Backcountry camping with stunning lake views and challenging hiking trails</p>
-                        
+
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Backcountry</span>
                             <span class="tag-all-modern">Hiking</span>
                             <span class="tag-all-modern">Lake Views</span>
                         </div>
-                        
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('kawartha-highlands-park')">View Details</button>
                     </div>
                 </div>
 
@@ -267,14 +267,14 @@
                         <h3 class="park-title-all-modern">Presqu'ile Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Brighton, ON</div>
                         <p class="park-description-all-modern">Lighthouse views and excellent bird migration watching along Lake Ontario</p>
-                        
+
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Lighthouse</span>
                             <span class="tag-all-modern">Birding</span>
                             <span class="tag-all-modern">Lake Views</span>
                         </div>
-                        
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('presquile-park')">View Details</button>
                     </div>
                 </div>
 
@@ -285,14 +285,14 @@
                         <h3 class="park-title-all-modern">Petroglyphs Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Peterborough, ON</div>
                         <p class="park-description-all-modern">Ancient Indigenous rock carvings with educational programs and cultural significance</p>
-                        
+
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Cultural</span>
                             <span class="tag-all-modern">Historical</span>
                             <span class="tag-all-modern">Educational</span>
                         </div>
-                        
-                        <button class="btn-view-details-all-modern" onclick="window.location.href='park-details.html'">View Details</button>
+
+                        <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('petroglyphs-park')">View Details</button>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     initializeBookingPage();
     loadParkBookingData();
+    setDefaultBookingDates();
 });
 
 function initializeBookingPage() {
@@ -858,4 +859,28 @@ function updateBookingPageContent(park) {
         maxOccupancy: park.maxOccupancy,
         contact: park.contact
     }));
+}
+
+// Set default booking dates to today and 3 days from today
+function setDefaultBookingDates() {
+    try {
+        const today = new Date().toISOString().split('T')[0];
+        const threeDaysLater = new Date();
+        threeDaysLater.setDate(threeDaysLater.getDate() + 3);
+        const threeDaysLaterStr = threeDaysLater.toISOString().split('T')[0];
+
+        const arrivalInput = document.getElementById('booking-arrival-date');
+        const departureInput = document.getElementById('booking-departure-date');
+
+        if (arrivalInput) {
+            arrivalInput.value = today;
+            arrivalInput.min = today;
+        }
+        if (departureInput) {
+            departureInput.value = threeDaysLaterStr;
+            departureInput.min = today;
+        }
+    } catch (error) {
+        console.error('Error setting booking dates:', error);
+    }
 }

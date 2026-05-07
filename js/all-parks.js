@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     initParksPage();
+    setDefaultSearchDates();
 });
 
 async function initParksPage() {
@@ -825,19 +826,39 @@ function generateMockParks() {
 function populateMockFilterOptions() {
     try {
         console.log('Populating mock filter options...');
-        
+
         // Mock filter population
         const regions = ["All Regions", "Central Ontario", "Eastern Ontario", "Northern Ontario"];
         const activities = ["All Activities", "Hiking", "Canoeing", "Swimming", "Camping"];
         const amenities = ["All Amenities", "Visitor Centre", "Beach Access", "Hiking Trails"];
-        
+
         populateSelectOptions('region-filter', regions);
-        populateSelectOptions('activity-filter', activities);  
+        populateSelectOptions('activity-filter', activities);
         populateSelectOptions('amenity-filter', amenities);
-        
+
         console.log('Mock filter options populated successfully');
     } catch (error) {
         console.error('Error populating mock filter options:', error);
-        // Don't throw - just log the error
+    }
+}
+
+// Set default search dates to today and 3 days from today
+function setDefaultSearchDates() {
+    try {
+        const today = new Date();
+        const threeDaysLater = new Date(today);
+        threeDaysLater.setDate(threeDaysLater.getDate() + 3);
+
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        const arrivalText = today.toLocaleDateString('en-US', options);
+        const departureText = threeDaysLater.toLocaleDateString('en-US', options);
+
+        const arrivalDisplay = document.getElementById('arrival-date-display');
+        const departureDisplay = document.getElementById('departure-date-display');
+
+        if (arrivalDisplay) arrivalDisplay.value = arrivalText;
+        if (departureDisplay) departureDisplay.value = departureText;
+    } catch (error) {
+        console.error('Error setting search dates:', error);
     }
 }

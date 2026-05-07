@@ -136,20 +136,26 @@ function initHeroSlider() {
 
 // Newsletter form functionality
 function initNewsletterForm() {
-    const form = document.querySelector('.newsletter-form');
-    const emailInput = document.querySelector('.email-input');
-    
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const email = emailInput.value.trim();
-        if (validateEmail(email)) {
-            // Simulate subscription
-            showNotification('Thank you for subscribing! Welcome to the Ontario Parks community.', 'success');
-            emailInput.value = '';
-        } else {
-            showNotification('Please enter a valid email address.', 'error');
-        }
+    const forms = document.querySelectorAll('.newsletter-form, .newsletter-form-modern');
+
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const emailInput = this.querySelector('.email-input, .email-input-modern');
+            if (!emailInput) return;
+
+            const email = emailInput.value.trim();
+            if (validateEmail(email)) {
+                // Store email (in real app, send to server)
+                localStorage.setItem('newsletterEmail', email);
+                showNotification('Thank you for subscribing! Welcome to the Ontario Parks community.', 'success');
+                emailInput.value = '';
+                form.reset();
+            } else {
+                showNotification('Please enter a valid email address.', 'error');
+            }
+        });
     });
 }
 
@@ -387,7 +393,7 @@ class BookingSystem {
         showNotification(`Dates selected: ${checkIn} to ${checkOut}`, 'success');
     }
     
-    completebooking() {
+    completeBooking() {
         if (this.selectedPark && this.selectedDates) {
             showNotification('Booking confirmed! Check your email for details.', 'success');
             this.reset();
@@ -408,6 +414,18 @@ const bookingSystem = new BookingSystem();
 
 // Make booking system globally available
 window.bookingSystem = bookingSystem;
+
+// Navigate to park details with park ID
+function navigateToParkDetails(parkId) {
+    localStorage.setItem('selectedParkId', parkId);
+    window.location.href = 'park-details.html';
+}
+
+// Navigate to booking page with park ID
+function navigateToBooking(parkId) {
+    localStorage.setItem('selectedParkId', parkId);
+    window.location.href = 'booking.html';
+}
 
 // Load featured parks from API
 async function loadFeaturedParks() {
