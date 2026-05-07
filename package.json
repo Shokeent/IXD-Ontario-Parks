@@ -1,0 +1,10 @@
+{
+  "name": "ixd-ontario-parks",
+  "version": "1.0.0",
+  "description": "Ontario Parks web application",
+  "scripts": {
+    "dev": "npx serve .",
+    "deploy": "vercel --prod"
+  },
+  "license": "MIT"
+}
