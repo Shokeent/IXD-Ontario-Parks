@@ -370,8 +370,17 @@ function startBookingProcess(parkName) {
     // 3. Guide user through date selection, site selection, etc.
 }
 
-// Add CSS for animations
-const style = document.createElement('style');
+// Global error handler
+window.addEventListener('error', function(event) {
+    console.error('Global error caught:', event.error);
+    showNotification('An unexpected error occurred. Please refresh the page.', 'error');
+});
+
+// Handle unhandled promise rejections
+window.addEventListener('unhandledrejection', function(event) {
+    console.error('Unhandled promise rejection:', event.reason);
+    showNotification('An error occurred. Please try again.', 'error');
+});
 style.textContent = `
     @keyframes slideIn {
         from {
@@ -412,8 +421,46 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Booking functionality
-class BookingSystem {
+// Loading state manager
+const loadingManager = {
+    isLoading: false,
+    loadingElement: null,
+
+    show(message = 'Loading...') {
+        if (this.isLoading) return;
+
+        this.isLoading = true;
+        this.loadingElement = document.createElement('div');
+        this.loadingElement.id = 'global-loading-overlay';
+        this.loadingElement.innerHTML = `
+            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+                <div style="background: white; padding: 2rem; border-radius: 12px; text-align: center;">
+                    <div style="width: 40px; height: 40px; border: 4px solid #e5e7eb; border-top: 4px solid #059669; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+                    <p style="color: #6b7280; margin: 0;">${message}</p>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(this.loadingElement);
+    },
+
+    hide() {
+        if (!this.isLoading) return;
+        if (this.loadingElement) {
+            this.loadingElement.remove();
+        }
+        this.isLoading = false;
+    }
+};
+
+// Add spin animation
+const spinStyle = document.createElement('style');
+spinStyle.textContent = `
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(spinStyle);
     constructor() {
         this.selectedPark = null;
         this.selectedDates = null;
@@ -446,8 +493,60 @@ class BookingSystem {
     }
 }
 
-// Initialize booking system
-const bookingSystem = new BookingSystem();
+// Simple analytics tracker for user interactions
+const analyticsTracker = {
+    events: [],
+    sessionId: generateSessionId(),
+
+    track(eventName, eventData = {}) {
+        const event = {
+            name: eventName,
+            timestamp: new Date().toISOString(),
+            data: eventData,
+            url: window.location.href,
+            sessionId: this.sessionId
+        };
+        this.events.push(event);
+
+        // Log to console in development
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('[Analytics]', eventName, eventData);
+        }
+
+        // Store in localStorage (simple implementation)
+        try {
+            localStorage.setItem(`analytics_${this.sessionId}`, JSON.stringify(this.events));
+        } catch (e) {
+            console.warn('Failed to store analytics:', e);
+        }
+    },
+
+    trackPageView(pageName) {
+        this.track('page_view', { pageName });
+    },
+
+    trackButton(buttonName, buttonLocation) {
+        this.track('button_click', { buttonName, buttonLocation });
+    },
+
+    trackSearch(searchTerm, resultsCount) {
+        this.track('search', { searchTerm, resultsCount });
+    },
+
+    trackBooking(parkName, campsiteName) {
+        this.track('booking_started', { parkName, campsiteName });
+    }
+};
+
+function generateSessionId() {
+    return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+// Track initial page view
+document.addEventListener('DOMContentLoaded', function() {
+    const pageName = document.title.split(' - ')[0] || 'Unknown';
+    analyticsTracker.trackPageView(pageName);
+});
 
 // Make booking system globally available
 window.bookingSystem = bookingSystem;

@@ -205,8 +205,38 @@ function initSearchAndFilters() {
     }
 }
 
-// Handle search input
+// Rate limiter for API calls
+class RateLimiter {
+    constructor(maxRequests = 5, timeWindow = 1000) {
+        this.maxRequests = maxRequests;
+        this.timeWindow = timeWindow;
+        this.requests = [];
+    }
+
+    isAllowed() {
+        const now = Date.now();
+        // Remove old requests outside the time window
+        this.requests = this.requests.filter(time => now - time < this.timeWindow);
+
+        if (this.requests.length < this.maxRequests) {
+            this.requests.push(now);
+            return true;
+        }
+        return false;
+    }
+}
+
+// Create rate limiters for different operations
+const searchRateLimiter = new RateLimiter(10, 1000); // 10 searches per second
+const filterRateLimiter = new RateLimiter(10, 1000); // 10 filters per second
+
+// Handle search input with rate limiting
 function handleSearch(event) {
+    if (!searchRateLimiter.isAllowed()) {
+        console.warn('Search rate limit exceeded');
+        return;
+    }
+
     const searchTerm = event.target.value.toLowerCase().trim();
 
     // Validate and sanitize search input
@@ -224,48 +254,58 @@ function handleSearch(event) {
     currentPage = 1;
     renderParks();
     updateParkCount();
+
+    // Track search analytics
+    if (typeof analyticsTracker !== 'undefined') {
+        analyticsTracker.trackSearch(searchTerm, filteredParks.length);
+    }
 }
 
-// Handle filter changes
+// Handle filter changes with rate limiting
 function handleFilterChange() {
+    if (!filterRateLimiter.isAllowed()) {
+        console.warn('Filter rate limit exceeded');
+        return;
+    }
+
     const filters = getActiveFilters();
-    
+
     filteredParks = allParks.filter(park => {
         // Region filter
         if (filters.region && park.region !== filters.region) {
             return false;
         }
-        
+
         // Activity filter
-        if (filters.activity && !park.activities.some(activity => 
+        if (filters.activity && !park.activities.some(activity =>
             activity.toLowerCase().includes(filters.activity.toLowerCase()))) {
             return false;
         }
-        
+
         // Amenity filter
-        if (filters.amenity && !park.amenities.some(amenity => 
+        if (filters.amenity && !park.amenities.some(amenity =>
             amenity.toLowerCase().includes(filters.amenity.toLowerCase()))) {
             return false;
         }
-        
+
         // Difficulty filter
         if (filters.difficulty && park.difficulty !== filters.difficulty) {
             return false;
         }
-        
+
         // Pets filter
         if (filters.pets && !park.pets) {
             return false;
         }
-        
+
         // Accessibility filter
         if (filters.accessibility && !park.accessibility) {
             return false;
         }
-        
+
         return true;
     });
-    
+
     currentPage = 1;
     renderParks();
     updateParkCount();
@@ -465,34 +505,34 @@ function renderParks() {
 // Render individual park card (grid view)
 function renderParkCard(park) {
     const difficultyClass = park.difficulty.toLowerCase();
-    const amenitiesText = park.amenities.slice(0, 3).join(', ') + 
+    const amenitiesText = park.amenities.slice(0, 3).join(', ') +
                          (park.amenities.length > 3 ? `, +${park.amenities.length - 3} more` : '');
-    
+
     return `
-        <div class="park-card-all" data-park-id="${park.id}">
+        <div class="park-card-all" data-park-id="${park.id}" role="article" aria-label="${park.name} park card">
             <div class="park-image">
-                <img src="${park.image}" alt="${park.name}" loading="lazy" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
-                <span class="difficulty-badge ${difficultyClass}">${park.difficulty}</span>
-                ${park.pets ? '<span class="pets-badge">🐕 Pet Friendly</span>' : ''}
+                <img src="${park.image}" alt="${park.name} - ${park.region}, Ontario" loading="lazy" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                <span class="difficulty-badge ${difficultyClass}" aria-label="Difficulty level: ${park.difficulty}">${park.difficulty}</span>
+                ${park.pets ? '<span class="pets-badge" aria-label="Pet friendly">🐕 Pet Friendly</span>' : ''}
             </div>
             <div class="park-info-all">
                 <h3>${park.name}</h3>
-                <div class="park-location">📍 ${park.region}</div>
+                <div class="park-location" role="text">📍 ${park.region}</div>
                 <p class="park-description-all">${park.description.substring(0, 100)}...</p>
-                
+
                 <div class="park-tags">
-                    <span class="park-tag">🏕️ ${park.campgrounds} Campgrounds</span>
-                    <span class="park-tag">👥 Up to ${park.maxOccupancy}</span>
-                    ${park.accessibility ? '<span class="park-tag">♿ Accessible</span>' : ''}
+                    <span class="park-tag" aria-label="Number of campgrounds">🏕️ ${park.campgrounds} Campgrounds</span>
+                    <span class="park-tag" aria-label="Maximum occupancy">👥 Up to ${park.maxOccupancy}</span>
+                    ${park.accessibility ? '<span class="park-tag" aria-label="Accessible facilities">♿ Accessible</span>' : ''}
                 </div>
-                
+
                 <div class="park-pricing-all">
                     <span class="price-label">From $${park.pricing.tent}/night</span>
                 </div>
-                
+
                 <div class="park-actions-all">
-                    <button class="btn-outline">View Details</button>
-                    <button class="btn-book">Book Now</button>
+                    <button class="btn-outline" aria-label="View details for ${park.name}">View Details</button>
+                    <button class="btn-book" aria-label="Book ${park.name}">Book Now</button>
                 </div>
             </div>
         </div>
@@ -502,30 +542,30 @@ function renderParkCard(park) {
 // Render individual park list item (list view)
 function renderParkListItem(park) {
     const difficultyClass = park.difficulty.toLowerCase();
-    
+
     return `
-        <div class="park-list-item" data-park-id="${park.id}">
+        <div class="park-list-item" data-park-id="${park.id}" role="article" aria-label="${park.name} park">
             <div class="park-image-small">
-                <img src="${park.image}" alt="${park.name}" loading="lazy">
+                <img src="${park.image}" alt="${park.name} - ${park.region}" loading="lazy">
             </div>
             <div class="park-info">
                 <div class="park-header">
                     <h3 class="park-name">${park.name}</h3>
-                    <span class="difficulty-badge ${difficultyClass}">${park.difficulty}</span>
+                    <span class="difficulty-badge ${difficultyClass}" aria-label="Difficulty: ${park.difficulty}">${park.difficulty}</span>
                 </div>
-                <p class="park-region">${park.region}</p>
+                <p class="park-region" role="text">📍 ${park.region}</p>
                 <p class="park-description">${park.description}</p>
                 <div class="park-details">
-                    <span class="detail">🏕️ ${park.campgrounds} Campgrounds</span>
-                    <span class="detail">👥 Up to ${park.maxOccupancy}</span>
-                    <span class="detail">From $${park.pricing.tent}/night</span>
-                    ${park.pets ? '<span class="detail">🐕 Pet Friendly</span>' : ''}
-                    ${park.accessibility ? '<span class="detail">♿ Accessible</span>' : ''}
+                    <span class="detail" aria-label="Campgrounds">🏕️ ${park.campgrounds} Campgrounds</span>
+                    <span class="detail" aria-label="Max occupancy">👥 Up to ${park.maxOccupancy}</span>
+                    <span class="detail" aria-label="Price">From $${park.pricing.tent}/night</span>
+                    ${park.pets ? '<span class="detail" aria-label="Pet friendly">🐕 Pet Friendly</span>' : ''}
+                    ${park.accessibility ? '<span class="detail" aria-label="Accessible">♿ Accessible</span>' : ''}
                 </div>
             </div>
             <div class="park-actions">
-                <button class="btn btn-primary">View Details</button>
-                <button class="btn btn-secondary">Quick Book</button>
+                <button class="btn btn-primary" aria-label="View details for ${park.name}">View Details</button>
+                <button class="btn btn-secondary" aria-label="Quick book ${park.name}">Quick Book</button>
             </div>
         </div>
     `;
