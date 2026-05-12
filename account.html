@@ -326,6 +326,7 @@
                 <ul class="account-menu">
                     <li><button class="menu-btn active" onclick="switchTab('profile')">Profile</button></li>
                     <li><button class="menu-btn" onclick="switchTab('bookings')">My Bookings</button></li>
+                    <li><button class="menu-btn" onclick="switchTab('rewards')">Loyalty Rewards</button></li>
                     <li><button class="menu-btn" onclick="switchTab('preferences')">Preferences</button></li>
                     <li><button class="menu-btn" onclick="switchTab('security')">Security</button></li>
                 </ul>
@@ -389,6 +390,12 @@
                     <div id="bookings-list"></div>
                 </section>
 
+                <!-- Rewards Section -->
+                <section id="rewards" class="account-section">
+                    <h2 class="section-title">Loyalty Rewards</h2>
+                    <div id="loyalty-dashboard"></div>
+                </section>
+
                 <!-- Preferences Section -->
                 <section id="preferences" class="account-section">
                     <h2 class="section-title">Preferences</h2>
@@ -444,6 +451,12 @@
 
     <script src="js/auth.js"></script>
     <script src="js/analytics.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/loyalty-rewards.js"></script>
+    <script src="js/activity-insights.js"></script>
+    <script src="js/visitor-survey.js"></script>
     <script>
         // Check authentication
         function checkAuthentication() {
@@ -469,6 +482,20 @@
             if (tab === 'bookings') {
                 loadBookings();
             }
+            if (tab === 'rewards') {
+                renderLoyaltyDashboard();
+            }
+        }
+
+        function renderLoyaltyDashboard() {
+            const container = document.getElementById('loyalty-dashboard');
+            if (!container || typeof loyaltyRewardsManager === 'undefined') return;
+            const userId = localStorage.getItem('user_id');
+            if (!userId) {
+                container.innerHTML = '<p style="color:#6b7280;">Sign in to view your loyalty rewards.</p>';
+                return;
+            }
+            loyaltyRewardsManager.renderDashboard(userId, 'loyalty-dashboard');
         }
 
         function loadProfileData() {
@@ -609,8 +636,5 @@
         // Initialize
         checkAuthentication();
     </script>
-    <script src="js/dark-mode.js"></script>
-    <script src="js/i18n.js"></script>
-    <script src="js/notifications.js"></script>
 </body>
 </html>

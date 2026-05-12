@@ -131,6 +131,11 @@
             <div class="parks-header">
                 <h2 class="parks-title">Ontario Parks</h2>
                 <p class="parks-subtitle">Handpicked locations with excellent facilities and beginner-friendly features</p>
+                <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+                    <button class="filter-tag-btn" onclick="findNearbyParks()" style="background:#059669;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;">📍 Near Me</button>
+                    <span id="compare-status" style="color:#6b7280;font-size:14px;"></span>
+                    <button id="compare-btn" onclick="showComparison()" style="display:none;background:#1d4ed8;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;">Compare Selected Parks</button>
+                </div>
             </div>
             
             <div class="parks-grid-all-modern">
@@ -148,11 +153,10 @@
                             <span class="tag-all-modern">Easy Trails</span>
                         </div>
                         
+                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
                         <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('algonquin-park')">View Details</button>
-                    </div>
-                </div>
-
-                <!-- Park 2 - Killarney -->
+                        <label style="font-size:13px;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:4px;"><input type="checkbox" onchange="toggleParkCompare('algonquin-park',this)"> Compare</label>
+                        </div>
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-killarney"></div>
                     <div class="park-content-all-modern">
@@ -166,11 +170,10 @@
                             <span class="tag-all-modern">Easy Trails</span>
                         </div>
 
+                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
                         <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('killarney-park')">View Details</button>
-                    </div>
-                </div>
-
-                <!-- Park 3 - Bon Echo -->
+                        <label style="font-size:13px;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:4px;"><input type="checkbox" onchange="toggleParkCompare('killarney-park',this)"> Compare</label>
+                        </div>
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-bon-echo"></div>
                     <div class="park-content-all-modern">
@@ -184,11 +187,10 @@
                             <span class="tag-all-modern">Easy Trails</span>
                         </div>
 
+                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
                         <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('bon-echo-park')">View Details</button>
-                    </div>
-                </div>
-
-                <!-- Park 4 - Sandbanks -->
+                        <label style="font-size:13px;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:4px;"><input type="checkbox" onchange="toggleParkCompare('bon-echo-park',this)"> Compare</label>
+                        </div>
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-sandbanks"></div>
                     <div class="park-content-all-modern">
@@ -202,11 +204,10 @@
                             <span class="tag-all-modern">Family Fun</span>
                         </div>
 
+                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
                         <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('sandbanks-park')">View Details</button>
-                    </div>
-                </div>
-
-                <!-- Park 5 - Long Point -->
+                        <label style="font-size:13px;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:4px;"><input type="checkbox" onchange="toggleParkCompare('sandbanks-park',this)"> Compare</label>
+                        </div>
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-long-point"></div>
                     <div class="park-content-all-modern">
@@ -299,6 +300,15 @@
         </div>
     </section>
 
+    <!-- Park Comparison Section -->
+    <section id="comparison-section" style="display:none;padding:40px 0;background:#f9fafb;">
+        <div class="container">
+            <h2 style="margin-bottom:20px;">Park Comparison</h2>
+            <div id="comparison-table"></div>
+            <button onclick="document.getElementById('comparison-section').style.display='none'" style="margin-top:20px;padding:10px 20px;background:#6b7280;color:white;border:none;border-radius:6px;cursor:pointer;">Close Comparison</button>
+        </div>
+    </section>
+
     <!-- Newsletter Section -->
     <section class="newsletter-modern">
         <div class="newsletter-bg-overlay"></div>
@@ -379,6 +389,59 @@
     <script src="js/feature-flags.js"></script>
     <script src="js/api-client.js"></script>
     <script src="js/analytics.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/park-comparison.js"></script>
+    <script src="js/seasonal-recommendations.js"></script>
+    <script src="js/geolocation.js"></script>
+    <script src="js/advanced-search.js"></script>
     <script src="js/all-parks.js"></script>
+    <script>
+        function toggleParkCompare(parkId, checkbox) {
+            if (checkbox.checked) {
+                const result = parkComparisonTool.addToComparison(parkId);
+                if (!result.success) {
+                    alert(result.error);
+                    checkbox.checked = false;
+                    return;
+                }
+            } else {
+                parkComparisonTool.removeFromComparison(parkId);
+            }
+            const count = parkComparisonTool.comparisonList.length;
+            document.getElementById('compare-status').textContent = count > 0 ? `${count} park${count > 1 ? 's' : ''} selected` : '';
+            document.getElementById('compare-btn').style.display = count >= 2 ? 'inline-block' : 'none';
+        }
+
+        function showComparison() {
+            parkComparisonTool.renderComparisonTable(null, 'comparison-table');
+            const section = document.getElementById('comparison-section');
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function findNearbyParks() {
+            if (typeof geolocationManager !== 'undefined') {
+                geolocationManager.findNearbyParks && geolocationManager.findNearbyParks();
+            } else if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    pos => alert(`Location found: ${pos.coords.latitude.toFixed(2)}°N, ${Math.abs(pos.coords.longitude).toFixed(2)}°W\nShowing parks near you...`),
+                    () => alert('Could not get your location. Please enable GPS.')
+                );
+            }
+        }
+
+        // Restore any pre-checked comparison parks
+        document.querySelectorAll('input[type=checkbox][onchange^=toggleParkCompare]').forEach(cb => {
+            const parkId = cb.getAttribute('onchange').match(/'([^']+)'/)[1];
+            if (parkComparisonTool.isInComparison(parkId)) cb.checked = true;
+        });
+        const preCount = parkComparisonTool.comparisonList.length;
+        if (preCount > 0) {
+            document.getElementById('compare-status').textContent = `${preCount} park${preCount > 1 ? 's' : ''} selected`;
+            if (preCount >= 2) document.getElementById('compare-btn').style.display = 'inline-block';
+        }
+    </script>
 </body>
 </html>

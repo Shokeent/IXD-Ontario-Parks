@@ -119,6 +119,7 @@
                     <div class="park-header-section">
                         <h2>Algonquin - Achray</h2>
                         <p class="park-subtitle">Handpicked locations with excellent facilities and beginner-friendly features</p>
+                        <div id="booking-fire-ban" style="margin-top:10px;"></div>
                     </div>
 
                     <!-- Campsites Available -->
@@ -187,6 +188,13 @@
                                 <div class="campsite-price">$30 / 3+ night</div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Equipment Rental Upsell -->
+                    <div id="equipment-rental-upsell" style="margin-top:30px;padding:20px;background:#f0fdf4;border-radius:8px;border:1px solid #a7f3d0;">
+                        <h3 style="margin-bottom:12px;">Need Gear? Rent Equipment</h3>
+                        <p style="color:#6b7280;margin-bottom:15px;font-size:14px;">Don't have camping gear? We offer quality equipment rentals starting from $20/day.</p>
+                        <div id="rental-bundles"></div>
                     </div>
 
                     <!-- Facilities & Family Features -->
@@ -445,7 +453,33 @@
     <script src="js/analytics.js"></script>
     <script src="js/stripe.js"></script>
     <script src="js/email.js"></script>
+    <script src="js/campfire-permits.js"></script>
+    <script src="js/equipment-rental.js"></script>
+    <script src="js/loyalty-rewards.js"></script>
     <script src="js/script.js"></script>
     <script src="js/booking.js"></script>
-</body>
+    <script>
+        const bookingParkId = localStorage.getItem('selectedParkId') || 'algonquin-park';
+
+        // Fire ban status
+        const ban = campfirePermitManager.checkFireBan(bookingParkId);
+        const banEl = document.getElementById('booking-fire-ban');
+        if (banEl && ban.active) {
+            banEl.innerHTML = `<div style="padding:10px 14px;border-radius:6px;background:${ban.level === 'total' ? '#fee2e2' : '#fef3c7'};color:${ban.level === 'total' ? '#991b1b' : '#92400e'};font-weight:600;font-size:14px;">${ban.message}</div>`;
+        }
+
+        // Equipment rental bundles
+        const bundlesEl = document.getElementById('rental-bundles');
+        if (bundlesEl && typeof equipmentRentalManager !== 'undefined') {
+            const bundles = equipmentRentalManager.getBundles ? equipmentRentalManager.getBundles() : equipmentRentalManager.bundles || [];
+            if (bundles.length) {
+                bundlesEl.innerHTML = bundles.map(b => `
+                    <div style="display:inline-block;margin:0 10px 10px 0;padding:12px 16px;background:white;border-radius:8px;border:1px solid #d1fae5;cursor:pointer;" onclick="window.location.href='gear-list.html'">
+                        <strong>${b.name}</strong> — $${b.price}/day
+                        <div style="font-size:12px;color:#6b7280;margin-top:4px;">${b.items ? b.items.join(', ') : ''}</div>
+                    </div>
+                `).join('');
+            }
+        }
+    </script>
 </html>

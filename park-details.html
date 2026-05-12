@@ -75,6 +75,7 @@
                     <!-- Explore the Map -->
                     <section class="park-map-section">
                         <h2>Explore the map</h2>
+                        <div id="map-panel"></div>
                         <div class="map-container">
                             <div class="interactive-map">
                                 <!-- Map placeholder with camping markers -->
@@ -112,7 +113,15 @@
 
                     <!-- Campground Details -->
                     <section class="campground-section">
-                        <h2>Campground</h2>
+
+                    <!-- Campfire Permit & Fire Safety -->
+                    <section class="campfire-section" style="margin-bottom:30px;">
+                        <h2>Fire Safety & Permits</h2>
+                        <div id="fire-ban-status" style="margin-bottom:15px;"></div>
+                        <div id="fire-safety-guide"></div>
+                    </section>
+
+                    <h2>Campground</h2>
                         
                         <div class="campground-item">
                             <div class="campground-header">
@@ -169,6 +178,25 @@
 
                 <!-- Right Column -->
                 <div class="park-right-column">
+
+                    <!-- Park Events -->
+                    <section class="park-events-right" style="margin-bottom:30px;">
+                        <h2>Upcoming Events</h2>
+                        <div id="park-events-list"></div>
+                    </section>
+
+                    <!-- Wildlife Guide -->
+                    <section class="wildlife-section-right" style="margin-bottom:30px;">
+                        <h2>Wildlife You Might See</h2>
+                        <div id="wildlife-guide-panel"></div>
+                    </section>
+
+                    <!-- Photo Gallery -->
+                    <section class="photo-gallery-section-right" style="margin-bottom:30px;">
+                        <h2>Photo Gallery</h2>
+                        <div id="photo-gallery-panel"></div>
+                    </section>
+
                     <!-- Duplicate Park Overview for Right Column -->
                     <section class="park-overview-right">
                         <h2>Park Overview</h2>
@@ -221,6 +249,18 @@
                     <!-- Amenities & Facilities -->
                     <section class="amenities-facilities-section">
                         <div id="amenities-panel"></div>
+                    </section>
+
+                    <!-- Accessibility Guide -->
+                    <section class="accessibility-section-right" style="margin-bottom:30px;">
+                        <h2>Accessibility</h2>
+                        <div id="accessibility-info"></div>
+                    </section>
+
+                    <!-- Visitor Survey -->
+                    <section class="survey-section-right" style="margin-bottom:30px;">
+                        <h2>Share Your Experience</h2>
+                        <div id="survey-form"></div>
                     </section>
 
                     <!-- General Information -->
@@ -336,9 +376,46 @@
     <script src="js/i18n.js"></script>
     <script src="js/park-details.js"></script>
     <script src="js/park-amenities.js"></script>
+    <script src="js/park-events.js"></script>
+    <script src="js/wildlife-guide.js"></script>
+    <script src="js/photo-gallery.js"></script>
+    <script src="js/offline-maps.js"></script>
+    <script src="js/campfire-permits.js"></script>
+    <script src="js/accessibility-guide.js"></script>
+    <script src="js/visitor-survey.js"></script>
+    <script src="js/loyalty-rewards.js"></script>
+    <script src="js/emergency-safety.js"></script>
     <script>
         const parkId = localStorage.getItem('selectedParkId') || 'algonquin-park';
+
+        // Amenities
         parkAmenitiesFinder.renderAmenitiesPanel(parkId, 'amenities-panel');
+
+        // Offline map panel
+        offlineMapsManager.renderMapPanel(parkId, 'map-panel');
+
+        // Campfire permit & fire ban
+        const fireBan = campfirePermitManager.checkFireBan(parkId);
+        const fireBanEl = document.getElementById('fire-ban-status');
+        if (fireBanEl) {
+            fireBanEl.innerHTML = `<div style="padding:12px;border-radius:6px;background:${fireBan.active ? '#fee2e2' : '#d1fae5'};color:${fireBan.active ? '#991b1b' : '#065f46'};font-weight:600;">${fireBan.message}</div>`;
+        }
+        campfirePermitManager.renderFireSafetyGuide('fire-safety-guide');
+
+        // Park events
+        parkEventsManager.renderEventsList(parkId, 'park-events-list');
+
+        // Wildlife guide
+        wildlifeNatureGuide.renderWildlifePanel(parkId, 'wildlife-guide-panel');
+
+        // Photo gallery
+        photoGalleryManager.renderGallery(parkId, 'photo-gallery-panel');
+
+        // Accessibility
+        accessibilityGuideManager.renderAccessibilityInfo(parkId, 'accessibility-info');
+
+        // Visitor survey
+        visitorSurveyManager.renderSurveyForm(parkId, 'post-visit', 'survey-form');
     </script>
 </body>
 </html>
