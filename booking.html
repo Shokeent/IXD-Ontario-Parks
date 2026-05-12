@@ -133,59 +133,59 @@
                         </div>
 
                         <!-- Campsite 1 -->
-                        <div class="campsite-card" data-campsite="1">
+                        <div class="campsite-card" data-campsite="1" data-name="Achray Waterfront" data-price="45" data-type="Waterfront Site">
                             <div class="campsite-image placeholder-campsite-1"></div>
                             <div class="campsite-info">
-                                <h4>Campsite 1</h4>
+                                <h4>Site #1 — Achray Waterfront</h4>
                                 <div class="campsite-features">
                                     <div class="feature-item">
                                         <span class="feature-icon">🏕️</span>
-                                        <span>Allowed equipment: Tent, RV</span>
+                                        <span>Tent & RV up to 30ft · fire pit · picnic table</span>
                                     </div>
                                     <div class="feature-item">
-                                        <span class="feature-icon">🏠</span>
-                                        <span>Accessible campsites: WiFi</span>
+                                        <span class="feature-icon">💧</span>
+                                        <span>Direct lake access · Achray Beach 200m</span>
                                     </div>
                                 </div>
-                                <div class="campsite-price">$30 / 3+ night</div>
+                                <div class="campsite-price">$45 / night</div>
                             </div>
                         </div>
 
                         <!-- Campsite 2 -->
-                        <div class="campsite-card" data-campsite="2">
+                        <div class="campsite-card" data-campsite="2" data-name="Kiosk Electrical" data-price="52" data-type="Electrical Hook-up">
                             <div class="campsite-image placeholder-campsite-2"></div>
                             <div class="campsite-info">
-                                <h4>Campsite 2</h4>
+                                <h4>Site #2 — Kiosk Electrical</h4>
                                 <div class="campsite-features">
                                     <div class="feature-item">
-                                        <span class="feature-icon">🏕️</span>
-                                        <span>Allowed equipment: Tent, RV</span>
+                                        <span class="feature-icon">⚡</span>
+                                        <span>15-amp electrical · WiFi · fire pit</span>
                                     </div>
                                     <div class="feature-item">
-                                        <span class="feature-icon">🏠</span>
-                                        <span>Accessible campsites: WiFi</span>
+                                        <span class="feature-icon">🚿</span>
+                                        <span>Flush washrooms & showers 80m</span>
                                     </div>
                                 </div>
-                                <div class="campsite-price">$30 / 3+ night</div>
+                                <div class="campsite-price">$52 / night</div>
                             </div>
                         </div>
 
                         <!-- Campsite 3 -->
-                        <div class="campsite-card" data-campsite="3">
+                        <div class="campsite-card" data-campsite="3" data-name="Brent Accessible" data-price="42" data-type="Accessible Site">
                             <div class="campsite-image placeholder-campsite-3"></div>
                             <div class="campsite-info">
-                                <h4>Campsite 3</h4>
+                                <h4>Site #3 — Brent Accessible</h4>
                                 <div class="campsite-features">
                                     <div class="feature-item">
-                                        <span class="feature-icon">🏕️</span>
-                                        <span>Allowed equipment: Tent, RV</span>
+                                        <span class="feature-icon">♿</span>
+                                        <span>Paved pad · accessible picnic table & grill</span>
                                     </div>
                                     <div class="feature-item">
-                                        <span class="feature-icon">🏠</span>
-                                        <span>Accessible campsites: WiFi</span>
+                                        <span class="feature-icon">🚻</span>
+                                        <span>Accessible washrooms 50m · level terrain</span>
                                     </div>
                                 </div>
-                                <div class="campsite-price">$30 / 3+ night</div>
+                                <div class="campsite-price">$42 / night</div>
                             </div>
                         </div>
                     </div>
@@ -250,7 +250,7 @@
                     <!-- Selected Campsite Details -->
                     <div class="campsite-details">
                         <div class="campsite-header">
-                            <h3 id="selected-campsite-title">Campsite 1</h3>
+                            <h3 id="selected-campsite-title">Site #1 — Achray Waterfront</h3>
                             <div class="campsite-type" id="selected-campsite-type">Waterfront Site</div>
                         </div>
                         
@@ -284,11 +284,11 @@
                                 </div>
                                 <div class="feature-item">
                                     <span class="feature-icon">💧</span>
-                                    <span>Lake access • Fire pit • Picnic table</span>
+                                    <span>Direct lake access · Fire pit · Picnic table</span>
                                 </div>
                                 <div class="feature-item">
-                                    <span class="feature-icon">📶</span>
-                                    <span>WiFi available • Accessible facilities</span>
+                                    <span class="feature-icon">🏖️</span>
+                                    <span>Achray Beach 200m · Washrooms 150m</span>
                                 </div>
                             </div>
                         </div>
@@ -302,7 +302,7 @@
                         
                         <!-- Booking Actions -->
                         <div class="booking-actions">
-                            <button class="btn-primary book-now-btn" onclick="window.location.href='review-reservation.html'">Book This Site</button>
+                            <button class="btn-primary book-now-btn" onclick="proceedToReview()">Book This Site</button>
                             <button class="btn-secondary view-calendar-btn">View Calendar</button>
                         </div>
                     </div>
@@ -367,7 +367,7 @@
                                 <strong>Phone:</strong> 705-633-5572
                             </div>
                             <div class="info-item">
-                                <strong>Size:</strong> 7725000.00 ha
+                                <strong>Size:</strong> 772,500 ha (7,725 km²)
                             </div>
                             <div class="info-item">
                                 <strong>Year Established:</strong> 1893
@@ -480,6 +480,78 @@
                     </div>
                 `).join('');
             }
+        }
+
+        // Campsite selection — track which site is selected
+        const siteDetails = {
+            1: { features: ['Tent & RV friendly (up to 30ft)', 'Direct lake access · Fire pit · Picnic table', 'Achray Beach 200m · Washrooms 150m'], desc: 'A premier waterfront site overlooking Lake Achray. Spacious pad accommodates tents and RVs up to 30ft. Steps from the sandy beach, fire pit, and picnic area — ideal for families and first-time campers.' },
+            2: { features: ['15-amp electrical hook-up · WiFi', 'Fire pit · Picnic table · Level pad', 'Flush washrooms & showers 80m'], desc: 'Our most popular Kiosk campground site with full electrical service. WiFi-enabled for those who need connectivity. Modern washroom facilities nearby make this a comfortable choice for newcomers.' },
+            3: { features: ['Paved pad · Accessible picnic table & grill', 'Accessible washrooms 50m · Level terrain', 'Quiet Brent area · Near Cedar Lake'], desc: 'Designed for accessibility without compromising the wilderness experience. Paved surface, wider spacing, and an accessible picnic table. Located in the remote and tranquil Brent area near Cedar Lake.' }
+        };
+
+        let selectedSite = { id: 1, name: 'Site #1 — Achray Waterfront', price: 45 };
+        document.querySelectorAll('.campsite-card').forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.campsite-card').forEach(c => c.style.outline = '');
+                card.style.outline = '3px solid #059669';
+                const siteNum = parseInt(card.dataset.campsite);
+                const siteName = card.dataset.name;
+                const sitePrice = parseInt(card.dataset.price);
+                const siteType = card.dataset.type;
+                selectedSite = { id: siteNum, name: `Site #${siteNum} — ${siteName}`, price: sitePrice };
+
+                document.getElementById('selected-campsite-title').textContent = selectedSite.name;
+                document.getElementById('selected-campsite-type').textContent = siteType;
+                document.getElementById('selected-campsite-image').className = `preview-image placeholder-campsite-${siteNum}`;
+                document.getElementById('selected-price').textContent = `$${sitePrice}`;
+                document.getElementById('base-rate').textContent = `$${sitePrice - 5}`;
+                document.getElementById('site-premium').textContent = '$5';
+
+                const details = siteDetails[siteNum];
+                const featEl = document.getElementById('selected-features');
+                if (featEl && details) {
+                    featEl.innerHTML = details.features.map(f => `<div class="feature-item"><span class="feature-icon">✓</span><span>${f}</span></div>`).join('');
+                }
+                const descEl = document.getElementById('selected-description');
+                if (descEl && details) descEl.textContent = details.desc;
+            });
+        });
+
+        function proceedToReview() {
+            const arrival = document.getElementById('booking-arrival-date').value;
+            const departure = document.getElementById('booking-departure-date').value;
+
+            if (!arrival || !departure) {
+                const arrEl = document.getElementById('booking-arrival-date');
+                const depEl = document.getElementById('booking-departure-date');
+                if (arrEl) arrEl.style.borderColor = '#dc2626';
+                if (depEl) depEl.style.borderColor = '#dc2626';
+                alert('Please select arrival and departure dates.');
+                return;
+            }
+
+            const nights = Math.max(1, Math.ceil((new Date(departure) - new Date(arrival)) / 86400000));
+            const parkName = bookingParkId.replace(/-park$/, '').split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            const equipment = document.querySelector('.search-select:last-of-type')?.value || 'Single Tent';
+            const guests = document.querySelector('.search-select')?.value || '2';
+
+            // Persist booking data
+            const bookingData = {
+                parkId: bookingParkId,
+                parkName: parkName + ' Provincial Park',
+                campground: 'Algonquin - Kiosk Campground',
+                site: selectedSite.name,
+                arrival,
+                departure,
+                nights,
+                equipment,
+                guests,
+                pricePerNight: selectedSite.price,
+                total: selectedSite.price * nights
+            };
+            localStorage.setItem('pending_booking', JSON.stringify(bookingData));
+            window.location.href = 'review-reservation.html';
         }
     </script>
 </html>

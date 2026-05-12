@@ -307,7 +307,7 @@
                     <h1 class="page-title">Review Reservation Details</h1>
                     <p class="page-subtitle">Handpicked locations with excellent facilities and beginner-friendly features</p>
                 </div>
-                <button class="modify-booking-btn">
+                <button class="modify-booking-btn" onclick="window.location.href='booking.html'">
                     <span class="modify-icon">✏️</span>
                     Modify Booking
                 </button>
@@ -391,7 +391,7 @@
                         <div class="checkbox-text">All reservation details are correct.</div>
                     </div>
                     
-                    <button class="confirm-btn" onclick="window.location.href='shopping-cart.html'">
+                    <button class="confirm-btn" onclick="confirmReservation()">
                         Confirm reservation details
                     </button>
                 </div>
@@ -453,5 +453,47 @@
     <script src="js/i18n.js"></script>
     <script src="js/script.js"></script>
     <script src="js/review-reservation.js"></script>
+    <script>
+        // Load persisted booking data
+        (function() {
+            const raw = localStorage.getItem('pending_booking');
+            if (!raw) return;
+            const b = JSON.parse(raw);
+
+            const fmt = d => new Date(d).toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+
+            const campHeader = document.querySelector('.card-header h2');
+            if (campHeader) campHeader.textContent = b.campground || b.parkName;
+
+            const datesEl = document.querySelector('.dates');
+            if (datesEl) datesEl.textContent = `${fmt(b.arrival)} – ${fmt(b.departure)}`;
+
+            const timesEl = document.querySelector('.times');
+            if (timesEl) timesEl.textContent = `Check In: 14:00  Check Out: 12:00`;
+
+            const siteVal = document.querySelector('.detail-icon.site + .detail-info .detail-value');
+            if (siteVal) siteVal.textContent = b.site || '1';
+
+            const nightVal = document.querySelector('.detail-icon.night + .detail-info .detail-value');
+            if (nightVal) nightVal.textContent = b.nights || '1';
+
+            const equipVal = document.querySelector('.detail-icon.equipment + .detail-info .detail-value');
+            if (equipVal) equipVal.textContent = b.equipment || 'Single Tent';
+
+            const guestVal = document.querySelector('.detail-icon.guest + .detail-info .detail-value');
+            if (guestVal) guestVal.textContent = b.guests || '2';
+        })();
+
+        function confirmReservation() {
+            const checkbox = document.getElementById('confirm-details');
+            if (!checkbox.checked) {
+                checkbox.style.outline = '2px solid #dc2626';
+                alert('Please read and acknowledge the reservation details before continuing.');
+                return;
+            }
+            checkbox.style.outline = '';
+            window.location.href = 'shopping-cart.html';
+        }
+    </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/park-details.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <!-- Navigation -->
@@ -77,37 +78,7 @@
                         <h2>Explore the map</h2>
                         <div id="map-panel"></div>
                         <div class="map-container">
-                            <div class="interactive-map">
-                                <!-- Map placeholder with camping markers -->
-                                <div class="map-placeholder">
-                                    <div class="map-marker camping-marker" style="top: 30%; left: 40%;">
-                                        <span class="marker-icon">⛺</span>
-                                        <div class="marker-popup">
-                                            <strong>Camping Site 1</strong><br>
-                                            Perfect for first-time campers with guided programs and family-friendly trails
-                                        </div>
-                                    </div>
-                                    <div class="map-marker camping-marker" style="top: 60%; left: 65%;">
-                                        <span class="marker-icon">⛺</span>
-                                    </div>
-                                    <div class="map-marker camping-marker" style="top: 45%; left: 25%;">
-                                        <span class="marker-icon">⛺</span>
-                                    </div>
-                                </div>
-                                <!-- Map Controls -->
-                                <div class="map-controls">
-                                    <button class="map-control-btn">🗺️</button>
-                                    <button class="map-control-btn">⚙️</button>
-                                    <button class="map-control-btn">📐</button>
-                                    <button class="map-control-btn">🔍</button>
-                                    <button class="map-control-btn">📍</button>
-                                    <button class="map-control-btn">↻</button>
-                                    <button class="map-control-btn">⊕</button>
-                                    <button class="map-control-btn">📱</button>
-                                    <button class="map-control-btn">💾</button>
-                                    <button class="map-control-btn">{ }</button>
-                                </div>
-                            </div>
+                            <div id="algonquin-leaflet-map" style="width:100%;height:420px;border-radius:8px;z-index:1;"></div>
                         </div>
                     </section>
 
@@ -136,7 +107,7 @@
                                 <span class="amenity">🏠 Roofed Accommodations</span>
                                 <span class="amenity">❄️ Available in Winter</span>
                             </div>
-                            <p class="operating-dates">Operating Dates: April 1st 2024 - June 1st 2024</p>
+                            <p class="operating-dates">Operating Dates: May 3 – Oct 14, 2025</p>
                         </div>
 
                         <div class="campground-item">
@@ -153,7 +124,7 @@
                                 <span class="amenity">🏠 Roofed Accommodations</span>
                                 <span class="amenity">❄️ Available in Winter</span>
                             </div>
-                            <p class="operating-dates">Operating Dates: April 1st 2024 - June 1st 2024</p>
+                            <p class="operating-dates">Operating Dates: Year-round (permit required)</p>
                         </div>
 
                         <div class="campground-item">
@@ -170,7 +141,7 @@
                                 <span class="amenity">🏠 Roofed Accommodations</span>
                                 <span class="amenity">❄️ Available in Winter</span>
                             </div>
-                            <p class="operating-dates">Operating Dates: April 1st 2024 - June 1st 2024</p>
+                            <p class="operating-dates">Operating Dates: May 17 – Oct 14, 2025</p>
                         </div>
                     </section>
                 </div>
@@ -275,7 +246,7 @@
                         </div>
                         <div class="info-row">
                             <span class="info-label">Size:</span>
-                            <span class="info-value">7725300.00 ha</span>
+                            <span class="info-value">772,500 ha (7,725 km²)</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Year Established:</span>
@@ -334,17 +305,17 @@
                         <li><a href="gear-list.html">Gear Rental</a></li>
                         <li><a href="park-details.html">Safety Tips</a></li>
                         <li><a href="all-parks.html">Family Activities</a></li>
-                        <li><a href="#maps">Park Maps</a></li>
+                        <li><a href="park-details.html">Park Maps</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-section-modern">
                     <h4>Support</h4>
                     <ul>
-                        <li><a href="#help">Help Center</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="#accessibility">Accessibility</a></li>
-                        <li><a href="#languages">Languages</a></li>
+                        <li><a href="index.html">Help Center</a></li>
+                        <li><a href="index.html">Contact Us</a></li>
+                        <li><a href="park-details.html">Accessibility</a></li>
+                        <li><a href="index.html">Languages</a></li>
                     </ul>
                 </div>
 
@@ -353,8 +324,8 @@
                     <ul>
                         <li><a href="all-parks.html">All Parks</a></li>
                         <li><a href="booking.html">Reservations</a></li>
-                        <li><a href="#events">Events</a></li>
-                        <li><a href="#news">News</a></li>
+                        <li><a href="all-parks.html">Events</a></li>
+                        <li><a href="index.html">News</a></li>
                     </ul>
                 </div>
             </div>
@@ -373,6 +344,7 @@
     <script src="js/auth.js"></script>
     <script src="js/dark-mode.js"></script>
     <script src="js/i18n.js"></script>
+    <script src="js/script.js"></script>
     <script src="js/park-details.js"></script>
     <script src="js/park-amenities.js"></script>
     <script src="js/park-events.js"></script>
@@ -415,6 +387,45 @@
 
         // Visitor survey
         visitorSurveyManager.renderSurveyForm(parkId, 'post-visit', 'survey-form');
+    </script>
+
+    <!-- Leaflet.js interactive map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        (function() {
+            const mapEl = document.getElementById('algonquin-leaflet-map');
+            if (!mapEl) return;
+            const map = L.map('algonquin-leaflet-map').setView([45.5153, -78.3536], 9);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            const campIcon = L.divIcon({
+                html: '<span style="font-size:22px;">⛺</span>',
+                className: '',
+                iconSize: [28, 28],
+                iconAnchor: [14, 28],
+                popupAnchor: [0, -28]
+            });
+
+            const campgrounds = [
+                { name: 'Algonquin – Achray Campground', lat: 46.0167, lng: -78.1167, desc: '150 sites · Waterfront · No electrical · $45/night', link: 'booking.html' },
+                { name: 'Algonquin – Kiosk Campground', lat: 45.8800, lng: -78.5500, desc: '100 sites · Electrical available · WiFi · $52/night', link: 'booking.html' },
+                { name: 'Algonquin – Brent Campground', lat: 46.0730, lng: -78.4890, desc: '30 sites · Remote · Canoe-in access · $42/night', link: 'booking.html' }
+            ];
+
+            campgrounds.forEach(cg => {
+                L.marker([cg.lat, cg.lng], { icon: campIcon })
+                    .addTo(map)
+                    .bindPopup(`<strong>${cg.name}</strong><br>${cg.desc}<br><a href="${cg.link}" style="color:#059669;font-weight:600;">Book Now →</a>`);
+            });
+
+            // Park boundary approximate center marker
+            L.marker([45.5153, -78.3536], {
+                icon: L.divIcon({ html: '<span style="font-size:16px;background:rgba(5,150,105,0.85);color:white;padding:2px 7px;border-radius:12px;font-weight:700;white-space:nowrap;">Algonquin Park</span>', className: '', iconAnchor: [60, 10] })
+            }).addTo(map);
+        })();
     </script>
 </body>
 </html>

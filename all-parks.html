@@ -94,7 +94,7 @@
                         </select>
                     </div>
                     
-                    <button class="search-btn-hero">
+                    <button class="search-btn-hero" onclick="searchParks()">
                         <span class="search-icon">🔍</span>
                     </button>
                 </div>
@@ -107,13 +107,15 @@
         <div class="container">
             <div class="filter-tags-row">
                 <div class="filter-tags-left">
-                    <button class="filter-tag-btn active">
+                    <button class="filter-tag-btn active" onclick="filterParks('')">
                         <span class="filter-icon">📋</span>
-                        Filter
+                        All Parks
                     </button>
-                    <button class="filter-tag-btn">Kids Programs</button>
-                    <button class="filter-tag-btn">Easy Trail</button>
-                    <button class="filter-tag-btn">Birding</button>
+                    <button class="filter-tag-btn" onclick="filterParks('kids')">Kids Programs</button>
+                    <button class="filter-tag-btn" onclick="filterParks('easy')">Easy Trail</button>
+                    <button class="filter-tag-btn" onclick="filterParks('birding')">Birding</button>
+                    <button class="filter-tag-btn" onclick="filterParks('beach')">Beach</button>
+                    <button class="filter-tag-btn" onclick="filterParks('backcountry')">Backcountry</button>
                 </div>
                 <div class="filter-tags-right">
                     <button class="map-view-btn">
@@ -157,46 +159,58 @@
                         <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('algonquin-park')">View Details</button>
                         <label style="font-size:13px;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:4px;"><input type="checkbox" onchange="toggleParkCompare('algonquin-park',this)"> Compare</label>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Park 2 - Killarney -->
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-killarney"></div>
                     <div class="park-content-all-modern">
                         <h3 class="park-title-all-modern">Killarney Provincial Park</h3>
-                        <div class="park-location-all-modern">📍 Huntsville, ON</div>
-                        <p class="park-description-all-modern">Perfect for first-time campers with guided programs and family-friendly trails</p>
+                        <div class="park-location-all-modern">📍 Georgian Bay, ON</div>
+                        <p class="park-description-all-modern">Dramatic white quartzite ridges, turquoise lakes and world-class hiking in the La Cloche Mountains</p>
 
                         <div class="park-tags-all-modern">
-                            <span class="tag-all-modern">Kids Programs</span>
-                            <span class="tag-all-modern">Swimming</span>
-                            <span class="tag-all-modern">Easy Trails</span>
+                            <span class="tag-all-modern">Hiking</span>
+                            <span class="tag-all-modern">Backcountry</span>
+                            <span class="tag-all-modern">Scenic Views</span>
                         </div>
 
                         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
                         <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('killarney-park')">View Details</button>
                         <label style="font-size:13px;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:4px;"><input type="checkbox" onchange="toggleParkCompare('killarney-park',this)"> Compare</label>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Park 3 - Bon Echo -->
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-bon-echo"></div>
                     <div class="park-content-all-modern">
                         <h3 class="park-title-all-modern">Bon Echo Provincial Park</h3>
-                        <div class="park-location-all-modern">📍 Huntsville, ON</div>
-                        <p class="park-description-all-modern">Perfect for first-time campers with guided programs and family-friendly trails</p>
+                        <div class="park-location-all-modern">📍 Cloyne, ON</div>
+                        <p class="park-description-all-modern">Iconic Mazinaw Rock with Indigenous pictographs, crystal-clear lake, and stunning cliff scenery</p>
 
                         <div class="park-tags-all-modern">
-                            <span class="tag-all-modern">Kids Programs</span>
+                            <span class="tag-all-modern">Canoeing</span>
+                            <span class="tag-all-modern">Rock Climbing</span>
                             <span class="tag-all-modern">Swimming</span>
-                            <span class="tag-all-modern">Easy Trails</span>
                         </div>
 
                         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
                         <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('bon-echo-park')">View Details</button>
                         <label style="font-size:13px;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:4px;"><input type="checkbox" onchange="toggleParkCompare('bon-echo-park',this)"> Compare</label>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Park 4 - Sandbanks -->
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-sandbanks"></div>
                     <div class="park-content-all-modern">
                         <h3 class="park-title-all-modern">Sandbanks Provincial Park</h3>
                         <div class="park-location-all-modern">📍 Prince Edward County, ON</div>
-                        <p class="park-description-all-modern">Beautiful beaches and sandy dunes perfect for families and swimming enthusiasts</p>
+                        <p class="park-description-all-modern">World's largest freshwater sand dunes and stunning Lake Ontario beaches — perfect for families</p>
 
                         <div class="park-tags-all-modern">
                             <span class="tag-all-modern">Beach</span>
@@ -208,6 +222,9 @@
                         <button class="btn-view-details-all-modern" onclick="navigateToParkDetails('sandbanks-park')">View Details</button>
                         <label style="font-size:13px;color:#6b7280;cursor:pointer;display:flex;align-items:center;gap:4px;"><input type="checkbox" onchange="toggleParkCompare('sandbanks-park',this)"> Compare</label>
                         </div>
+                    </div>
+                </div>
+                <!-- Park 5 - Long Point -->
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-long-point"></div>
                     <div class="park-content-all-modern">
@@ -352,17 +369,17 @@
                         <li><a href="gear-list.html">Gear Rental</a></li>
                         <li><a href="park-details.html">Safety Tips</a></li>
                         <li><a href="all-parks.html">Family Activities</a></li>
-                        <li><a href="#maps">Park Maps</a></li>
+                        <li><a href="park-details.html">Park Maps</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-section-modern">
                     <h4>Support</h4>
                     <ul>
-                        <li><a href="#help">Help Center</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="#accessibility">Accessibility</a></li>
-                        <li><a href="#languages">Languages</a></li>
+                        <li><a href="index.html">Help Center</a></li>
+                        <li><a href="index.html">Contact Us</a></li>
+                        <li><a href="park-details.html">Accessibility</a></li>
+                        <li><a href="index.html">Languages</a></li>
                     </ul>
                 </div>
 
@@ -371,8 +388,8 @@
                     <ul>
                         <li><a href="all-parks.html">All Parks</a></li>
                         <li><a href="booking.html">Reservations</a></li>
-                        <li><a href="#events">Events</a></li>
-                        <li><a href="#news">News</a></li>
+                        <li><a href="all-parks.html">Events</a></li>
+                        <li><a href="index.html">News</a></li>
                     </ul>
                 </div>
             </div>
@@ -391,6 +408,7 @@
     <script src="js/analytics.js"></script>
     <script src="js/dark-mode.js"></script>
     <script src="js/i18n.js"></script>
+    <script src="js/script.js"></script>
     <script src="js/notifications.js"></script>
     <script src="js/park-comparison.js"></script>
     <script src="js/seasonal-recommendations.js"></script>
@@ -398,6 +416,34 @@
     <script src="js/advanced-search.js"></script>
     <script src="js/all-parks.js"></script>
     <script>
+        function searchParks() {
+            const parkSelect = document.querySelector('.search-select-hero');
+            const parkName = parkSelect ? parkSelect.value : '';
+            if (parkName) {
+                const cards = document.querySelectorAll('.park-card-all-modern');
+                cards.forEach(card => {
+                    const title = card.querySelector('.park-title-all-modern');
+                    card.style.display = (!title || title.textContent.toLowerCase().includes(parkName.toLowerCase().split(' ')[0])) ? '' : 'none';
+                });
+            }
+        }
+
+        function filterParks(keyword) {
+            const cards = document.querySelectorAll('.park-card-all-modern');
+            const btns = document.querySelectorAll('.filter-tag-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (!keyword) {
+                    card.style.display = '';
+                    return;
+                }
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(keyword.toLowerCase()) ? '' : 'none';
+            });
+        }
+
         function toggleParkCompare(parkId, checkbox) {
             if (checkbox.checked) {
                 const result = parkComparisonTool.addToComparison(parkId);

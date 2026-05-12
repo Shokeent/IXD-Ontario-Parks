@@ -278,7 +278,7 @@
                     <h1 class="page-title">Shopping Cart</h1>
                     <p class="page-subtitle">All reservations in your shopping cart will be held for 15 minutes or until the reservation has been paid for.</p>
                 </div>
-                <button class="modify-booking-btn">
+                <button class="modify-booking-btn" onclick="window.location.href='booking.html'">
                     <span class="modify-icon">✏️</span>
                     Modify Booking
                 </button>
@@ -397,16 +397,51 @@
     <script src="js/script.js"></script>
     <script src="js/review-reservation.js"></script>
     <script>
+        // Load booking data from localStorage
+        (function() {
+            const raw = localStorage.getItem('pending_booking');
+            if (raw) {
+                const b = JSON.parse(raw);
+                const fmt = d => new Date(d).toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+                const campName = document.querySelector('.reservation-info h3');
+                if (campName) campName.textContent = b.campground || b.parkName;
+                const datesEl = document.querySelector('.dates');
+                if (datesEl) datesEl.textContent = `${fmt(b.arrival)} – ${fmt(b.departure)}`;
+                const nightsVal = document.querySelector('.nights-value');
+                if (nightsVal) nightsVal.textContent = b.nights || '1';
+
+                // Recalculate pricing
+                const nights = b.nights || 1;
+                const pricePerNight = b.pricePerNight || 37.50;
+                const campFee = (nights * pricePerNight).toFixed(2);
+                const resvFee = (nights * 9.73).toFixed(2);
+                const subtotal = (parseFloat(campFee) + parseFloat(resvFee)).toFixed(2);
+                const tax = (parseFloat(subtotal) * 0.13).toFixed(2);
+                const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
+
+                const rows = document.querySelectorAll('.pricing-row');
+                if (rows[0]) rows[0].querySelector('.pricing-description').textContent = `${nights} x $${pricePerNight} CampFee`;
+                if (rows[0]) rows[0].querySelector('.pricing-amount').textContent = `$${campFee}`;
+                if (rows[1]) rows[1].querySelector('.pricing-amount').textContent = `$${resvFee}`;
+                if (rows[2]) rows[2].querySelector('.pricing-amount').textContent = `$${subtotal}`;
+                const totalEl = document.querySelector('.total-amount');
+                if (totalEl) totalEl.textContent = `TOTAL (CAD) $${total}`;
+
+                // Store final total for checkout page
+                localStorage.setItem('checkout_total', total);
+                localStorage.setItem('checkout_subtotal', subtotal);
+                localStorage.setItem('checkout_tax', tax);
+            }
+        })();
+
+        // Equipment rental add-on
         (function() {
             const pending = localStorage.getItem('pending_rental');
             if (!pending) return;
-
             const rental = JSON.parse(pending);
             localStorage.removeItem('pending_rental');
-
             const pricing = document.querySelector('.pricing-section');
             if (!pricing) return;
-
             const row = document.createElement('div');
             row.className = 'pricing-row';
             row.innerHTML = `
@@ -415,11 +450,9 @@
             `;
             const subtotal = pricing.querySelector('.subtotal-row');
             pricing.insertBefore(row, subtotal);
-
             const subtotalAmt = subtotal.querySelector('.pricing-amount');
             const newSubtotal = parseFloat(subtotalAmt.textContent.replace('$', '')) + rental.totalCost;
             subtotalAmt.textContent = '$' + newSubtotal.toFixed(2);
-
             const totalEl = document.querySelector('.total-amount');
             if (totalEl) {
                 const currentTotal = parseFloat(totalEl.textContent.replace(/[^0-9.]/g, ''));
