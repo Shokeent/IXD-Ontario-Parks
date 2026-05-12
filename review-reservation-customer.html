@@ -261,32 +261,32 @@
                     <h2 class="section-title">Order Summary</h2>
 
                     <div style="margin-bottom: 24px;">
-                        <p style="color: #374151; margin: 0 0 8px 0;"><strong>Algonquin - Kiosk Campground</strong></p>
-                        <p style="color: #6b7280; margin: 0 0 16px 0;">Mon, Jul 21 - Tue, Jul 22, 2025 • 1 Night</p>
+                        <p style="color: #374151; margin: 0 0 8px 0;"><strong id="order-campground">Algonquin - Kiosk Campground</strong></p>
+                        <p style="color: #6b7280; margin: 0 0 16px 0;" id="order-dates">Mon, Jul 21 - Tue, Jul 22, 2025 • 1 Night</p>
 
                         <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span>Camp Fee (1 x $37.50)</span>
-                                <span>$37.50</span>
+                                <span id="order-camp-label">Camp Fee (1 x $37.50)</span>
+                                <span id="order-camp-fee">$37.50</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                                 <span>Reservation Fee (web)</span>
-                                <span>$9.73</span>
+                                <span id="order-resv-fee">$9.73</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                                 <span>Subtotal</span>
-                                <span>$47.23</span>
+                                <span id="order-subtotal">$47.23</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid #d1d5db;">
                                 <span><strong>Tax (HST 13%)</strong></span>
-                                <span><strong>$6.14</strong></span>
+                                <span><strong id="order-tax">$6.14</strong></span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Total Section -->
                     <div class="total-section">
-                        <div class="total-amount">Total: $53.37 CAD</div>
+                        <div class="total-amount" id="order-total">Total: $53.37 CAD</div>
                         <div class="total-note">Payment processed securely</div>
                     </div>
                 </div>
@@ -355,6 +355,46 @@
     <script src="js/email.js"></script>
     <script src="js/script.js"></script>
     <script>
+        // Load real booking totals from localStorage
+        (function() {
+            const b = JSON.parse(localStorage.getItem('pending_booking') || '{}');
+            const total = localStorage.getItem('checkout_total');
+            const subtotal = localStorage.getItem('checkout_subtotal');
+            const tax = localStorage.getItem('checkout_tax');
+
+            if (b.campground) {
+                const cgEl = document.getElementById('order-campground');
+                if (cgEl) cgEl.textContent = b.campground;
+            }
+            if (b.arrival && b.departure) {
+                const fmt = d => new Date(d).toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+                const dEl = document.getElementById('order-dates');
+                if (dEl) dEl.textContent = `${fmt(b.arrival)} – ${fmt(b.departure)} • ${b.nights || 1} Night${(b.nights || 1) > 1 ? 's' : ''}`;
+            }
+            if (b.nights && b.pricePerNight) {
+                const campFee = (b.nights * b.pricePerNight).toFixed(2);
+                const resvFee = (b.nights * 9.73).toFixed(2);
+                const lbl = document.getElementById('order-camp-label');
+                if (lbl) lbl.textContent = `Camp Fee (${b.nights} x $${b.pricePerNight})`;
+                const feeEl = document.getElementById('order-camp-fee');
+                if (feeEl) feeEl.textContent = `$${campFee}`;
+                const resvEl = document.getElementById('order-resv-fee');
+                if (resvEl) resvEl.textContent = `$${resvFee}`;
+            }
+            if (subtotal) {
+                const subEl = document.getElementById('order-subtotal');
+                if (subEl) subEl.textContent = `$${subtotal}`;
+            }
+            if (tax) {
+                const taxEl = document.getElementById('order-tax');
+                if (taxEl) taxEl.textContent = `$${tax}`;
+            }
+            if (total) {
+                const totEl = document.getElementById('order-total');
+                if (totEl) totEl.textContent = `Total: $${total} CAD`;
+            }
+        })();
+
         function completeCheckout() {
             const inputs = document.querySelectorAll('input[required], select[required]');
             let isValid = true;
