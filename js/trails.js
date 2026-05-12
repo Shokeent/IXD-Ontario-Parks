@@ -189,7 +189,7 @@ class TrailManager {
     // Format trail data for display
     formatTrailData(trail) {
         const season = new Date();
-        const currentSeason = season.getMonth() < 3 ? 'spring' :
+        const currentSeason = season.getMonth() < 3 ? 'winter' :
                              season.getMonth() < 6 ? 'spring' :
                              season.getMonth() < 9 ? 'summer' :
                              season.getMonth() < 12 ? 'fall' : 'winter';

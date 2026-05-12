@@ -111,9 +111,6 @@
                         </div>
                     </section>
 
-                    <!-- Campground Details -->
-                    <section class="campground-section">
-
                     <!-- Campfire Permit & Fire Safety -->
                     <section class="campfire-section" style="margin-bottom:30px;">
                         <h2>Fire Safety & Permits</h2>
@@ -121,7 +118,9 @@
                         <div id="fire-safety-guide"></div>
                     </section>
 
-                    <h2>Campground</h2>
+                    <!-- Campground Details -->
+                    <section class="campground-section">
+                        <h2>Campground</h2>
                         
                         <div class="campground-item">
                             <div class="campground-header">
@@ -406,7 +405,7 @@
         parkEventsManager.renderEventsList(parkId, 'park-events-list');
 
         // Wildlife guide
-        wildlifeNatureGuide.renderWildlifePanel(parkId, 'wildlife-guide-panel');
+        wildlifeNatureGuide.renderWildlifeGuide(parkId, 'wildlife-guide-panel');
 
         // Photo gallery
         photoGalleryManager.renderGallery(parkId, 'photo-gallery-panel');

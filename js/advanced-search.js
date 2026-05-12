@@ -420,7 +420,16 @@ class AdvancedSearchManager {
 
     // Update filter
     updateFilter(filterName, value) {
-        // Would update current filters and re-run search
+        this.currentFilters = this.currentFilters || {};
+        if (value) {
+            this.currentFilters[filterName] = value;
+        } else {
+            delete this.currentFilters[filterName];
+        }
+        const input = document.getElementById('search-input');
+        if (input && input.value.trim()) {
+            this.search(input.value.trim());
+        }
     }
 }
 

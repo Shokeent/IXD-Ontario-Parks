@@ -341,10 +341,10 @@ class FavoritesManager {
                     </div>
                     <p class="collection-description">${collection.description}</p>
                     <div class="collection-actions">
-                        <button class="btn-link" onclick="viewCollection('${collection.id}')">
+                        <button class="btn-link" onclick="favoritesManager.viewCollection('${collection.id}')">
                             View
                         </button>
-                        <button class="btn-link" onclick="editCollection('${collection.id}')">
+                        <button class="btn-link" onclick="favoritesManager.editCollection('${collection.id}')">
                             Edit
                         </button>
                         <button class="btn-link" onclick="favoritesManager.deleteCollection('${collection.id}'); location.reload();">
@@ -357,6 +357,23 @@ class FavoritesManager {
 
         html += '</div>';
         container.innerHTML = html;
+    }
+
+    viewCollection(collectionId) {
+        const collection = this.collections.find(c => c.id === collectionId);
+        if (!collection) return;
+        alert(`Collection: ${collection.name}\nItems: ${collection.items.join(', ') || 'No parks added yet'}`);
+    }
+
+    editCollection(collectionId) {
+        const collection = this.collections.find(c => c.id === collectionId);
+        if (!collection) return;
+        const newName = prompt('Collection name:', collection.name);
+        if (newName && newName.trim()) {
+            collection.name = newName.trim();
+            this.saveCollections();
+            this.renderCollections();
+        }
     }
 
     // Get random color for collection

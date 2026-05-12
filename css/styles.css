@@ -2650,3 +2650,622 @@ body {
         gap: 24px;
     }
 }
+
+/* ============================================================
+   MODULE STYLES — wired feature components
+   ============================================================ */
+
+/* Nav additions */
+.nav-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.nav-icon-btn:hover { background: rgba(0,0,0,0.06); }
+.nav-lang-select {
+    background: none;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #374151;
+}
+
+/* ---- Comparison table ---- */
+.comparison-table-wrapper { overflow-x: auto; }
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.comparison-table th,
+.comparison-table td {
+    padding: 10px 14px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+}
+.comparison-table th {
+    background: #f9fafb;
+    font-weight: 600;
+    color: #1f2937;
+}
+.comparison-table .highlight-row td { background: #f0fdf4; }
+.comparison-table .best-score { background: #d1fae5; font-weight: 600; }
+.comparison-table .difficulty-easy { color: #059669; }
+.comparison-table .difficulty-moderate { color: #d97706; }
+.comparison-table .difficulty-hard { color: #dc2626; }
+.comparison-verdict {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+.comparison-verdict h3 { margin-bottom: 10px; font-size: 16px; }
+.comparison-verdict p { margin: 6px 0; font-size: 14px; }
+.no-results { color: #6b7280; padding: 20px; text-align: center; }
+
+/* ---- Fire safety guide ---- */
+.fire-safety-guide { margin-top: 12px; }
+.safety-section {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+}
+.safety-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+.safety-section ul { padding-left: 20px; }
+.safety-section li { margin-bottom: 6px; font-size: 14px; color: #374151; }
+.safety-section.warning {
+    border-color: #fca5a5;
+    background: #fff5f5;
+}
+.safety-section.warning h3 { color: #b91c1c; }
+
+/* ---- Events list ---- */
+.events-list { display: flex; flex-direction: column; gap: 14px; }
+.event-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+.event-date-badge {
+    min-width: 52px;
+    background: #059669;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+.event-date-badge .month { font-size: 10px; text-transform: uppercase; }
+.event-date-badge .day { font-size: 22px; line-height: 1; }
+.event-info { flex: 1; }
+.event-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.event-meta { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
+.event-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.event-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: #f3f4f6;
+    color: #374151;
+}
+.event-capacity { font-size: 12px; color: #dc2626; font-weight: 600; }
+.btn-register {
+    padding: 8px 14px;
+    background: #059669;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.btn-register:hover { background: #047857; }
+.btn-register:disabled { background: #9ca3af; cursor: not-allowed; }
+
+/* ---- Photo gallery ---- */
+.photo-gallery { }
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+.gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: #f3f4f6;
+    cursor: pointer;
+}
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s;
+}
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-upload-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #f0fdf4;
+    border: 2px dashed #a7f3d0;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    color: #059669;
+    font-size: 14px;
+    transition: all 0.2s;
+    margin-top: 12px;
+}
+.gallery-upload-btn:hover { background: #d1fae5; }
+.gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gallery-lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 8px; }
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* ---- Visitor survey form ---- */
+.survey-form { background: #fff; }
+.survey-form h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+.survey-question { margin-bottom: 24px; }
+.question-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 12px;
+}
+.nps-scale {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+.nps-option input { display: none; }
+.nps-option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.15s;
+}
+.nps-option input:checked + span {
+    background: #059669;
+    border-color: #059669;
+    color: white;
+}
+.nps-option span:hover { border-color: #059669; }
+.nps-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+.star-rating { display: flex; gap: 4px; flex-direction: row-reverse; justify-content: flex-end; }
+.star-rating input { display: none; }
+.star-rating .star {
+    font-size: 24px;
+    cursor: pointer;
+    color: #d1d5db;
+    transition: color 0.1s;
+}
+.star-rating input:checked ~ label .star,
+.star-rating label:hover .star,
+.star-rating label:hover ~ label .star { color: #f59e0b; }
+.checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.15s;
+}
+.checkbox-option:has(input:checked) {
+    background: #d1fae5;
+    border-color: #059669;
+    color: #065f46;
+}
+.survey-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+.survey-textarea:focus { outline: none; border-color: #059669; box-shadow: 0 0 0 3px rgba(5,150,105,0.1); }
+.btn-full { width: 100%; }
+.survey-thankyou { text-align: center; padding: 40px 20px; }
+.survey-thankyou h2 { font-size: 24px; margin-bottom: 10px; }
+
+/* ---- Accessibility guide ---- */
+.accessibility-guide { }
+.accessibility-score-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #f9fafb;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 4px solid #059669;
+}
+.score-number { font-size: 36px; font-weight: 800; }
+.score-label { font-size: 13px; color: #6b7280; }
+.accessibility-notice {
+    background: #fef3c7;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #92400e;
+    margin-bottom: 16px;
+}
+.accessibility-section { margin-bottom: 20px; }
+.accessibility-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: #1f2937; }
+.paths-list, .equipment-list, .campsites-list { display: flex; flex-direction: column; gap: 10px; }
+.path-item, .equipment-item, .campsite-item {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+.path-details { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; color: #6b7280; margin-top: 4px; }
+.path-details span { background: #f3f4f6; padding: 2px 8px; border-radius: 4px; }
+.equipment-item span { font-size: 13px; color: #6b7280; margin-left: 8px; }
+.booking-note { font-size: 12px; color: #6b7280; margin-top: 8px; }
+.campsite-item ul { padding-left: 16px; margin-top: 6px; }
+.campsite-item li { font-size: 13px; color: #374151; margin-bottom: 3px; }
+
+/* ---- Wildlife guide ---- */
+.wildlife-guide { }
+.wildlife-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+.wildlife-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+.wildlife-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.wildlife-icon { font-size: 32px; margin-bottom: 8px; }
+.wildlife-name { font-size: 14px; font-weight: 600; color: #1f2937; }
+.wildlife-status {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 4px;
+}
+.status-spotted { background: #d1fae5; color: #065f46; }
+.status-not-spotted { background: #f3f4f6; color: #6b7280; }
+.wildlife-season { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+
+/* ---- Offline map panel ---- */
+.map-panel { margin-bottom: 16px; }
+.map-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.map-header h3 { font-size: 16px; font-weight: 600; }
+.map-actions { display: flex; gap: 8px; align-items: center; }
+.downloaded-badge {
+    font-size: 12px;
+    color: #059669;
+    font-weight: 600;
+    background: #d1fae5;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+.map-placeholder {
+    background: #f3f4f6;
+    border-radius: 10px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 13px;
+    text-align: center;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+.map-center-info p { margin: 4px 0; }
+.poi-list { margin-top: 10px; }
+.poi-list h4 { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 8px; }
+.poi-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 13px;
+}
+.poi-icon { font-size: 16px; }
+.poi-name { flex: 1; color: #1f2937; }
+.poi-type { font-size: 11px; color: #9ca3af; }
+.waypoints-section { margin-top: 12px; display: flex; align-items: center; gap: 12px; }
+.waypoints-section h4 { font-size: 13px; font-weight: 600; margin: 0; }
+
+/* ---- Loyalty rewards dashboard ---- */
+.loyalty-dashboard { }
+.loyalty-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, #059669, #047857);
+    border-radius: 12px;
+    color: white;
+    margin-bottom: 20px;
+}
+.loyalty-tier { font-size: 20px; font-weight: 700; }
+.loyalty-points { font-size: 32px; font-weight: 800; }
+.loyalty-points-label { font-size: 13px; opacity: 0.85; }
+.loyalty-progress {
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    height: 6px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.loyalty-progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 20px;
+    transition: width 0.4s;
+}
+.badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 12px;
+    text-align: center;
+    min-width: 70px;
+}
+.badge-item.earned { border-color: #059669; background: #f0fdf4; }
+.badge-icon { font-size: 24px; margin-bottom: 4px; }
+.badge-name { font-weight: 600; color: #1f2937; }
+.badge-points { color: #059669; font-weight: 600; }
+.rewards-list { display: flex; flex-direction: column; gap: 10px; }
+.reward-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+}
+.reward-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.reward-info p { font-size: 12px; color: #6b7280; }
+.btn-redeem {
+    padding: 6px 14px;
+    background: #059669;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+.btn-redeem:disabled { background: #d1d5db; cursor: not-allowed; }
+
+/* ---- Seasonal recommendations ---- */
+.seasonal-info { }
+.seasonal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.seasonal-header h2 { font-size: 20px; font-weight: 700; }
+.season-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #d1fae5;
+    color: #065f46;
+}
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+.recommendation-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    padding: 16px;
+    transition: box-shadow 0.2s;
+}
+.recommendation-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.rec-park-name { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: #1f2937; }
+.rec-reason { font-size: 13px; color: #6b7280; margin-bottom: 10px; }
+.rec-score {
+    display: inline-block;
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+/* ---- Permit card ---- */
+.permit-card {
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px;
+    background: #fff;
+}
+.permit-card.valid { border-color: #059669; }
+.permit-card.expired { border-color: #d1d5db; opacity: 0.7; }
+.permit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.permit-status { font-size: 13px; font-weight: 600; color: #059669; }
+.permit-card.expired .permit-status { color: #9ca3af; }
+.permit-number { font-size: 18px; font-weight: 700; color: #1d4ed8; margin-bottom: 12px; }
+.permit-details { font-size: 13px; color: #374151; display: flex; flex-direction: column; gap: 4px; }
+.permit-restrictions {
+    margin-top: 12px;
+    padding: 10px;
+    background: #fef3c7;
+    border-radius: 6px;
+    font-size: 13px;
+}
+.permit-note { font-size: 12px; color: #9ca3af; margin-top: 10px; }
+
+/* ---- Amenities panel (park-amenities.js) ---- */
+.amenities-panel { }
+.amenity-section { margin-bottom: 20px; }
+.amenity-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+.amenity-items { display: flex; flex-wrap: wrap; gap: 8px; }
+.amenity-item {
+    padding: 6px 12px;
+    background: #f0fdf4;
+    border: 1px solid #a7f3d0;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #065f46;
+}
+.amenity-item.unavailable { background: #f9fafb; border-color: #e5e7eb; color: #9ca3af; }
+.crowd-level { font-size: 13px; margin-top: 6px; }
+.crowd-low { color: #059669; }
+.crowd-moderate { color: #d97706; }
+.crowd-high { color: #dc2626; }
+
+/* ---- Btn helpers ---- */
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+.btn-link {
+    background: none;
+    border: none;
+    color: #059669;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 4px 8px;
+    text-decoration: underline;
+}
+
+/* ---- Seasonal info section (renderSeasonalInfo) ---- */
+.seasonal-period { color: #6b7280; font-size: 14px; margin-top: 4px; }
+.seasonal-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.seasonal-section {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid #e5e7eb;
+}
+.seasonal-section h3 { font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.activity-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.activity-badge {
+    padding: 3px 10px;
+    background: #d1fae5;
+    color: #065f46;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.parks-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.park-link {
+    padding: 4px 12px;
+    background: none;
+    border: 1px solid #059669;
+    color: #059669;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    text-transform: capitalize;
+}
+.park-link:hover { background: #059669; color: white; }
+.community-insights {
+    background: #f0fdf4;
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid #a7f3d0;
+}
+.community-insights h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.community-insights p { font-size: 13px; color: #374151; margin-bottom: 6px; }
