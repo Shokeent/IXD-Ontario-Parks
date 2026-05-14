@@ -27,10 +27,22 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1 class="page-title">Acknowledge</h1>
+    <!-- Confirmation Banner -->
+    <section style="background:linear-gradient(135deg,#059669,#047857);padding:48px 0;color:white;">
+        <div class="container" style="text-align:center;">
+            <div style="font-size:56px;margin-bottom:12px;">✅</div>
+            <h1 style="font-size:32px;font-weight:700;margin:0 0 8px 0;">Booking Confirmed!</h1>
+            <p style="font-size:16px;opacity:0.9;margin:0 0 20px 0;" id="conf-park-name">Algonquin Provincial Park</p>
+            <div style="display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:10px;padding:14px 32px;">
+                <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:4px;">Booking Reference</div>
+                <div style="font-size:24px;font-weight:700;letter-spacing:4px;" id="conf-ref-number">ONP-2025-XXXXXX</div>
+            </div>
+            <div style="margin-top:20px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;font-size:14px;opacity:0.9;">
+                <span id="conf-dates">📅 Dates TBD</span>
+                <span id="conf-site">⛺ Site TBD</span>
+                <span id="conf-total">💳 Total TBD</span>
+            </div>
+            <p style="margin-top:20px;font-size:13px;opacity:0.75;">A confirmation email has been sent to your registered address.</p>
         </div>
     </section>
 
@@ -69,12 +81,13 @@
                     </div>
                     
                     <div class="search-field">
-                        <label>Guest</label>
+                        <label>Guests</label>
                         <select class="search-select">
-                            <option>2 Night</option>
-                            <option>1 Night</option>
-                            <option>3 Nights</option>
-                            <option>4+ Nights</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2" selected>2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5+ Guests</option>
                         </select>
                     </div>
                     
@@ -411,5 +424,30 @@
     <script src="js/i18n.js"></script>
     <script src="js/script.js"></script>
     <script src="js/acknowledge.js"></script>
+    <script>
+        (function() {
+            const ref = 'ONP-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2,6).toUpperCase();
+            const refEl = document.getElementById('conf-ref-number');
+            if (refEl) refEl.textContent = ref;
+            localStorage.setItem('booking_ref', ref);
+
+            const b = JSON.parse(localStorage.getItem('pending_booking') || '{}');
+            const fmt = d => new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            const parkEl = document.getElementById('conf-park-name');
+            if (parkEl && b.parkName) parkEl.textContent = b.parkName;
+
+            const datesEl = document.getElementById('conf-dates');
+            if (datesEl && b.arrival && b.departure)
+                datesEl.textContent = `📅 ${fmt(b.arrival)} – ${fmt(b.departure)} (${b.nights || 1} night${(b.nights||1)>1?'s':''})`;
+
+            const siteEl = document.getElementById('conf-site');
+            if (siteEl && b.site) siteEl.textContent = `⛺ ${b.site}`;
+
+            const total = localStorage.getItem('checkout_total') || b.total;
+            const totEl = document.getElementById('conf-total');
+            if (totEl && total) totEl.textContent = `💳 $${parseFloat(total).toFixed(2)} CAD`;
+        })();
+    </script>
 </body>
 </html>

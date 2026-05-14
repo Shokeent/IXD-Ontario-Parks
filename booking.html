@@ -82,18 +82,19 @@
                     </div>
                     
                     <div class="search-field">
-                        <label>Guest</label>
-                        <select class="search-select">
-                            <option>2 Night</option>
-                            <option>1 Night</option>
-                            <option>3 Nights</option>
-                            <option>4+ Nights</option>
+                        <label>Guests</label>
+                        <select class="search-select" id="booking-guests">
+                            <option value="1">1 Guest</option>
+                            <option value="2" selected>2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5+ Guests</option>
                         </select>
                     </div>
                     
                     <div class="search-field">
                         <label>Equipment</label>
-                        <select class="search-select">
+                        <select class="search-select" id="booking-equipment">
                             <option>Single Tent</option>
                             <option>Family Tent</option>
                             <option>RV</option>
@@ -533,8 +534,8 @@
 
             const nights = Math.max(1, Math.ceil((new Date(departure) - new Date(arrival)) / 86400000));
             const parkName = bookingParkId.replace(/-park$/, '').split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-            const equipment = document.querySelector('.search-select:last-of-type')?.value || 'Single Tent';
-            const guests = document.querySelector('.search-select')?.value || '2';
+            const equipment = document.querySelector('#booking-equipment')?.value || 'Single Tent';
+            const guests = document.getElementById('booking-guests')?.value || '2';
 
             // Persist booking data
             const bookingData = {

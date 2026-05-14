@@ -140,7 +140,14 @@
                 </div>
             </div>
             
-            <div class="parks-grid-all-modern">
+            <div class="parks-grid-all-modern" id="parks-grid">
+                <!-- no-results state (hidden by default) -->
+                <div id="no-results-msg" style="display:none;grid-column:1/-1;text-align:center;padding:60px 20px;">
+                    <div style="font-size:48px;margin-bottom:16px;">🌲</div>
+                    <h3 style="color:#1f2937;margin-bottom:8px;">No parks match your search</h3>
+                    <p style="color:#6b7280;margin-bottom:20px;">Try a different keyword or clear the filter.</p>
+                    <button onclick="filterParks('')" style="background:#059669;color:white;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:600;">Clear Filter</button>
+                </div>
                 <!-- Park 1 - Algonquin -->
                 <div class="park-card-all-modern">
                     <div class="park-image-all-modern park-image-algonquin"></div>
@@ -419,29 +426,38 @@
         function searchParks() {
             const parkSelect = document.querySelector('.search-select-hero');
             const parkName = parkSelect ? parkSelect.value : '';
-            if (parkName) {
-                const cards = document.querySelectorAll('.park-card-all-modern');
-                cards.forEach(card => {
-                    const title = card.querySelector('.park-title-all-modern');
-                    card.style.display = (!title || title.textContent.toLowerCase().includes(parkName.toLowerCase().split(' ')[0])) ? '' : 'none';
-                });
-            }
+            const cards = document.querySelectorAll('.park-card-all-modern');
+            let visible = 0;
+            cards.forEach(card => {
+                const title = card.querySelector('.park-title-all-modern');
+                const show = !parkName || !title || title.textContent.toLowerCase().includes(parkName.toLowerCase().split(' ')[0]);
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            const noRes = document.getElementById('no-results-msg');
+            if (noRes) noRes.style.display = visible === 0 ? 'block' : 'none';
         }
 
         function filterParks(keyword) {
             const cards = document.querySelectorAll('.park-card-all-modern');
             const btns = document.querySelectorAll('.filter-tag-btn');
             btns.forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) event.target.classList.add('active');
 
+            let visible = 0;
             cards.forEach(card => {
-                if (!keyword) {
-                    card.style.display = '';
-                    return;
-                }
+                if (!keyword) { card.style.display = ''; visible++; return; }
                 const text = card.textContent.toLowerCase();
-                card.style.display = text.includes(keyword.toLowerCase()) ? '' : 'none';
+                const show = text.includes(keyword.toLowerCase());
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
             });
+            const noRes = document.getElementById('no-results-msg');
+            if (noRes) noRes.style.display = visible === 0 ? 'block' : 'none';
+            const subtitle = document.querySelector('.parks-subtitle');
+            if (subtitle) subtitle.textContent = keyword
+                ? `${visible} park${visible !== 1 ? 's' : ''} matching "${keyword}"`
+                : 'Handpicked locations with excellent facilities and beginner-friendly features';
         }
 
         function toggleParkCompare(parkId, checkbox) {

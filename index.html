@@ -317,6 +317,35 @@
         if (typeof seasonalRecommendationEngine !== 'undefined') {
             seasonalRecommendationEngine.renderSeasonalInfo('seasonal-banner');
         }
+
+        // Hero slider — cycle through 5 background themes
+        (function() {
+            const hero = document.getElementById('hero-section');
+            if (!hero) return;
+            const slides = [
+                { bg: 'linear-gradient(135deg,#064e3b 0%,#065f46 50%,#047857 100%)', title: 'Your First Ontario<br>Adventure Starts Here', sub: 'We guide newcomers and first-time campers through every step<br>from gear prep to unforgettable memories.' },
+                { bg: 'linear-gradient(135deg,#1e3a5f 0%,#1d4ed8 50%,#2563eb 100%)', title: 'Paddle Algonquin\'s<br>Crystal Lakes', sub: 'Over 2,400 lakes and rivers to explore — canoe routes for every skill level.' },
+                { bg: 'linear-gradient(135deg,#78350f 0%,#92400e 50%,#b45309 100%)', title: 'Fall Colours Like<br>You\'ve Never Seen', sub: 'Ontario\'s parks transform into a sea of red, orange and gold every autumn.' },
+                { bg: 'linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#4338ca 100%)', title: 'Stargaze Far from<br>City Lights', sub: 'Some of Ontario\'s darkest skies are waiting for you — no telescope required.' },
+                { bg: 'linear-gradient(135deg,#134e4a 0%,#0f766e 50%,#0d9488 100%)', title: 'Wildlife at Every<br>Turn', sub: 'Moose, loons, beavers and black bears — all in their natural Ontario habitat.' }
+            ];
+            const dots = hero.querySelectorAll('.dot');
+            const titleEl = hero.querySelector('.hero-title');
+            const subEl = hero.querySelector('.hero-description');
+            let current = 0;
+
+            function goTo(idx) {
+                current = (idx + slides.length) % slides.length;
+                hero.style.background = slides[current].bg;
+                if (titleEl) titleEl.innerHTML = slides[current].title;
+                if (subEl) subEl.innerHTML = slides[current].sub;
+                dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            }
+
+            dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+            const interval = setInterval(() => goTo(current + 1), 4500);
+            hero.addEventListener('mouseenter', () => clearInterval(interval));
+        })();
     </script>
 </body>
 </html>
