@@ -488,7 +488,10 @@ class EquipmentRentalManager {
             });
         }
 
-        window.location.href = 'shopping-cart.html';
+        if (typeof showNotification === 'function') {
+            showNotification(`${item.name} added for ${days} day${days > 1 ? 's' : ''} — $${totalCost}. Redirecting to cart…`, 'success');
+        }
+        setTimeout(() => { window.location.href = 'shopping-cart.html'; }, 1200);
     }
 }
 

@@ -307,12 +307,12 @@
                     <!-- Reservation Details -->
                     <div class="reservation-details">
                         <div class="reservation-info">
-                            <h3>Algonquin - Kiosk Campground</h3>
+                            <h3>Your Reservation</h3>
                             <div class="check-times">
                                 <div class="check-time">Check In: 14:00</div>
                                 <div class="check-time">Check Out: 14:00</div>
                             </div>
-                            <div class="dates">Mon, Jul 21 - Tue, Jul 22, 2025</div>
+                            <div class="dates" id="cart-dates">Dates TBD</div>
                         </div>
                         
                         <div class="nights-info">
@@ -418,7 +418,7 @@
                 const fmt = d => new Date(d).toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
                 const campName = document.querySelector('.reservation-info h3');
                 if (campName) campName.textContent = b.campground || b.parkName;
-                const datesEl = document.querySelector('.dates');
+                const datesEl = document.querySelector('.dates, #cart-dates');
                 if (datesEl) datesEl.textContent = `${fmt(b.arrival)} – ${fmt(b.departure)}`;
                 const nightsVal = document.querySelector('.nights-value');
                 if (nightsVal) nightsVal.textContent = b.nights || '1';

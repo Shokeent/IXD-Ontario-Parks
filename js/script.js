@@ -590,6 +590,20 @@ function navigateToParkDetails(parkId) {
     window.location.href = 'park-details.html';
 }
 
+// Scroll-to-top button — injected on every page
+(function() {
+    const btn = document.createElement('button');
+    btn.id = 'scroll-to-top-btn';
+    btn.setAttribute('aria-label', 'Scroll to top');
+    btn.innerHTML = '&#8679;';
+    btn.style.cssText = 'position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:#059669;color:white;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);display:none;align-items:center;justify-content:center;z-index:9000;transition:opacity 0.2s;';
+    document.body.appendChild(btn);
+    window.addEventListener('scroll', () => {
+        btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
 // Navigate to booking page with park ID
 function navigateToBooking(parkId) {
     localStorage.setItem('selectedParkId', parkId);

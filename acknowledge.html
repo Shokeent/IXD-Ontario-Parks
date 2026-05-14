@@ -55,7 +55,7 @@
                 <span id="conf-site">⛺ Site TBD</span>
                 <span id="conf-total">💳 Total TBD</span>
             </div>
-            <p style="margin-top:20px;font-size:13px;opacity:0.75;">A confirmation email has been sent to your registered address.</p>
+            <p style="margin-top:20px;font-size:13px;opacity:0.75;" id="conf-email-line">A confirmation email has been sent to your registered address.</p>
         </div>
     </section>
 
@@ -444,6 +444,17 @@
                     totalCost: parseFloat(total || b.total || 0),
                     status: 'confirmed'
                 });
+            }
+
+            // Personalize the email confirmation line
+            const emailLineEl = document.getElementById('conf-email-line');
+            if (emailLineEl) {
+                const user = (typeof authManager !== 'undefined' && authManager.isAuthenticated)
+                    ? authManager.getCurrentUser() : null;
+                const email = user?.email || localStorage.getItem('lastLoginEmail') || null;
+                emailLineEl.textContent = email
+                    ? `A confirmation email has been sent to ${email}.`
+                    : 'A confirmation email has been sent to your registered address.';
             }
         })();
     </script>

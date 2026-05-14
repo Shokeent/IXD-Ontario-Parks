@@ -567,6 +567,17 @@
         }
 
         async function saveProfile() {
+            const emailEl = document.getElementById('profile-email');
+            const phoneEl = document.getElementById('profile-phone');
+            const phone = phoneEl.value.trim();
+
+            if (phone && !/^[\d\s\-\+\(\)]{7,15}$/.test(phone)) {
+                phoneEl.style.borderColor = '#dc2626';
+                showMessage('profile-message', { success: false, error: 'Please enter a valid phone number.' });
+                return;
+            }
+            phoneEl.style.borderColor = '';
+
             const result = await authManager.updateProfile({
                 firstName: document.getElementById('profile-firstName').value,
                 lastName: document.getElementById('profile-lastName').value,
@@ -605,6 +616,9 @@
                 return;
             }
 
+            const btn = document.querySelector('#security .btn-save');
+            if (btn) { btn.disabled = true; btn.textContent = 'Updating…'; }
+
             const result = await authManager.changePassword(current, newPass);
             if (result.success) {
                 document.getElementById('security-current').value = '';
@@ -612,16 +626,27 @@
                 document.getElementById('security-confirm').value = '';
             }
 
+            if (btn) { btn.disabled = false; btn.textContent = 'Update Password'; }
             showMessage('security-message', result);
         }
 
         function viewBookingDetails(confirmationId) {
-            alert('Viewing details for: ' + confirmationId);
+            showNotification(`Booking ref: ${confirmationId} — view full details in your confirmation email.`, 'info');
         }
 
         function cancelBooking(confirmationId) {
             if (confirm('Are you sure you want to cancel this booking?')) {
-                alert('Booking ' + confirmationId + ' has been cancelled');
+                const bookings = authManager.getUserBookings();
+                const booking = bookings.find(b => b.confirmationId === confirmationId);
+                if (booking) {
+                    booking.status = 'cancelled';
+                    const allUsers = JSON.parse(localStorage.getItem('ontario_parks_users') || '[]');
+                    const uid = localStorage.getItem('user_id');
+                    const user = allUsers.find(u => u.id === uid);
+                    if (user) { user.bookings = bookings; localStorage.setItem('ontario_parks_users', JSON.stringify(allUsers)); }
+                    loadBookings();
+                    showNotification(`Booking ${confirmationId} has been cancelled.`, 'success');
+                }
             }
         }
 

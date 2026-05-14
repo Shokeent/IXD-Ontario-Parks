@@ -343,8 +343,8 @@
                 dots.forEach((d, i) => d.classList.toggle('active', i === current));
             }
 
-            dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
-            const interval = setInterval(() => goTo(current + 1), 4500);
+            let interval = setInterval(() => goTo(current + 1), 4500);
+            dots.forEach((dot, i) => dot.addEventListener('click', () => { clearInterval(interval); goTo(i); }));
             hero.addEventListener('mouseenter', () => clearInterval(interval));
         })();
     </script>

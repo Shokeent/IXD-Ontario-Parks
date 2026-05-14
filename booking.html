@@ -550,6 +550,24 @@
             });
         });
 
+        // Apply selected outline to first card on load
+        const firstCard = document.querySelector('.campsite-card');
+        if (firstCard) firstCard.style.outline = '3px solid #059669';
+
+        // Pre-select campground if arriving from BOOK NOW on park-details page
+        const preselect = localStorage.getItem('bookingCampground');
+        if (preselect) {
+            const targetCard = document.querySelector(`.campsite-card[data-campsite="${preselect}"]`);
+            if (targetCard) { targetCard.click(); targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+            localStorage.removeItem('bookingCampground');
+        }
+
+        // Reset error borders when user picks a date
+        ['booking-arrival-date', 'booking-departure-date'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('change', () => { el.style.borderColor = ''; });
+        });
+
         function proceedToReview() {
             const arrival = document.getElementById('booking-arrival-date').value;
             const departure = document.getElementById('booking-departure-date').value;
