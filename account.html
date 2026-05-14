@@ -325,11 +325,11 @@
         <div class="account-grid">
             <aside class="account-sidebar">
                 <ul class="account-menu">
-                    <li><button class="menu-btn active" onclick="switchTab('profile')">Profile</button></li>
-                    <li><button class="menu-btn" onclick="switchTab('bookings')">My Bookings</button></li>
-                    <li><button class="menu-btn" onclick="switchTab('rewards')">Loyalty Rewards</button></li>
-                    <li><button class="menu-btn" onclick="switchTab('preferences')">Preferences</button></li>
-                    <li><button class="menu-btn" onclick="switchTab('security')">Security</button></li>
+                    <li><button class="menu-btn active" onclick="switchTab('profile',this)">Profile</button></li>
+                    <li><button class="menu-btn" onclick="switchTab('bookings',this)">My Bookings</button></li>
+                    <li><button class="menu-btn" onclick="switchTab('rewards',this)">Loyalty Rewards</button></li>
+                    <li><button class="menu-btn" onclick="switchTab('preferences',this)">Preferences</button></li>
+                    <li><button class="menu-btn" onclick="switchTab('security',this)">Security</button></li>
                 </ul>
                 <button class="account-logout" onclick="handleLogout()">Logout</button>
             </aside>
@@ -475,11 +475,11 @@
             loadPreferences();
         }
 
-        function switchTab(tab) {
+        function switchTab(tab, el) {
             document.querySelectorAll('.account-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tab).classList.add('active');
-            event.target.classList.add('active');
+            if (el) el.classList.add('active');
 
             if (tab === 'bookings') {
                 loadBookings();

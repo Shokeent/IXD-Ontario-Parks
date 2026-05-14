@@ -47,64 +47,35 @@
         </div>
     </section>
 
-    <!-- Search and Filter Section -->
-    <section class="search-filter-section">
+    <!-- What's Next Section -->
+    <section style="padding:40px 0;background:#f0fdf4;">
         <div class="container">
-            <div class="search-card">
-                <div class="search-row">
-                    <div class="search-field">
-                        <label>Campsite</label>
-                        <select class="search-select">
-                            <option>All Parks</option>
-                            <option>Algonquin - Achray</option>
-                            <option>Algonquin - Brent</option>
-                            <option>Backpacking</option>
-                        </select>
-                    </div>
-                    
-                    <div class="search-field">
-                        <label>Park</label>
-                        <select class="search-select">
-                            <option>Algonquin - Achray</option>
-                            <option>Algonquin - Brent</option>
-                            <option>Backpacking</option>
-                        </select>
-                    </div>
-                    
-                    <div class="search-field">
-                        <label>Arrival</label>
-                        <input type="date" class="search-input" value="2025-08-21">
-                    </div>
-                    
-                    <div class="search-field">
-                        <label>Departure</label>
-                        <input type="date" class="search-input" value="2025-08-24">
-                    </div>
-                    
-                    <div class="search-field">
-                        <label>Guests</label>
-                        <select class="search-select">
-                            <option value="1">1 Guest</option>
-                            <option value="2" selected>2 Guests</option>
-                            <option value="3">3 Guests</option>
-                            <option value="4">4 Guests</option>
-                            <option value="5">5+ Guests</option>
-                        </select>
-                    </div>
-                    
-                    <div class="search-field">
-                        <label>Equipment</label>
-                        <select class="search-select">
-                            <option>Single Tent</option>
-                            <option>Family Tent</option>
-                            <option>RV</option>
-                            <option>Cabin</option>
-                        </select>
-                    </div>
-                    
-                    <button class="search-btn">
-                        <span class="search-icon">🔍</span>
-                    </button>
+            <h2 style="text-align:center;font-size:24px;font-weight:700;color:#1f2937;margin-bottom:8px;">What to Do Next</h2>
+            <p style="text-align:center;color:#6b7280;margin-bottom:32px;">Your reservation is secured — here's how to prepare for an amazing trip</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:900px;margin:0 auto;">
+                <div style="background:white;border-radius:12px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+                    <div style="font-size:36px;margin-bottom:12px;">🗺️</div>
+                    <h3 style="font-size:16px;font-weight:600;color:#1f2937;margin-bottom:8px;">Explore the Park</h3>
+                    <p style="font-size:14px;color:#6b7280;margin-bottom:16px;">View trails, facilities, and the interactive map for your park.</p>
+                    <a href="park-details.html" style="display:inline-block;background:#059669;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">View Park Details</a>
+                </div>
+                <div style="background:white;border-radius:12px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+                    <div style="font-size:36px;margin-bottom:12px;">🎒</div>
+                    <h3 style="font-size:16px;font-weight:600;color:#1f2937;margin-bottom:8px;">Pack Your Gear</h3>
+                    <p style="font-size:14px;color:#6b7280;margin-bottom:16px;">Use our complete gear checklist so you don't forget anything.</p>
+                    <a href="gear-list.html" style="display:inline-block;background:#059669;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">Gear Checklist</a>
+                </div>
+                <div style="background:white;border-radius:12px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+                    <div style="font-size:36px;margin-bottom:12px;">👤</div>
+                    <h3 style="font-size:16px;font-weight:600;color:#1f2937;margin-bottom:8px;">View My Booking</h3>
+                    <p style="font-size:14px;color:#6b7280;margin-bottom:16px;">Access your booking details and confirmation anytime.</p>
+                    <a href="account.html" style="display:inline-block;background:#059669;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">My Account</a>
+                </div>
+                <div style="background:white;border-radius:12px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+                    <div style="font-size:36px;margin-bottom:12px;">🏕️</div>
+                    <h3 style="font-size:16px;font-weight:600;color:#1f2937;margin-bottom:8px;">Discover More Parks</h3>
+                    <p style="font-size:14px;color:#6b7280;margin-bottom:16px;">Plan your next adventure across Ontario's 340+ parks.</p>
+                    <a href="all-parks.html" style="display:inline-block;background:#059669;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">All Parks</a>
                 </div>
             </div>
         </div>
@@ -126,7 +97,7 @@
                     <div class="campsites-section">
                         <div class="section-header">
                             <h3>3 Campsites available</h3>
-                            <button class="map-toggle">
+                            <button class="map-toggle" onclick="window.open('park-details.html#algonquin-leaflet-map','_blank')">
                                 <span class="map-icon">🗺️</span>
                                 Show in Map
                             </button>
@@ -448,6 +419,20 @@
             const total = localStorage.getItem('checkout_total') || b.total;
             const totEl = document.getElementById('conf-total');
             if (totEl && total) totEl.textContent = `💳 $${parseFloat(total).toFixed(2)} CAD`;
+
+            // Save to account booking history if authenticated
+            if (b.arrival && typeof authManager !== 'undefined' && authManager.isAuthenticated) {
+                authManager.addBooking({
+                    confirmationId: ref,
+                    parkName: b.parkName || 'Ontario Park',
+                    campsiteName: b.site || b.campground,
+                    checkIn: fmt(b.arrival),
+                    checkOut: fmt(b.departure),
+                    nights: b.nights || 1,
+                    totalCost: parseFloat(total || b.total || 0),
+                    status: 'confirmed'
+                });
+            }
         })();
     </script>
 </body>
