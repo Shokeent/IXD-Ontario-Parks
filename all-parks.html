@@ -485,8 +485,6 @@
         }
 
         function findNearbyParks() {
-            if (typeof geolocationManager !== 'undefined') {
-        function findNearbyParks() {
             const btn = document.querySelector('[onclick="findNearbyParks()"]');
             if (btn) { btn.textContent = '📍 Locating…'; btn.disabled = true; }
             const parkCoords = {

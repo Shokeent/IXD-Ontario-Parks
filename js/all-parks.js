@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function initParksPage() {
     try {
-        console.log('Initializing parks page...');
         
         // Show loading state
         showLoadingState();
@@ -23,7 +22,6 @@ async function initParksPage() {
         initSortingOptions();
         initPagination();
         
-        console.log('Parks page initialization complete');
         
     } catch (error) {
         console.error('Failed to initialize parks page:', error);
@@ -46,7 +44,6 @@ async function loadParksData() {
         const maxAttempts = 10;
         
         while (!window.ontarioParksAPI && attempts < maxAttempts) {
-            console.log('Waiting for Ontario Parks API to load...');
             await new Promise(resolve => setTimeout(resolve, 500));
             attempts++;
         }
@@ -55,11 +52,9 @@ async function loadParksData() {
             throw new Error('Ontario Parks API failed to load after multiple attempts');
         }
         
-        console.log('Loading parks data...');
         allParks = await window.ontarioParksAPI.getAllParks();
         filteredParks = [...allParks];
         
-        console.log(`Loaded ${allParks.length} parks successfully`);
         
         // Populate filter options
         await populateFilterOptions();
@@ -76,12 +71,9 @@ async function loadParksData() {
         
         // Try fallback with mock data
         try {
-            console.log('Attempting to load fallback park data...');
             allParks = generateMockParks();
             filteredParks = [...allParks];
             
-            console.log('Generated mock parks:', allParks);
-            console.log('First park image:', allParks[0]?.image);
             
             // Populate filter options with mock data
             populateMockFilterOptions();
@@ -93,7 +85,6 @@ async function loadParksData() {
             // Hide loading state
             hideLoadingState();
             
-            console.log('Successfully loaded fallback park data');
         } catch (fallbackError) {
             console.error('Failed to load fallback data:', fallbackError);
             showErrorState();
@@ -447,7 +438,6 @@ function handleSortChange(event) {
 // Render parks based on current view and pagination
 function renderParks() {
     try {
-        console.log('Rendering parks...', {
             allParksCount: allParks.length,
             filteredParksCount: filteredParks.length,
             currentPage,
@@ -467,7 +457,6 @@ function renderParks() {
         const endIndex = startIndex + parksPerPage;
         const parksToShow = filteredParks.slice(startIndex, endIndex);
         
-        console.log('Parks to show:', parksToShow.length);
         
         // Update container class based on view
         container.className = currentView === 'grid' ? 'parks-grid-all' : 'parks-list';
@@ -477,7 +466,6 @@ function renderParks() {
             currentView === 'grid' ? renderParkCard(park) : renderParkListItem(park)
         ).join('');
         
-        console.log('Parks rendered successfully');
         
         // Add click handlers
         addParkClickHandlers();
@@ -878,7 +866,6 @@ function generateMockParks() {
 
 function populateMockFilterOptions() {
     try {
-        console.log('Populating mock filter options...');
 
         // Mock filter population
         const regions = ["All Regions", "Central Ontario", "Eastern Ontario", "Northern Ontario"];
@@ -889,7 +876,6 @@ function populateMockFilterOptions() {
         populateSelectOptions('activity-filter', activities);
         populateSelectOptions('amenity-filter', amenities);
 
-        console.log('Mock filter options populated successfully');
     } catch (error) {
         console.error('Error populating mock filter options:', error);
     }
