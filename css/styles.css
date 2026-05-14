@@ -3353,3 +3353,58 @@ a.read-more:hover { text-decoration: underline; }
     transform: translateY(-3px);
     box-shadow: 0 6px 18px rgba(0,0,0,0.09);
 }
+
+/* =============================================
+   MOBILE NAVIGATION: Hamburger Menu
+   ============================================= */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    border: none;
+    background: transparent;
+}
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #1f2937;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 16px 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        z-index: 999;
+        gap: 4px;
+        border-top: 1px solid #e5e7eb;
+    }
+    .nav-menu.open { display: flex; }
+    .nav-menu .nav-link {
+        padding: 10px 0;
+        border-bottom: 1px solid #f3f4f6;
+        font-size: 15px;
+    }
+    .nav-menu .btn-reservation {
+        margin-top: 8px;
+        width: 100%;
+        text-align: center;
+    }
+    .nav-container { position: relative; }
+    .nav-icons { display: flex; gap: 12px; }
+}

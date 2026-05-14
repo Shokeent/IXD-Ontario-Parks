@@ -154,7 +154,8 @@
                     <h2>Ontario Parks</h2>
                 </a>
             </div>
-            <div class="nav-menu">
+            <button class="hamburger" id="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('nav-menu').classList.toggle('open')"><span></span><span></span><span></span></button>
+            <div class="nav-menu" id="nav-menu">
                 <a href="all-parks.html" class="nav-link">Discover Parks</a>
                 <a href="gear-list.html" class="nav-link">Gear Guide</a>
                 <a href="gear-list.html" class="nav-link">First Timer Help</a>
@@ -235,23 +236,23 @@
                     <h2 class="section-title">Payment Information</h2>
 
                     <div class="form-group">
-                        <label>Card Holder Name</label>
-                        <input type="text" placeholder="John Doe" required>
+                        <label>Card Holder Name <span style="color:#dc2626;">*</span></label>
+                        <input type="text" placeholder="John Doe" required id="card-name">
                     </div>
 
                     <div class="form-group">
-                        <label>Card Number</label>
-                        <input type="text" placeholder="4111 1111 1111 1111" maxlength="19" required>
+                        <label>Card Number <span style="color:#dc2626;">*</span></label>
+                        <input type="text" placeholder="4111 1111 1111 1111" maxlength="19" required id="card-number" inputmode="numeric" autocomplete="cc-number">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Expiry Date</label>
-                            <input type="text" placeholder="MM/YY" maxlength="5" required>
+                            <label>Expiry Date <span style="color:#dc2626;">*</span></label>
+                            <input type="text" placeholder="MM/YY" maxlength="5" required id="card-expiry" inputmode="numeric" autocomplete="cc-exp">
                         </div>
                         <div class="form-group">
-                            <label>CVV</label>
-                            <input type="text" placeholder="123" maxlength="4" required>
+                            <label>CVV <span style="color:#dc2626;">*</span></label>
+                            <input type="text" placeholder="123" maxlength="4" required id="card-cvv" inputmode="numeric" autocomplete="cc-csc">
                         </div>
                     </div>
                 </div>
@@ -446,5 +447,31 @@
     <script src="js/auth.js"></script>
     <script src="js/dark-mode.js"></script>
     <script src="js/i18n.js"></script>
+    <script>
+        // Card number: auto-insert space every 4 digits
+        const cardInput = document.getElementById('card-number');
+        if (cardInput) {
+            cardInput.addEventListener('input', function() {
+                let v = this.value.replace(/\D/g, '').substring(0, 16);
+                this.value = v.match(/.{1,4}/g)?.join(' ') || v;
+            });
+        }
+        // Expiry: auto-insert slash after MM
+        const expiryInput = document.getElementById('card-expiry');
+        if (expiryInput) {
+            expiryInput.addEventListener('input', function(e) {
+                let v = this.value.replace(/\D/g, '').substring(0, 4);
+                if (v.length >= 3) v = v.substring(0,2) + '/' + v.substring(2);
+                this.value = v;
+            });
+        }
+        // CVV: digits only
+        const cvvInput = document.getElementById('card-cvv');
+        if (cvvInput) {
+            cvvInput.addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, '').substring(0, 4);
+            });
+        }
+    </script>
 </body>
 </html>

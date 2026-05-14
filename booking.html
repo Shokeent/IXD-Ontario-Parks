@@ -17,7 +17,8 @@
                     <h2>Ontario Parks</h2>
                 </a>
             </div>
-            <div class="nav-menu">
+            <button class="hamburger" id="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('nav-menu').classList.toggle('open')"><span></span><span></span><span></span></button>
+            <div class="nav-menu" id="nav-menu">
                 <a href="all-parks.html" class="nav-link">Discover Parks</a>
                 <a href="gear-list.html" class="nav-link">Gear Guide</a>
                 <a href="gear-list.html" class="nav-link">First Timer Help</a>
@@ -461,6 +462,24 @@
     <script src="js/booking.js"></script>
     <script>
         const bookingParkId = localStorage.getItem('selectedParkId') || 'algonquin-park';
+
+        // Default arrival = today, departure = tomorrow
+        (function() {
+            const toISO = d => d.toISOString().split('T')[0];
+            const today = new Date();
+            const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
+            const arrEl = document.getElementById('booking-arrival-date');
+            const depEl = document.getElementById('booking-departure-date');
+            if (arrEl && !arrEl.value) arrEl.value = toISO(today);
+            if (depEl && !depEl.value) depEl.value = toISO(tomorrow);
+            if (arrEl) arrEl.min = toISO(today);
+            if (depEl) depEl.min = toISO(tomorrow);
+            // Keep departure >= arrival + 1 night
+            if (arrEl) arrEl.addEventListener('change', () => {
+                const a = new Date(arrEl.value); a.setDate(a.getDate() + 1);
+                if (depEl) { depEl.min = toISO(a); if (depEl.value <= arrEl.value) depEl.value = toISO(a); }
+            });
+        })();
 
         // Fire ban status
         const ban = campfirePermitManager.checkFireBan(bookingParkId);
