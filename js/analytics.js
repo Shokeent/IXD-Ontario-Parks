@@ -31,7 +31,6 @@ class GoogleAnalyticsManager {
         });
 
         this.isInitialized = true;
-        console.log('Google Analytics 4 initialized with ID:', this.measurementId);
     }
 
     // Track page view

@@ -350,8 +350,6 @@ class SecurityManager {
         }
         window.securityAuditLog.push(event);
 
-        // Log to server (in production)
-        console.log('Security Event:', event);
 
         return event;
     }

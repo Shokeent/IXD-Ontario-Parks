@@ -21,7 +21,6 @@ class StripePaymentManager {
         script.src = 'https://js.stripe.com/v3/';
         script.onload = () => {
             this.stripe = window.Stripe(this.publishableKey);
-            console.log('Stripe initialized successfully');
         };
         document.head.appendChild(script);
     }

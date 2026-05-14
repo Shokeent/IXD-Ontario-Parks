@@ -237,7 +237,6 @@ class PerformanceOptimizer {
             });
         }
 
-        console.log('Performance Metrics:', metrics);
     }
 
     // Detect network speed and adapt

@@ -150,9 +150,8 @@ function initNewsletterForm() {
 
             const email = emailInput.value.trim();
             if (validateEmail(email)) {
-                // Store email (in real app, send to server)
                 localStorage.setItem('newsletterEmail', email);
-                showNotification('Thank you for subscribing! Welcome to the Ontario Parks community.', 'success');
+                showNotification(`Subscribed! We'll send park updates to ${email}.`, 'success');
                 emailInput.value = '';
                 form.reset();
             } else {
