@@ -172,9 +172,21 @@
         <div class="container">
             <div class="header-content">
                 <div>
+                    <a href="shopping-cart.html" class="booking-back-btn">&#8592; Back to Cart</a>
                     <h1 class="page-title">Complete Your Checkout</h1>
                     <p class="page-subtitle">Secure payment and confirmation for your Ontario Parks reservation</p>
                 </div>
+            </div>
+            <div class="booking-progress">
+                <div class="booking-step done"><div class="booking-step-circle">✓</div><div class="booking-step-label">Select Site</div></div>
+                <div class="booking-step-line done"></div>
+                <div class="booking-step done"><div class="booking-step-circle">✓</div><div class="booking-step-label">Review</div></div>
+                <div class="booking-step-line done"></div>
+                <div class="booking-step done"><div class="booking-step-circle">✓</div><div class="booking-step-label">Cart</div></div>
+                <div class="booking-step-line done"></div>
+                <div class="booking-step active"><div class="booking-step-circle">4</div><div class="booking-step-label">Checkout</div></div>
+                <div class="booking-step-line"></div>
+                <div class="booking-step"><div class="booking-step-circle">5</div><div class="booking-step-label">Confirmed</div></div>
             </div>
         </div>
     </section>
@@ -215,7 +227,22 @@
                         </div>
                         <div class="form-group">
                             <label>Province</label>
-                            <input type="text" placeholder="Ontario" required>
+                            <select style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:8px;font-size:16px;" required>
+                                <option value="">Select Province</option>
+                                <option value="AB">Alberta</option>
+                                <option value="BC">British Columbia</option>
+                                <option value="MB">Manitoba</option>
+                                <option value="NB">New Brunswick</option>
+                                <option value="NL">Newfoundland and Labrador</option>
+                                <option value="NS">Nova Scotia</option>
+                                <option value="ON" selected>Ontario</option>
+                                <option value="PE">Prince Edward Island</option>
+                                <option value="QC">Quebec</option>
+                                <option value="SK">Saskatchewan</option>
+                                <option value="NT">Northwest Territories</option>
+                                <option value="NU">Nunavut</option>
+                                <option value="YT">Yukon</option>
+                            </select>
                         </div>
                     </div>
 

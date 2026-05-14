@@ -1,26 +1,16 @@
 // Review Reservation Details Pages JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Determine which page we're on and initialize accordingly
     const currentPage = window.location.pathname.split('/').pop();
-    
-    switch(currentPage) {
-        case 'review-reservation-customer.html':
-            initCustomerDetailsPage();
-            break;
-        case 'review-reservation-cart.html':
-            initShoppingCartPage();
-            break;
-        case 'review-reservation-final.html':
-            initFinalReviewPage();
-            break;
+    if (currentPage === 'review-reservation-customer.html') {
+        initCustomerDetailsPage();
     }
 });
 
 // Customer Details Page Functions
 function initCustomerDetailsPage() {
     const form = document.getElementById('customerForm');
-    const continueBtn = document.getElementById('continueBtn');
+    if (!form) return; // page uses its own inline checkout handler
     
     // Load existing data if available
     loadCustomerData();
@@ -38,7 +28,7 @@ function initCustomerDetailsPage() {
     
     confirmPassword.addEventListener('input', function() {
         if (this.value !== password.value) {
-            this.setCustomAttribute('data-error', 'Passwords do not match');
+            this.setAttribute('data-error', 'Passwords do not match');
             this.style.borderColor = '#ef4444';
         } else {
             this.removeAttribute('data-error');

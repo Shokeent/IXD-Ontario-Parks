@@ -326,8 +326,8 @@
             <aside class="account-sidebar">
                 <ul class="account-menu">
                     <li><button class="menu-btn active" onclick="switchTab('profile',this)">Profile</button></li>
-                    <li><button class="menu-btn" onclick="switchTab('bookings',this)">My Bookings</button></li>
-                    <li><button class="menu-btn" onclick="switchTab('rewards',this)">Loyalty Rewards</button></li>
+                    <li id="tab-bookings-li" style="display:none;"><button class="menu-btn" onclick="switchTab('bookings',this)">My Bookings</button></li>
+                    <li id="tab-rewards-li" style="display:none;"><button class="menu-btn" onclick="switchTab('rewards',this)">Loyalty Rewards</button></li>
                     <li><button class="menu-btn" onclick="switchTab('preferences',this)">Preferences</button></li>
                     <li><button class="menu-btn" onclick="switchTab('security',this)">Security</button></li>
                 </ul>
@@ -469,6 +469,10 @@
 
             const user = authManager.getCurrentUser();
             document.getElementById('user-greeting').textContent = `Hello, ${user.firstName || user.email}!`;
+
+            // Show member-only tabs only when authenticated
+            document.getElementById('tab-bookings-li').style.display = '';
+            document.getElementById('tab-rewards-li').style.display = '';
 
             loadProfileData();
             loadBookings();
